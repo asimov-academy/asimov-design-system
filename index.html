@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Design system portátil da Asimov Academy: identidade Lumina, componentes interativos, layouts e animações locais.">
+<meta name="robots" content="noindex,nofollow">
+<title>Layouts · Asimov Design System</title>
+<link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/design-system.css">
+<script src="assets/js/themes.js" defer>
+</script>
+<script src="assets/js/rain-shaders.js" defer>
+</script>
+<script src="assets/js/rain.js" defer>
+</script>
+<script src="assets/js/aurora.js" defer>
+</script>
+<script src="assets/js/system.js" defer>
+</script>
+</head>
+<body class="library-themed">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+<header class="ds-nav">
+<a class="ds-brand" href="index.html" aria-label="Asimov Academy">
+<img src="assets/images/logo.svg" alt="Asimov" width="79" height="24">
+</a>
+<nav class="ds-nav-links" aria-label="Principal">
+<a href="index.html" aria-current="page">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>
+</svg> Layouts</a>
+<a href="components.html" >
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="3" width="7" height="7" rx="2"/>
+<rect x="14" y="3" width="7" height="7" rx="2"/>
+<rect x="3" y="14" width="7" height="7" rx="2"/>
+<rect x="14" y="14" width="7" height="7" rx="2"/>
+</svg> Components</a>
+</nav>
+<div class="library-theme-control">
+<label for="component-theme">Cores</label>
+<div class="library-theme-control__select">
+<span class="library-theme-control__swatch" aria-hidden="true">
+</span>
+<select id="component-theme" data-theme-select aria-label="Cor da página" aria-describedby="component-theme-help">
+<option value="teal_asimov">Teal</option>
+<option value="cyan_asimov">Ciano</option>
+<option value="formacao_analista_dados">Laranja</option>
+<option value="formacao_ai_designer">Azul</option>
+<option value="trilha_python_web">Vermelho</option>
+<option value="trilha_engenharia_dados">Verde</option>
+<option value="trilha_data_science_ml">Terracota</option>
+<option value="trilha_visao_computacional">Roxo</option>
+</select>
+</div>
+<p class="sr-only" id="component-theme-help">Botões, cards, gráficos e backgrounds seguem esta paleta.</p>
+<span class="sr-only" data-theme-status role="status">Tema: Teal</span>
+</div>
+</header>
+<div class="aura-background aura-background--composite" data-aura aria-hidden="true">
+</div>
+<div class="landscape-layer" aria-hidden="true">
+<img class="landscape-layer__image" src="assets/images/landscape-1280.webp" srcset="assets/images/landscape-768.webp 768w, assets/images/landscape-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="" decoding="async">
+</div>
+<div class="site-grid" aria-hidden="true">
+</div>
+<main id="main">
+<nav class="layout-picker container-ds" aria-label="Exemplos de layouts">
+<span>Layouts</span>
+<a href="index.html" aria-current="page">Principal · Aura</a>
+<a href="cadence-rain.html" >Workspace · Cadence Rain <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</a>
+</nav>
+<section class="hero-ds container-ds" id="hero">
+<div class="hero-ds__grid">
+<div class="reveal">
+<p class="eyebrow">Referência de interface <span class="badge">v1.0</span>
+</p>
+<h1>Design System <span class="text-gradient-silver">Asimov Academy</span>
+</h1>
+<p class="hero-ds__intro text-copy">Referência visual para landing pages e aplicativos da Asimov Academy. Tipografia, cores, componentes e layouts em uma biblioteca reutilizável.</p>
+<div class="row">
+<a class="button-glow" href="components.html" >
+<span class="button-glow__border" aria-hidden="true">
+<span class="button-glow__border-spin">
+</span>
+</span>
+<span class="button-glow__inner" aria-hidden="true">
+</span>
+<span class="button-glow__row">
+<span class="button-glow__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/>
+</svg>
+</span>
+<span class="button-glow__label">Ver componentes</span>
+<span class="button-glow__arrow">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</span>
+</span>
+</a>
+<a class="btn btn--ghost" href="#features">Ver layouts <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</a>
+</div>
+<div class="hero-ds__foot">
+<div class="avatar-stack">
+<img src="assets/images/avatar-1.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-2.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-3.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-4.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-5.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-6.webp" alt="" width="30" height="30" loading="lazy">
+</div>
+<span>Biblioteca de referência · edição 2026</span>
+</div>
+</div>
+</div>
+<div class="hero-divider">
+<span>Fundamentos e recursos</span>
+<span>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M4 4h16M12 4v16m-4 0h8"/>
+</svg> Tipografia</span>
+<span>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-3.7c-1-.6-.6-2.3.6-2.3H18a4 4 0 0 0 3-4c0-4-4-8-9-8Z"/>
+<circle cx="7" cy="10" r=".5"/>
+<circle cx="10" cy="6.5" r=".5"/>
+<circle cx="15" cy="7" r=".5"/>
+<circle cx="18" cy="10.5" r=".5"/>
+</svg> Cores</span>
+<span>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="3" width="7" height="7" rx="2"/>
+<rect x="14" y="3" width="7" height="7" rx="2"/>
+<rect x="3" y="14" width="7" height="7" rx="2"/>
+<rect x="14" y="14" width="7" height="7" rx="2"/>
+</svg> Componentes</span>
+<span>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m8 15-2 5m7-5-2 5m7-5-2 5M5 13a4 4 0 0 1-.5-8A6 6 0 0 1 16 5a4 4 0 0 1 3 8"/>
+</svg> Movimento</span>
+<span>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16"/>
+</svg> Código portátil</span>
+</div>
+</section>
+<div class="layouts-content">
+<section class="section-ds container-ds" id="features">
+<header class="section-head reveal">
+<div>
+<p class="eyebrow">
+<span class="section-index">01 /</span> Componentes</p>
+<h2>Componentes<br>
+<span class="text-gradient-silver">e padrões de interface.</span>
+</h2>
+</div>
+<p class="text-copy">Exemplos de composição com os estilos da Asimov Academy: botões, cards, superfícies, estados e efeitos de fundo.</p>
+</header>
+<div class="grid-3 feature-cards reveal">
+<a href="components.html#cards" class="course-card" style="--card-accent:var(--ui-accent);--card-accent-dark:var(--ui-accent-dark);--card-accent-light:var(--ui-accent-light);--card-accent-glow:var(--ui-accent-glow)">
+<span class="course-card__beam" aria-hidden="true">
+</span>
+<span class="course-card__glow" aria-hidden="true">
+</span>
+<span class="course-card__dots" aria-hidden="true">
+</span>
+<span class="course-card__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="6" y="6" width="12" height="12" rx="3"/>
+<rect x="9" y="9" width="6" height="6" rx="1"/>
+<path d="M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/>
+</svg>
+</span>
+<h3 class="course-card__title">Interações<br>e estados</h3>
+<p class="course-card__text">Botões, mensagens e transições para indicar ações e estados da interface.</p>
+<span class="course-card__duration">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 7v5l3 2"/>
+</svg> 01 / INTERAÇÃO</span>
+</a>
+<a href="components.html#cards" class="course-card" style="--card-accent:var(--ui-accent);--card-accent-dark:var(--ui-accent-dark);--card-accent-light:var(--ui-accent-light);--card-accent-glow:var(--ui-accent-glow)">
+<span class="course-card__beam" aria-hidden="true">
+</span>
+<span class="course-card__glow" aria-hidden="true">
+</span>
+<span class="course-card__dots" aria-hidden="true">
+</span>
+<span class="course-card__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M4 3v17h17M8 14l4-4 4 2 5-7"/>
+</svg>
+</span>
+<h3 class="course-card__title">Dados<br>e indicadores</h3>
+<p class="course-card__text">Padrões de apresentação para métricas, tabelas e gráficos.</p>
+<span class="course-card__duration">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 7v5l3 2"/>
+</svg> 02 / INFORMAÇÃO</span>
+</a>
+<a href="components.html#cards" class="course-card" style="--card-accent:var(--ui-accent);--card-accent-dark:var(--ui-accent-dark);--card-accent-light:var(--ui-accent-light);--card-accent-glow:var(--ui-accent-glow)">
+<span class="course-card__beam" aria-hidden="true">
+</span>
+<span class="course-card__glow" aria-hidden="true">
+</span>
+<span class="course-card__dots" aria-hidden="true">
+</span>
+<span class="course-card__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-3.7c-1-.6-.6-2.3.6-2.3H18a4 4 0 0 0 3-4c0-4-4-8-9-8Z"/>
+<circle cx="7" cy="10" r=".5"/>
+<circle cx="10" cy="6.5" r=".5"/>
+<circle cx="15" cy="7" r=".5"/>
+<circle cx="18" cy="10.5" r=".5"/>
+</svg>
+</span>
+<h3 class="course-card__title">Identidade<br>e consistência</h3>
+<p class="course-card__text">Cores, transparências e bordas definidas para uso consistente entre páginas.</p>
+<span class="course-card__duration">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 7v5l3 2"/>
+</svg> 03 / IDENTIDADE</span>
+</a>
+</div>
+<div class="bento reveal">
+<article class="surface media-tile">
+<span class="eyebrow" style="margin-bottom:16px">Plataforma Asimov</span>
+<h3>Referências da plataforma.</h3>
+<p>Exemplo de aplicação dos componentes no ambiente de aprendizagem.</p>
+<img src="assets/images/platform-1.png" alt="Interface original da plataforma Asimov Academy" loading="lazy" width="900" height="490">
+</article>
+<div class="stack">
+<article class="surface feature-mini">
+<span class="icon-stage">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m8 15-2 5m7-5-2 5m7-5-2 5M5 13a4 4 0 0 1-.5-8A6 6 0 0 1 16 5a4 4 0 0 1 3 8"/>
+</svg>
+</span>
+<div>
+<h3>Fundos e efeitos.</h3>
+<p>Aurora boreal e paisagem original mescladas em um único fundo. Chuva Cadence como alternativa.</p>
+</div>
+<a href="cadence-rain.html" class="feature-link">Ver layout com Cadence Rain <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</a>
+</article>
+<article class="surface feature-mini">
+<span class="icon-stage">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16"/>
+</svg>
+</span>
+<div>
+<h3>Arquivos para reutilização.</h3>
+<p>Fontes, imagens e interações incluídas na pasta, sem dependência do projeto principal.</p>
+</div>
+<a href="AGENTS.md" class="feature-link">Consultar guia de uso <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</a>
+</article>
+</div>
+</div>
+</section>
+<section class="section-ds container-ds" id="applications">
+<header class="section-head reveal">
+<div>
+<p class="eyebrow">
+<span class="section-index">02 /</span> Aplicativos</p>
+<h2>Layouts<br>
+<span class="text-gradient-silver">para aplicativos.</span>
+</h2>
+</div>
+<p class="text-copy">Exemplo de dashboard com navegação, indicadores e gráficos. Os dados e as interações são demonstrativos.</p>
+</header>
+<div class="reveal">
+<div class="dashboard surface" data-dashboard>
+<div class="dashboard-top">
+<span class="dashboard-logo">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>
+</svg> Asimov Workspace <span class="badge badge--accent">DEMO</span>
+</span>
+<div class="row">
+<span class="muted" style="font-size:10px">Meu workspace</span>
+<button type="button" class="btn btn--square" aria-label="Notificações" data-toast="Nenhuma nova notificação.">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+</svg>
+</button>
+</div>
+</div>
+<div class="dashboard-shell">
+<div class="dashboard-side" role="tablist" aria-label="Área do aplicativo">
+<button type="button" role="tab" id="dash-1-overview" aria-selected="true" aria-controls="dash-1-panel" data-dashboard-view="overview">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="3" width="7" height="7" rx="2"/>
+<rect x="14" y="3" width="7" height="7" rx="2"/>
+<rect x="3" y="14" width="7" height="7" rx="2"/>
+<rect x="14" y="14" width="7" height="7" rx="2"/>
+</svg> Visão geral</button>
+<button type="button" role="tab" id="dash-1-projects" aria-selected="false" tabindex="-1" aria-controls="dash-1-panel" data-dashboard-view="projects">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
+</svg> Projetos</button>
+<button type="button" role="tab" id="dash-1-team" aria-selected="false" tabindex="-1" aria-controls="dash-1-panel" data-dashboard-view="team">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="9" cy="8" r="3"/>
+<path d="M3 21v-3a6 6 0 0 1 12 0v3m1-16a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/>
+</svg> Comunidade</button>
+</div>
+<div class="dashboard-body" role="tabpanel" id="dash-1-panel" aria-labelledby="dash-1-overview">
+<div class="dashboard-heading">
+<div>
+<h3 data-dashboard-title>Visão geral do workspace</h3>
+<p data-dashboard-subtitle>Indicadores do período selecionado.</p>
+</div>
+<div class="segmented" aria-label="Período do gráfico">
+<button type="button" data-period="7" aria-pressed="false">7 dias</button>
+<button type="button" data-period="30" aria-pressed="true">30 dias</button>
+<button type="button" data-period="90" aria-pressed="false">90 dias</button>
+</div>
+</div>
+<div class="grid-3">
+<div class="metric">
+<span class="metric-label">Alunos ativos<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="9" cy="8" r="3"/>
+<path d="M3 21v-3a6 6 0 0 1 12 0v3m1-16a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/>
+</svg>
+</span>
+<strong class="metric-value" data-metric="0">2.840</strong>
+<span class="metric-note">
+<b>+18,6%</b> vs. período anterior</span>
+</div>
+<div class="metric">
+<span class="metric-label">Projetos criados<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
+</svg>
+</span>
+<strong class="metric-value" data-metric="1">128</strong>
+<span class="metric-note">
+<b>+24,2%</b> vs. período anterior</span>
+</div>
+<div class="metric">
+<span class="metric-label">Taxa de conclusão<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M4 3v17h17M8 14l4-4 4 2 5-7"/>
+</svg>
+</span>
+<strong class="metric-value" data-metric="2">94,8%</strong>
+<span class="metric-note">
+<b>+6,4%</b> vs. período anterior</span>
+</div>
+</div>
+<div data-dashboard-chart>
+<div class="chart-panel">
+<div class="row between">
+<h4>Crescimento da comunidade</h4>
+<div class="row">
+<span class="status-dot accent">
+</span>
+<small>Alunos ativos</small>
+</div>
+</div>
+<div class="chart-visual">
+<div class="chart-scale">
+<span>3.000</span>
+<span>2.000</span>
+<span>1.000</span>
+<span>0</span>
+</div>
+<svg class="chart-svg" viewBox="0 0 600 180" role="img" aria-label="Gráfico ilustrativo: alunos ativos sobem de 680 para 2.840 ao longo do período">
+<defs>
+<linearGradient id="chart-2" x1="0" y1="0" x2="0" y2="1">
+<stop stop-color="var(--ui-accent)" stop-opacity=".23"/>
+<stop offset="1" stop-color="var(--ui-accent)" stop-opacity="0"/>
+</linearGradient>
+</defs>
+<path class="chart-grid" d="M0 10H600M0 62H600M0 114H600M0 166H600"/>
+<path data-chart-area fill="url(#chart-2)" d="M0 145 C30 145 35 122 65 128 S100 144 125 105 S170 125 200 91 S230 97 260 73 S300 105 325 63 S370 80 400 51 S455 75 480 35 S520 40 550 20 S585 28 600 10 V180 H0Z"/>
+<path class="chart-line" data-chart-line d="M0 145 C30 145 35 122 65 128 S100 144 125 105 S170 125 200 91 S230 97 260 73 S300 105 325 63 S370 80 400 51 S455 75 480 35 S520 40 550 20 S585 28 600 10"/>
+</svg>
+</div>
+<div class="chart-labels" data-chart-labels>
+<span>01 set</span>
+<span>06 set</span>
+<span>11 set</span>
+<span>16 set</span>
+<span>21 set</span>
+<span>26 set</span>
+</div>
+</div>
+</div>
+<div data-dashboard-table hidden style="margin-top:20px">
+<div class="table-wrap">
+<table class="data-table">
+<caption>Atividades recentes · dados de demonstração</caption>
+<thead>
+<tr>
+<th scope="col">Projeto</th>
+<th scope="col">Categoria</th>
+<th scope="col">Status</th>
+<th scope="col">Progresso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<span class="table-person">
+<img src="assets/images/avatar-1.webp" width="26" height="26" alt="">Agente de atendimento</span>
+</td>
+<td>IA</td>
+<td>
+<span class="badge badge--success">Ativo</span>
+</td>
+<td>
+<div class="row">
+<div class="progress" role="progressbar" aria-label="Agente de atendimento" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" style="width:70px;--progress:85%">
+<span>
+</span>
+</div>
+<span>85%</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<span class="table-person">
+<img src="assets/images/avatar-2.webp" width="26" height="26" alt="">Painel de resultados</span>
+</td>
+<td>Dados</td>
+<td>
+<span class="badge badge--warning">Em revisão</span>
+</td>
+<td>
+<div class="row">
+<div class="progress" role="progressbar" aria-label="Painel de resultados" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" style="width:70px;--progress:64%">
+<span>
+</span>
+</div>
+<span>64%</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<span class="table-person">
+<img src="assets/images/avatar-3.webp" width="26" height="26" alt="">Nova landing page</span>
+</td>
+<td>Design</td>
+<td>
+<span class="badge badge--info">Concluído</span>
+</td>
+<td>
+<div class="row">
+<div class="progress" role="progressbar" aria-label="Nova landing page" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" style="width:70px;--progress:100%">
+<span>
+</span>
+</div>
+<span>100%</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div data-dashboard-team hidden class="row surface surface-pad" style="margin-top:20px">
+<div class="avatar-stack">
+<img src="assets/images/avatar-1.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-2.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-3.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-4.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-5.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-6.webp" alt="" width="30" height="30" loading="lazy">
+</div>
+<div>
+<h4 style="margin:0 0 6px">Membros do workspace</h4>
+<p class="muted" style="font-size:12px;margin:0">6 membros ativos neste workspace de demonstração.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row between" style="margin-top:20px;color:#79878b;font-size:11px">
+<span>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 11v6m0-10v.1"/>
+</svg> Dados ilustrativos · explore as abas e os períodos</span>
+<a class="btn btn--link" href="components.html#data">Ver componentes de dados <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</a>
+</div>
+</section>
+<section class="section-ds container-ds" id="pricing">
+<header class="section-head reveal">
+<div>
+<p class="eyebrow">
+<span class="section-index">03 /</span> Planos e garantia</p>
+<h2>Planos<br>
+<span class="text-gradient-silver">e condições.</span>
+</h2>
+</div>
+<p class="text-copy">Referência de apresentação para preços, comparação de recursos e informações de garantia.</p>
+</header>
+<div class="reveal">
+<div class="index4-cadence index4-typography-lumina pricing-demo" data-pricing>
+<div class="segmented price-switch" aria-label="Período de cobrança">
+<button type="button" data-billing="monthly" aria-pressed="false">Mensal</button>
+<button type="button" data-billing="annual" aria-pressed="true">Anual <span class="accent">−20%</span>
+</button>
+</div>
+<div class="index4-pricing-grid">
+<article class="index4-pricing-card ">
+<div class="index4-pricing-card__head">
+<div>
+<h3 class="index4-pricing-card__name">Essencial</h3>
+<p class="muted" style="font-size:12px;margin:9px 0 0">Exemplo de plano com recursos básicos.</p>
+</div>
+<span class="index4-pricing-card__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>
+</svg>
+</span>
+</div>
+<div class="index4-pricing-card__price-block">
+<p class="index4-pricing-card__price">
+<span class="index4-pricing-card__installments">R$</span>
+<span class="index4-pricing-card__amount" data-monthly="29" data-annual="23">23</span>
+<span class="muted" style="font-size:12px">/ mês</span>
+</p>
+<p class="index4-pricing-card__cash" data-billing-note>Cobrado anualmente · valor ilustrativo</p>
+</div>
+<ul class="index4-pricing-card__benefits">
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Biblioteca de componentes</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Layouts responsivos</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Paletas e tipografia</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Efeitos e animações</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Arquivos de referência</span>
+</li>
+</ul>
+<div class="index4-pricing-card__footer">
+<button type="button" class="index4-pricing-card__cta index4-pricing-card__cta--outline" data-plan="Essencial">Selecionar Essencial <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</button>
+<p class="index4-pricing-card__guarantee">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/>
+<path d="m8 12 3 3 5-6"/>
+</svg> Demonstração de interface</p>
+</div>
+</article>
+<article class="index4-pricing-card index4-pricing-card--featured">
+<span class="index4-pricing-card__popular">Plano em destaque</span>
+<div class="index4-pricing-card__head">
+<div>
+<h3 class="index4-pricing-card__name">Professional</h3>
+<p class="muted" style="font-size:12px;margin:9px 0 0">Exemplo de plano com recursos adicionais.</p>
+</div>
+<span class="index4-pricing-card__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Zm7 0v4m-2-2h4"/>
+</svg>
+</span>
+</div>
+<div class="index4-pricing-card__price-block">
+<p class="index4-pricing-card__price">
+<span class="index4-pricing-card__installments">R$</span>
+<span class="index4-pricing-card__amount" data-monthly="79" data-annual="63">63</span>
+<span class="muted" style="font-size:12px">/ mês</span>
+</p>
+<p class="index4-pricing-card__cash" data-billing-note>Cobrado anualmente · valor ilustrativo</p>
+</div>
+<ul class="index4-pricing-card__benefits">
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Tudo do plano Essencial</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Layouts responsivos</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Paletas e tipografia</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Dashboards e aplicações</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Configurações de interface</span>
+</li>
+</ul>
+<div class="index4-pricing-card__footer">
+<button type="button" class="index4-pricing-card__cta index4-pricing-card__cta--primary" data-plan="Professional">Selecionar Professional <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</button>
+<p class="index4-pricing-card__guarantee">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/>
+<path d="m8 12 3 3 5-6"/>
+</svg> Demonstração de interface</p>
+</div>
+</article>
+</div>
+</div>
+</div>
+<p class="pricing-demo-note">Planos e valores demonstrativos para visualizar o layout. Nenhuma compra é realizada.</p>
+<div class="reveal">
+<section class="guarantee-card">
+<div class="guarantee-seal" aria-hidden="true">
+<span class="guarantee-seal__ring">
+</span>
+<span class="guarantee-seal__text">
+<svg viewBox="0 0 200 200">
+<defs>
+<path id="seal-3" d="M100,100 m-85,0 a85,85 0 1,1 170,0 a85,85 0 1,1 -170,0"/>
+</defs>
+<text>
+<textPath href="#seal-3" startOffset="0%">GARANTIA DE 7 DIAS · EXEMPLO DE COMPONENTE · GARANTIA DE 7 DIAS · EXEMPLO DE COMPONENTE · </textPath>
+</text>
+</svg>
+</span>
+<div class="guarantee-seal__core">
+<svg class="icon guarantee-seal__icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/>
+<path d="m8 12 3 3 5-6"/>
+</svg>
+<span class="guarantee-seal__label">7 DIAS</span>
+</div>
+</div>
+<div class="guarantee-card__content">
+<p class="guarantee-card__eyebrow">Exemplo de garantia</p>
+<h3 class="guarantee-card__title">Informações sobre garantia.</h3>
+<p class="guarantee-card__description">Componente para apresentar prazo, condições e procedimento de solicitação. Substitua os textos pelas regras do produto.</p>
+<div class="guarantee-steps">
+<div class="guarantee-step">
+<span class="guarantee-step__number">01 / PRAZO</span>
+<p class="guarantee-step__text">Informe o prazo aplicável.</p>
+</div>
+<div class="guarantee-step">
+<span class="guarantee-step__number">02 / CONDIÇÕES</span>
+<p class="guarantee-step__text">Descreva as condições.</p>
+</div>
+<div class="guarantee-step">
+<span class="guarantee-step__number">03 / SOLICITAÇÃO</span>
+<p class="guarantee-step__text">Indique o canal de contato.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+</div>
+</main>
+<footer class="ds-footer">
+<div class="container-ds">
+<div class="row">
+<img src="assets/images/logo.svg" alt="Asimov" width="65" height="20">
+<span>Asimov Academy · Biblioteca de interface</span>
+</div>
+<div class="row">
+<a href="AGENTS.md">Guia para IA <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</a>
+<span>2026 · v1.0</span>
+</div>
+</div>
+</footer>
+<div class="toast" role="status" aria-live="polite" aria-atomic="true" id="toast">
+</div>
+<dialog class="dialog" id="demo-dialog" aria-labelledby="dialog-title">
+<button type="button" class="btn btn--square dialog-close" data-close-dialog aria-label="Fechar modal">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m6 6 12 12M6 18 18 6"/>
+</svg>
+</button>
+<p class="eyebrow">Preview interativo</p>
+<h2 id="dialog-title">Exemplo de diálogo</h2>
+<p data-dialog-copy>Este é um componente de demonstração. Conecte esta ação à lógica do seu produto.</p>
+<form method="dialog">
+<button class="btn btn--solid" value="close">Entendi <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</button>
+</form>
+</dialog>
+<button class="help-fab" type="button" data-dialog="Guia rápido" aria-label="Ajuda sobre o design system">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M21 11a9 9 0 0 1-9 9 10 10 0 0 1-4-.8L3 21l1.7-5A9 9 0 1 1 21 11Z"/>
+<path d="M8 11h8M8 8h5"/>
+</svg>
+</button>
+</body>
+</html>

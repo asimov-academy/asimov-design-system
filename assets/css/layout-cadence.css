@@ -1,0 +1,90 @@
+/* Layout navigation and the isolated Cadence Rain workspace example. */
+.layout-picker {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-block: 22px;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 11px;
+}
+.layout-picker > span { color: var(--color-text-copy); margin-right: 10px; }
+.layout-picker a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 13px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--color-text-copy);
+}
+.layout-picker a:hover,
+.layout-picker a[aria-current='page'] {
+  color: var(--ui-accent-light);
+  border-color: var(--border-subtle);
+  background: rgb(255 255 255 / .035);
+}
+.layout-picker .icon { width: 13px; height: 13px; }
+.cadence-layout-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: 72px;
+  padding-block: 90px 80px;
+}
+.cadence-layout-hero > * { min-width: 0; }
+.cadence-layout-hero h1 {
+  font-size: clamp(46px, 5.4vw, 72px);
+  line-height: 1.04;
+  letter-spacing: -.06em;
+  margin-bottom: 28px;
+}
+.cadence-layout-hero__copy > .text-copy { max-width: 470px; margin-bottom: 30px; }
+.cadence-layout-note { margin: 22px 0 0; font-size: 11px; color: var(--color-text-copy); }
+.cadence-activity { padding: 28px; }
+.cadence-activity__brand { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.cadence-activity__brand .icon { color: var(--ui-accent-light); }
+.cadence-activity__heading { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin: 36px 0 18px; }
+.cadence-activity__heading .eyebrow { font-size: 9px; margin-bottom: 10px; }
+.cadence-activity__heading h2 { font-size: 22px; margin: 0; }
+.cadence-activity__count { font-size: 48px; font-weight: 500; letter-spacing: -.06em; color: var(--ui-accent-light); }
+.cadence-activity__list { margin: 0; }
+.cadence-activity__list li { display: flex; align-items: flex-start; gap: 14px; padding-block: 20px; border-top: 1px solid var(--border-subtle); }
+.cadence-activity__icon { display: grid; place-items: center; flex-shrink: 0; width: 38px; height: 38px; border: 1px solid var(--border-subtle); border-radius: 10px; color: var(--ui-accent-light); background: color-mix(in srgb, var(--ui-accent) 6%, transparent); }
+.cadence-activity__list h3 { font-size: 13px; margin: 0 0 5px; letter-spacing: -.02em; }
+.cadence-activity__list p { font-size: 11px; margin: 0 0 8px; color: var(--color-text-copy); }
+.cadence-activity__list li > div > span { font-size: 9px; color: var(--ui-accent-light); }
+.cadence-activity__footer { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; padding-top: 20px; border-top: 1px solid var(--border-subtle); color: var(--color-text-copy); font-size: 10px; }
+.cadence-layout-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; padding-block: 24px; border-block: 1px solid var(--border-subtle); font-size: 11px; color: var(--color-text-copy); }
+.cadence-layout-meta > span:first-child { color: var(--ui-accent-light); }
+.cadence-layout-meta > span, .cadence-layout-meta > a { display: inline-flex; align-items: center; gap: 9px; }
+.cadence-layout-meta > a { margin-left: auto; }
+.cadence-layout-meta > a:hover { color: var(--ui-accent-light); }
+.cadence-layout-bottom { margin-top: 18px; font-size: 11px; color: var(--color-text-copy); }
+.cadence-layout-callout { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 48px; margin-bottom: 100px; }
+.cadence-layout-callout h2 { font-size: clamp(30px, 3.5vw, 44px); line-height: 1.1; }
+.cadence-layout-callout .text-copy { max-width: 510px; font-size: 15px; margin: 0; }
+.cadence-layout-callout > .button-glow { flex-shrink: 0; }
+@media (max-width: 1000px) {
+  .cadence-layout-hero { gap: 32px; }
+  .cadence-activity { padding: 22px; }
+}
+@media (max-width: 800px) {
+  .cadence-layout-hero { grid-template-columns: 1fr; padding-block: 60px; gap: 40px; }
+  .cadence-layout-hero h1 { font-size: clamp(42px, 8vw, 64px); }
+  .cadence-layout-hero__copy > .text-copy { max-width: 550px; }
+  .cadence-layout-callout { flex-direction: column; align-items: flex-start; padding: 30px; margin-bottom: 64px; }
+}
+@media (max-width: 520px) {
+  .layout-picker { gap: 6px; padding-block: 16px; }
+  .layout-picker > span { width: 100%; margin-bottom: 4px; }
+  .layout-picker a { font-size: 10px; padding: 8px 10px; }
+  .cadence-layout-hero h1 { font-size: clamp(36px, 10.6vw, 50px); }
+  .cadence-layout-hero .text-copy { font-size: 16px; }
+  .cadence-layout-hero .button-glow__label { font-size: 14px; }
+  .cadence-layout-meta { gap: 14px; font-size: 10px; }
+  .cadence-layout-meta > a { margin-left: 0; }
+  .cadence-layout-callout { padding: 24px; }
+}

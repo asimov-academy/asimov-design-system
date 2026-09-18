@@ -1,0 +1,72 @@
+/* Aurora is the default background. The actual Unicorn scene is bundled locally. */
+.aura-background {
+  --aura-filter: hue-rotate(-102deg) saturate(93%) brightness(.96);
+  --aura-opacity: .85;
+  --aura-darken: .2;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
+  pointer-events: none;
+  background: #050505;
+}
+.aura-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 75%, color-mix(in srgb, var(--ui-accent-dark) 26%, transparent), transparent 55%),
+    radial-gradient(ellipse at 80% 30%, color-mix(in srgb, var(--ui-accent) 15%, transparent), transparent 60%);
+}
+.aura-background__scene {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  filter: var(--aura-filter);
+  opacity: var(--aura-opacity);
+}
+.aura-background__scene canvas { display: block; width: 100%; height: 100%; }
+.aura-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgb(5 5 5 / .12), transparent 45%, rgb(5 5 5 / .48)), rgb(5 5 5 / var(--aura-darken));
+}
+.aura-background--composite {
+  --aura-opacity: 1;
+  --aura-darken: 0;
+}
+.aura-background--composite::after,
+.aura-background--composite[data-aura-ready='true']::before { display: none; }
+
+/* SiteBackground.astro: image at 30%, then the original fade and accent wash.
+ * Keep this layer AFTER Aurora so both blend into the same #050505 canvas. */
+.landscape-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.landscape-layer__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .3;
+}
+.landscape-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, color-mix(in srgb, var(--ui-accent-dark) 16%, transparent), transparent 72%),
+    linear-gradient(to bottom, rgb(5 5 5 / .9), rgb(5 5 5 / .6) 50%, #050505);
+}
+.background-lab .aura-background { position: absolute; }
+.background-lab .landscape-layer { position: absolute; z-index: 1; }
+.aura-background[data-aura-ready='false'] .aura-background__scene { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .aura-background__scene { opacity: 0; }
+}

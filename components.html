@@ -1,0 +1,2244 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Design system portátil da Asimov Academy: identidade Lumina, componentes interativos, layouts e animações locais.">
+<meta name="robots" content="noindex,nofollow">
+<title>Components · Asimov Design System</title>
+<link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/design-system.css">
+<script src="assets/js/themes.js" defer>
+</script>
+<script src="assets/js/rain-shaders.js" defer>
+</script>
+<script src="assets/js/rain.js" defer>
+</script>
+<script src="assets/js/aurora.js" defer>
+</script>
+<script src="assets/js/system.js" defer>
+</script>
+</head>
+<body class="library-themed">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+<header class="ds-nav">
+<a class="ds-brand" href="index.html" aria-label="Asimov Academy">
+<img src="assets/images/logo.svg" alt="Asimov" width="79" height="24">
+</a>
+<nav class="ds-nav-links" aria-label="Principal">
+<a href="index.html" >
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>
+</svg> Layouts</a>
+<a href="components.html" aria-current="page">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="3" width="7" height="7" rx="2"/>
+<rect x="14" y="3" width="7" height="7" rx="2"/>
+<rect x="3" y="14" width="7" height="7" rx="2"/>
+<rect x="14" y="14" width="7" height="7" rx="2"/>
+</svg> Components</a>
+</nav>
+<div class="library-theme-control">
+<label for="component-theme">Cores</label>
+<div class="library-theme-control__select">
+<span class="library-theme-control__swatch" aria-hidden="true">
+</span>
+<select id="component-theme" data-theme-select aria-label="Cor da página" aria-describedby="component-theme-help">
+<option value="teal_asimov">Teal</option>
+<option value="cyan_asimov">Ciano</option>
+<option value="formacao_analista_dados">Laranja</option>
+<option value="formacao_ai_designer">Azul</option>
+<option value="trilha_python_web">Vermelho</option>
+<option value="trilha_engenharia_dados">Verde</option>
+<option value="trilha_data_science_ml">Terracota</option>
+<option value="trilha_visao_computacional">Roxo</option>
+</select>
+</div>
+<p class="sr-only" id="component-theme-help">Botões, cards, gráficos e backgrounds seguem esta paleta.</p>
+<span class="sr-only" data-theme-status role="status">Tema: Teal</span>
+</div>
+</header>
+<div class="aura-background aura-background--composite" data-aura aria-hidden="true">
+</div>
+<div class="landscape-layer" aria-hidden="true">
+<img class="landscape-layer__image" src="assets/images/landscape-1280.webp" srcset="assets/images/landscape-768.webp 768w, assets/images/landscape-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="" decoding="async">
+</div>
+<div class="site-grid" aria-hidden="true">
+</div>
+<main id="main">
+<div class="library-head">
+<div class="container-ds">
+<div>
+<h1>Biblioteca de <span class="text-gradient-silver">componentes.</span>
+</h1>
+<p>Consulte os estilos, estados e exemplos de uso. Cada componente inclui uma referência visual e, quando aplicável, o HTML para reutilização.</p>
+</div>
+</div>
+</div>
+<div class="container-ds library-layout">
+<aside class="library-sidebar">
+<label for="component-search">Encontrar componente</label>
+<input type="search" id="component-search" placeholder="Buscar na biblioteca…" aria-controls="library-content">
+<nav aria-label="Seções de componentes">
+<a href="#foundations">Fundamentos<span>01</span>
+</a>
+<a href="#buttons">Botões e ações<span>02</span>
+</a>
+<a href="#cards">Cards e superfícies<span>03</span>
+</a>
+<a href="#people">Pessoas e prova social<span>04</span>
+</a>
+<a href="#backgrounds">Backgrounds e movimento<span>05</span>
+</a>
+<a href="#navigation">Navegação<span>06</span>
+</a>
+<a href="#forms">Formulários e controles<span>07</span>
+</a>
+<a href="#data">Dados e dashboards<span>08</span>
+</a>
+<a href="#feedback">Feedback e estados<span>09</span>
+</a>
+<a href="#conversion">Conversão e garantia<span>10</span>
+</a>
+<a href="#faq">Accordion e FAQ<span>11</span>
+</a>
+<a href="#assets">Assets locais<span>12</span>
+</a>
+</nav>
+<small>HOME ASIMOV → LUMINA<br>Tokens originais, código local.<br>Uso em páginas e aplicativos.</small>
+</aside>
+<div class="library-main" id="library-content">
+<p class="library-no-results" id="library-no-results" role="status" hidden>Nenhum componente encontrado. Tente “card”, “botão” ou “dados”.</p>
+<section class="library-section" id="foundations" data-library-section>
+<header>
+<div>
+<h2>01 / Fundamentos</h2>
+<p>Tokens extraídos da home. Inter conduz a interface; prata vertical e teal dão a assinatura visual.</p>
+</div>
+<span class="badge badge--accent">Home original</span>
+</header>
+<div class="row between" style="margin-bottom:22px">
+<span class="muted" style="font-size:12px">Clique em uma cor para copiar o valor.</span>
+</div>
+<div class="color-grid">
+<button class="swatch" type="button" data-copy-token="--ui-accent" style="--swatch:var(--ui-accent)">
+<span class="swatch-color">
+</span>
+<span class="swatch-label">Accent<small data-token-label="--ui-accent">#14b8a6</small>
+</span>
+</button>
+<button class="swatch" type="button" data-copy-token="--ui-accent-dark" style="--swatch:var(--ui-accent-dark)">
+<span class="swatch-color">
+</span>
+<span class="swatch-label">Dark<small data-token-label="--ui-accent-dark">#0d9488</small>
+</span>
+</button>
+<button class="swatch" type="button" data-copy-token="--ui-accent-light" style="--swatch:var(--ui-accent-light)">
+<span class="swatch-color">
+</span>
+<span class="swatch-label">Light<small data-token-label="--ui-accent-light">#2dd4bf</small>
+</span>
+</button>
+<button class="swatch" type="button" data-copy-token="--ui-accent-glow" style="--swatch:var(--ui-accent-glow)">
+<span class="swatch-color">
+</span>
+<span class="swatch-label">Glow<small data-token-label="--ui-accent-glow">#5eead4</small>
+</span>
+</button>
+<button class="swatch" type="button" data-copy-token="--color-surface" style="--swatch:var(--color-surface)">
+<span class="swatch-color">
+</span>
+<span class="swatch-label">Surface<small data-token-label="--color-surface">#050505</small>
+</span>
+</button>
+<button class="swatch" type="button" data-copy-token="--color-surface-elevated" style="--swatch:var(--color-surface-elevated)">
+<span class="swatch-color">
+</span>
+<span class="swatch-label">Elevated<small data-token-label="--color-surface-elevated">#0a0a0a</small>
+</span>
+</button>
+<button class="swatch" type="button" data-copy-token="--color-text-copy" style="--swatch:var(--color-text-copy)">
+<span class="swatch-color">
+</span>
+<span class="swatch-label">Copy<small data-token-label="--color-text-copy">#b4b4b4</small>
+</span>
+</button>
+<button class="swatch" type="button" data-copy-token="--border-subtle" style="--swatch:var(--border-subtle)">
+<span class="swatch-color">
+</span>
+<span class="swatch-label">Border<small data-token-label="--border-subtle">rgba(255,255,255,0.08)</small>
+</span>
+</button>
+</div>
+<h3 class="spec-label">Paletas disponíveis · clique para copiar a cor</h3>
+<div class="row">
+<button class="badge" type="button" data-copy-text="#14b8a6" style="color:#2dd4bf">
+<span class="status-dot" style="background:#14b8a6">
+</span>Teal</button>
+<button class="badge" type="button" data-copy-text="#06b6d4" style="color:#22d3ee">
+<span class="status-dot" style="background:#06b6d4">
+</span>Ciano</button>
+<button class="badge" type="button" data-copy-text="#f97316" style="color:#fb923c">
+<span class="status-dot" style="background:#f97316">
+</span>Laranja</button>
+<button class="badge" type="button" data-copy-text="#2563eb" style="color:#60a5fa">
+<span class="status-dot" style="background:#2563eb">
+</span>Azul</button>
+<button class="badge" type="button" data-copy-text="#ef4444" style="color:#f87171">
+<span class="status-dot" style="background:#ef4444">
+</span>Vermelho</button>
+<button class="badge" type="button" data-copy-text="#22c55e" style="color:#4ade80">
+<span class="status-dot" style="background:#22c55e">
+</span>Verde</button>
+<button class="badge" type="button" data-copy-text="#c28e7e" style="color:#d4a99a">
+<span class="status-dot" style="background:#c28e7e">
+</span>Terracota</button>
+<button class="badge" type="button" data-copy-text="#a855f7" style="color:#c084fc">
+<span class="status-dot" style="background:#a855f7">
+</span>Roxo</button>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>Inter / 400 · 500 · 600 · 700</span>
+<a class="copy-btn" href="tokens.json" download>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg> Tokens JSON</a>
+</div>
+<div class="type-row">
+<small>DISPLAY<br>80px / 1.04 / −.065em</small>
+<p class="type-hero text-gradient-silver">Design System Asimov</p>
+</div>
+<div class="type-row">
+<small>HEADING<br>40px / 1.08 / 500</small>
+<p class="type-heading">Componentes de interface</p>
+</div>
+<div class="type-row">
+<small>BODY<br>18px / 1.65 / 400</small>
+<p class="text-copy">Referências de tipografia, espaçamento e cor para compor páginas e aplicativos.</p>
+</div>
+<div class="type-row">
+<small>CARD<br>16px / 1.65 / 400</small>
+<p class="text-card">Texto de referência para o conteúdo dos cards.</p>
+</div>
+<div class="type-row">
+<small>EYEBROW<br>11px / .16em / 700</small>
+<p class="section-badge">
+<span class="section-badge__dot">
+</span>REFERÊNCIA DE COMPONENTE</p>
+</div>
+</div>
+<h3 class="spec-label">Superfícies e raios</h3>
+<div class="grid-3">
+<div class="surface surface-pad" style="border-radius:8px;font-size:11px;color:#a5b3b0">8px / controles</div>
+<div class="surface surface-pad" style="border-radius:16px;font-size:11px;color:#a5b3b0">16px / painéis</div>
+<div class="surface surface-pad" style="border-radius:24px;font-size:11px;color:#a5b3b0">24px / cards</div>
+</div>
+</section>
+<section class="library-section" id="buttons" data-library-section>
+<header>
+<div>
+<h2>02 / Botões e ações</h2>
+<p>O CTA glass conserva o gradiente cônico de 3s, o miolo translúcido e o glow original. Passe o mouse e navegue com Tab.</p>
+</div>
+<span class="badge badge--accent">Home original</span>
+</header>
+<div class="specimen">
+<div class="specimen-label">
+<span>ButtonGlow + Cadence CTA</span>
+</div>
+<div id="button-set" data-snippet>
+<div class="row">
+<a class="button-glow" href="#buttons" data-dialog="ButtonGlow">
+<span class="button-glow__border" aria-hidden="true">
+<span class="button-glow__border-spin">
+</span>
+</span>
+<span class="button-glow__inner" aria-hidden="true">
+</span>
+<span class="button-glow__row">
+<span class="button-glow__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/>
+</svg>
+</span>
+<span class="button-glow__label">Começar agora</span>
+<span class="button-glow__arrow">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</span>
+</span>
+</a>
+<button type="button" class="btn btn--solid" data-toast="Ação principal acionada.">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>Ação principal</button>
+<button type="button" class="btn " data-toast="Ação secundária acionada.">Secundário</button>
+<button type="button" class="btn btn--ghost" data-toast="Ação discreta acionada.">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>Ghost</button>
+</div>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>Extensões / estados de aplicação</span>
+</div>
+<div id="button-states" data-snippet>
+<div class="row">
+<button type="button" class="btn btn--solid" data-loading-button>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>Salvar alterações</button>
+<button type="button" class="btn " disabled>Indisponível</button>
+<button type="button" class="btn " disabled aria-busy="true">
+<span class="spinner" aria-hidden="true">
+</span> Processando</button>
+<button type="button" class="btn btn--danger" data-dialog="Confirmar ação">Excluir</button>
+<button type="button" class="btn btn--square" aria-label="Adicionar item" data-toast="Item de demonstração adicionado.">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14M12 5v14"/>
+</svg>
+</button>
+<span class="tooltip-wrap">
+<button type="button" class="btn btn--square" aria-label="Informações" aria-describedby="tip-demo">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 11v6m0-10v.1"/>
+</svg>
+</button>
+<span id="tip-demo" role="tooltip" class="tooltip">Feedback sem interromper o fluxo</span>
+</span>
+</div>
+</div>
+</div>
+</section>
+<section class="library-section" id="cards" data-library-section>
+<header>
+<div>
+<h2>03 / Cards e superfícies</h2>
+<p>Mesmas camadas da home: beam superior, halo radial, pontos, transparência e hover com elevação, rotação e escala.</p>
+</div>
+<span class="badge badge--accent">Home original</span>
+</header>
+<div class="specimen">
+<div class="specimen-label">
+<span>CoursesBlock / tema global</span>
+</div>
+<div id="course-cards" data-snippet>
+<div class="grid-3">
+<a href="#cards" class="course-card" style="--card-accent:var(--ui-accent);--card-accent-dark:var(--ui-accent-dark);--card-accent-light:var(--ui-accent-light);--card-accent-glow:var(--ui-accent-glow)">
+<span class="course-card__beam" aria-hidden="true">
+</span>
+<span class="course-card__glow" aria-hidden="true">
+</span>
+<span class="course-card__dots" aria-hidden="true">
+</span>
+<span class="course-card__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="6" y="6" width="12" height="12" rx="3"/>
+<rect x="9" y="9" width="6" height="6" rx="1"/>
+<path d="M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/>
+</svg>
+</span>
+<h3 class="course-card__title">Formação<br>Engenheiros de IA</h3>
+<p class="course-card__text">Do zero a seus primeiros agentes IA usando Python.</p>
+<span class="course-card__duration">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 7v5l3 2"/>
+</svg> 49h</span>
+</a>
+<a href="#cards" class="course-card" style="--card-accent:var(--ui-accent);--card-accent-dark:var(--ui-accent-dark);--card-accent-light:var(--ui-accent-light);--card-accent-glow:var(--ui-accent-glow)">
+<span class="course-card__beam" aria-hidden="true">
+</span>
+<span class="course-card__glow" aria-hidden="true">
+</span>
+<span class="course-card__dots" aria-hidden="true">
+</span>
+<span class="course-card__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M4 3v17h17M8 14l4-4 4 2 5-7"/>
+</svg>
+</span>
+<h3 class="course-card__title">Formação Analista<br>de Dados</h3>
+<p class="course-card__text">Analise dados profissionalmente usando Python.</p>
+<span class="course-card__duration">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 7v5l3 2"/>
+</svg> 24h</span>
+</a>
+<a href="#cards" class="course-card" style="--card-accent:var(--ui-accent);--card-accent-dark:var(--ui-accent-dark);--card-accent-light:var(--ui-accent-light);--card-accent-glow:var(--ui-accent-glow)">
+<span class="course-card__beam" aria-hidden="true">
+</span>
+<span class="course-card__glow" aria-hidden="true">
+</span>
+<span class="course-card__dots" aria-hidden="true">
+</span>
+<span class="course-card__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-3.7c-1-.6-.6-2.3.6-2.3H18a4 4 0 0 0 3-4c0-4-4-8-9-8Z"/>
+<circle cx="7" cy="10" r=".5"/>
+<circle cx="10" cy="6.5" r=".5"/>
+<circle cx="15" cy="7" r=".5"/>
+<circle cx="18" cy="10.5" r=".5"/>
+</svg>
+</span>
+<h3 class="course-card__title">Formação<br>AI Designer</h3>
+<p class="course-card__text">Crie sites com ferramentas de design e IA.</p>
+<span class="course-card__duration">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 7v5l3 2"/>
+</svg> 15h</span>
+</a>
+</div>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>GlassBenefitCard / pedestal + halo + borda mascarada</span>
+</div>
+<div id="benefit-cards" data-snippet>
+<div class="grid-3">
+<article class="trail-overview-v2-card" data-accent-variant="base">
+<span class="trail-overview-v2-card__shine" aria-hidden="true">
+</span>
+<span class="trail-overview-v2-card__grid" aria-hidden="true">
+</span>
+<div class="trail-overview-v2-card__icon-stage" aria-hidden="true">
+<span class="trail-overview-v2-card__icon-pedestal">
+</span>
+<span class="trail-overview-v2-card__icon-halo">
+</span>
+<span class="trail-overview-v2-card__icon-ring">
+</span>
+<svg class="icon trail-overview-v2-card__icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M21 11a9 9 0 0 1-9 9 10 10 0 0 1-4-.8L3 21l1.7-5A9 9 0 1 1 21 11Z"/>
+<path d="M8 11h8M8 8h5"/>
+</svg>
+</div>
+<h3 class="trail-overview-v2-card__title">Suporte e atualizações</h3>
+<p class="trail-overview-v2-card__text">Canais de suporte e materiais de referência.</p>
+</article>
+<article class="trail-overview-v2-card" data-accent-variant="light">
+<span class="trail-overview-v2-card__shine" aria-hidden="true">
+</span>
+<span class="trail-overview-v2-card__grid" aria-hidden="true">
+</span>
+<div class="trail-overview-v2-card__icon-stage" aria-hidden="true">
+<span class="trail-overview-v2-card__icon-pedestal">
+</span>
+<span class="trail-overview-v2-card__icon-halo">
+</span>
+<span class="trail-overview-v2-card__icon-ring">
+</span>
+<svg class="icon trail-overview-v2-card__icon" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="9" cy="8" r="3"/>
+<path d="M3 21v-3a6 6 0 0 1 12 0v3m1-16a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/>
+</svg>
+</div>
+<h3 class="trail-overview-v2-card__title">Comunidade ativa</h3>
+<p class="trail-overview-v2-card__text">Espaço de discussão e troca de referências.</p>
+</article>
+<article class="trail-overview-v2-card" data-accent-variant="glow">
+<span class="trail-overview-v2-card__shine" aria-hidden="true">
+</span>
+<span class="trail-overview-v2-card__grid" aria-hidden="true">
+</span>
+<div class="trail-overview-v2-card__icon-stage" aria-hidden="true">
+<span class="trail-overview-v2-card__icon-pedestal">
+</span>
+<span class="trail-overview-v2-card__icon-halo">
+</span>
+<span class="trail-overview-v2-card__icon-ring">
+</span>
+<svg class="icon trail-overview-v2-card__icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 5C8 2 3 3 3 3v16s5-1 9 2c4-3 9-2 9-2V3s-5-1-9 2v16"/>
+</svg>
+</div>
+<h3 class="trail-overview-v2-card__title">Conteúdo autoral</h3>
+<p class="trail-overview-v2-card__text">Conteúdo organizado por tema e nível de conhecimento.</p>
+</article>
+</div>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>PlatformBlock / mídia original</span>
+</div>
+<div id="media-card" data-snippet>
+<div class="platform-media-card">
+<span class="platform-media-card__beam">
+</span>
+<span class="platform-media-card__glow">
+</span>
+<span class="platform-media-card__dots">
+</span>
+<div class="platform-media-card__inner">
+<img class="platform-row__img" src="assets/images/platform-2.png" alt="Projetos exclusivos na plataforma Asimov" width="900" height="500" loading="lazy">
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="library-section" id="people" data-library-section>
+<header>
+<div>
+<h2>04 / Pessoas e prova social</h2>
+<p>Avatares sobrepostos e o card de instrutor com foto, máscara e verso em gradiente. O carrossel aceita toque, teclado e botões.</p>
+</div>
+<span class="badge badge--accent">Home original</span>
+</header>
+<div class="specimen">
+<div class="specimen-label">
+<span>HeroSocialProof</span>
+</div>
+<div id="social-proof" data-snippet>
+<div class="hero-social-proof">
+<div class="hero-social-proof__group">
+<div class="hero-social-proof__avatars">
+<img class="hero-social-proof__avatar" src="assets/images/avatar-1.webp" alt="" width="32" height="32" loading="lazy">
+<img class="hero-social-proof__avatar" src="assets/images/avatar-2.webp" alt="" width="32" height="32" loading="lazy">
+<img class="hero-social-proof__avatar" src="assets/images/avatar-3.webp" alt="" width="32" height="32" loading="lazy">
+<img class="hero-social-proof__avatar" src="assets/images/avatar-4.webp" alt="" width="32" height="32" loading="lazy">
+<img class="hero-social-proof__avatar" src="assets/images/avatar-5.webp" alt="" width="32" height="32" loading="lazy">
+<img class="hero-social-proof__avatar" src="assets/images/avatar-6.webp" alt="" width="32" height="32" loading="lazy">
+</div>
+<div class="hero-social-proof__copy">
+<p class="hero-social-proof__line1">
+<strong class="hero-social-proof__highlight">+30 mil alunos</strong> já</p>
+<p class="hero-social-proof__line2">passaram por aqui</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>InstructorsBlock / hover e foco</span>
+</div>
+<div id="instructors" data-snippet>
+<div class="instructors-section" style="--instructors-card-width:240px;--instructors-card-height:320px;--instructors-card-bg:#111;--instructors-cyan:var(--ui-accent);--instructors-cyan-deep:var(--ui-accent-dark)">
+<div class="row between">
+<p class="muted" style="font-size:12px;margin:0">Equipe de instrutores.</p>
+<div class="row">
+<button type="button" class="btn btn--square" data-carousel-prev aria-label="Instrutor anterior">←</button>
+<button type="button" class="btn btn--square" data-carousel-next aria-label="Próximo instrutor">→</button>
+</div>
+</div>
+<div class="instructor-strip" tabindex="0" aria-label="Carrossel de instrutores">
+<article class="instructor-card" tabindex="0" aria-label="Rodrigo Tadewald. Foco ou toque para conhecer.">
+<div class="instructor-card__default">
+<img class="instructor-card__photo" src="assets/images/instructor-rodrigo.webp" alt="Rodrigo Tadewald" loading="lazy" width="300" height="400">
+<div class="instructor-card__overlay">
+</div>
+<div class="instructor-card__info">
+<h3 class="instructor-card__name">Rodrigo Tadewald</h3>
+<p class="instructor-card__role">Python e IA</p>
+</div>
+</div>
+<div class="instructor-card__hover">
+<div class="instructor-card__pattern">
+</div>
+<div class="instructor-card__hover-content">
+<div>
+<h3 class="instructor-card__name">Rodrigo Tadewald</h3>
+<p class="instructor-card__role">Python e IA</p>
+</div>
+<p class="instructor-card__bio">Engenheiro Químico formado pela UFRGS. Sócio-fundador da Asimov Academy e instrutor de Python e Inteligência Artificial.</p>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</div>
+</div>
+</article>
+<article class="instructor-card" tabindex="0" aria-label="Juliano Faccioni. Foco ou toque para conhecer.">
+<div class="instructor-card__default">
+<img class="instructor-card__photo" src="assets/images/instructor-juliano.webp" alt="Juliano Faccioni" loading="lazy" width="300" height="400">
+<div class="instructor-card__overlay">
+</div>
+<div class="instructor-card__info">
+<h3 class="instructor-card__name">Juliano Faccioni</h3>
+<p class="instructor-card__role">Python e Dados</p>
+</div>
+</div>
+<div class="instructor-card__hover">
+<div class="instructor-card__pattern">
+</div>
+<div class="instructor-card__hover-content">
+<div>
+<h3 class="instructor-card__name">Juliano Faccioni</h3>
+<p class="instructor-card__role">Python e Dados</p>
+</div>
+<p class="instructor-card__bio">Doutor em Biologia Celular e Molecular pela UFRGS. Instrutor de Python e sócio da Asimov Academy.</p>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</div>
+</div>
+</article>
+<article class="instructor-card" tabindex="0" aria-label="Samuel Sublate. Foco ou toque para conhecer.">
+<div class="instructor-card__default">
+<img class="instructor-card__photo" src="assets/images/instructor-samuel.webp" alt="Samuel Sublate" loading="lazy" width="300" height="400">
+<div class="instructor-card__overlay">
+</div>
+<div class="instructor-card__info">
+<h3 class="instructor-card__name">Samuel Sublate</h3>
+<p class="instructor-card__role">Automações</p>
+</div>
+</div>
+<div class="instructor-card__hover">
+<div class="instructor-card__pattern">
+</div>
+<div class="instructor-card__hover-content">
+<div>
+<h3 class="instructor-card__name">Samuel Sublate</h3>
+<p class="instructor-card__role">Automações</p>
+</div>
+<p class="instructor-card__bio">Programador desde 2019, especializado em automações. Desenvolvedor de software e instrutor na Asimov Academy.</p>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</div>
+</div>
+</article>
+<article class="instructor-card" tabindex="0" aria-label="Lucas Petry. Foco ou toque para conhecer.">
+<div class="instructor-card__default">
+<img class="instructor-card__photo" src="assets/images/instructor-lucas.webp" alt="Lucas Petry" loading="lazy" width="300" height="400">
+<div class="instructor-card__overlay">
+</div>
+<div class="instructor-card__info">
+<h3 class="instructor-card__name">Lucas Petry</h3>
+<p class="instructor-card__role">Design com IA</p>
+</div>
+</div>
+<div class="instructor-card__hover">
+<div class="instructor-card__pattern">
+</div>
+<div class="instructor-card__hover-content">
+<div>
+<h3 class="instructor-card__name">Lucas Petry</h3>
+<p class="instructor-card__role">Design com IA</p>
+</div>
+<p class="instructor-card__bio">Profissional de marketing desde 2019. Instrutor de Vibe Design, criação de sites e geração de imagens com IA.</p>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="library-section" id="backgrounds" data-library-section>
+<header>
+<div>
+<h2>05 / Backgrounds e movimento</h2>
+<p>Quatro composições renderizadas para comparar: Aura com imagem, Cadence Rain, Aura sem imagem e paisagem estática. Todas seguem o seletor de cores da navbar.</p>
+</div>
+<span class="badge badge--accent">Home original</span>
+</header>
+<div class="specimen background-example" data-background-example="aura-landscape">
+<div class="specimen-label">
+<span>01 / Aura + paisagem · background principal</span>
+</div>
+    <div class="background-lab" data-background-preview>
+<div class="aura-background aura-background--composite" data-aura aria-hidden="true">
+</div>
+<div class="landscape-layer" aria-hidden="true">
+<img class="landscape-layer__image" src="assets/images/landscape-1280.webp" srcset="assets/images/landscape-768.webp 768w, assets/images/landscape-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="" decoding="async">
+</div>
+<div class="background-lab__copy">
+<p class="eyebrow" style="justify-content:center">Background Asimov</p>
+<h3 class="text-gradient-silver">Aura + imagem</h3>
+<p>Aurora boreal, paisagem e camadas de composição.</p>
+</div>
+</div>
+    <div class="background-controls">
+<button type="button" class="btn btn--small" data-background-pause aria-pressed="false" aria-label="Pausar Aura + imagem">Pausar</button>
+</div>
+    <p class="background-example__status muted" data-background-status role="status">Animação local · pausa fora da área visível.</p>
+<template id="home-background-snippet" data-snippet>
+<div class="aura-background aura-background--composite" data-aura aria-hidden="true">
+</div>
+<div class="landscape-layer" aria-hidden="true">
+<img class="landscape-layer__image" src="assets/images/landscape-1280.webp" srcset="assets/images/landscape-768.webp 768w, assets/images/landscape-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="" decoding="async">
+</div>
+</template>
+</div>
+<div class="specimen background-example" data-background-example="rain">
+<div class="specimen-label">
+<span>02 / Cadence Rain · background alternativo</span>
+</div>
+    <div class="background-lab" data-background-preview>
+<div class="cadence-rain-bg" data-rain aria-hidden="true">
+</div>
+<div class="background-lab__copy">
+<p class="eyebrow" style="justify-content:center">Background Asimov</p>
+<h3 class="text-gradient-silver">Cadence Rain</h3>
+<p>Chuva WebGL com o shader e as camadas originais.</p>
+</div>
+</div>
+    <div class="background-controls">
+<label for="rain-snippet-intensity">Intensidade da chuva <output id="rain-snippet-intensity-output" for="rain-snippet-intensity" data-intensity-output>1.0</output>
+<input id="rain-snippet-intensity" data-rain-intensity type="range" min="0.2" max="2" step="0.1" value="1" aria-describedby="rain-snippet-intensity-output">
+</label>
+<button type="button" class="btn btn--small" data-background-pause aria-pressed="false" aria-label="Pausar Cadence Rain">Pausar</button>
+</div>
+    <p class="background-example__status muted" data-background-status role="status">Animação local · pausa fora da área visível.</p>
+<template id="rain-snippet" data-snippet>
+<div class="cadence-rain-bg" data-rain aria-hidden="true">
+</div>
+</template>
+</div>
+<div class="specimen background-example" data-background-example="aura">
+<div class="specimen-label">
+<span>03 / Aura sem imagem · aurora.js</span>
+</div>
+    <div class="background-lab" data-background-preview>
+<div class="aura-background" data-aura aria-hidden="true">
+</div>
+<div class="background-lab__copy">
+<p class="eyebrow" style="justify-content:center">Background Asimov</p>
+<h3 class="text-gradient-silver">Aura sem imagem</h3>
+<p>Aurora boreal do Unicorn Studio, sem a paisagem.</p>
+</div>
+</div>
+    <div class="background-controls">
+<button type="button" class="btn btn--small" data-background-pause aria-pressed="false" aria-label="Pausar Aura sem imagem">Pausar</button>
+</div>
+    <p class="background-example__status muted" data-background-status role="status">Animação local · pausa fora da área visível.</p>
+<template id="aurora-snippet" data-snippet>
+<div class="aura-background" data-aura aria-hidden="true">
+</div>
+</template>
+</div>
+<div class="specimen background-example" data-background-example="landscape">
+<div class="specimen-label">
+<span>04 / Imagem estática · transparência + gradiente + glow</span>
+</div>
+    <div class="background-lab" data-background-preview>
+<div class="landscape-layer" aria-hidden="true">
+<img class="landscape-layer__image" src="assets/images/landscape-1280.webp" srcset="assets/images/landscape-768.webp 768w, assets/images/landscape-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="" decoding="async">
+</div>
+<div class="background-lab__copy">
+<p class="eyebrow" style="justify-content:center">Background Asimov</p>
+<h3 class="text-gradient-silver">Imagem estática</h3>
+<p>Paisagem original com transparência, gradiente e glow.</p>
+</div>
+</div>
+    
+    <p class="background-example__status muted" data-background-status role="status">Imagem original · composição estática.</p>
+<template id="landscape-snippet" data-snippet>
+<div class="landscape-layer" aria-hidden="true">
+<img class="landscape-layer__image" src="assets/images/landscape-1280.webp" srcset="assets/images/landscape-768.webp 768w, assets/images/landscape-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="" decoding="async">
+</div>
+</template>
+</div>
+<div class="row" style="margin-top:24px">
+<a class="copy-btn" href="assets/source/aura-default.json" download>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg> Cena Aurora / Unicorn</a>
+<a class="copy-btn" href="assets/source/cadence-rain-original.ts" download>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg> Fonte Cadence</a>
+<button type="button" class="btn btn--small" data-replay>Repetir entrada</button>
+</div>
+<div class="grid-3 motion-grid" style="margin-top:18px">
+<div class="surface" data-replay-target>
+<div>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>
+</svg>
+<p>Reveal · 1s · blur 6px</p>
+</div>
+</div>
+<div class="surface">
+<div class="float-demo">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Zm7 0v4m-2-2h4"/>
+</svg>
+<p>Flutuação · 4s</p>
+</div>
+</div>
+<div class="surface">
+<div>
+<a class="button-glow" href="#backgrounds" >
+<span class="button-glow__border" aria-hidden="true">
+<span class="button-glow__border-spin">
+</span>
+</span>
+<span class="button-glow__inner" aria-hidden="true">
+</span>
+<span class="button-glow__row">
+<span class="button-glow__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/>
+</svg>
+</span>
+<span class="button-glow__label">Glow</span>
+<span class="button-glow__arrow">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</span>
+</span>
+</a>
+<p>Borda cônica · 3s</p>
+</div>
+</div>
+</div>
+</section>
+<section class="library-section" id="navigation" data-library-section>
+<header>
+<div>
+<h2>06 / Navegação</h2>
+<p>Shell translúcido da home, mais padrões para aplicativos: abas, dropdown, breadcrumb e paginação.</p>
+</div>
+<span class="badge badge--info">Home + extensões</span>
+</header>
+<div class="specimen">
+<div class="specimen-label">
+<span>Navbar / vidro + links ativos</span>
+</div>
+<div id="nav-sample" data-snippet>
+<div class="surface surface-pad row between">
+<img src="assets/images/logo.svg" alt="Asimov" width="65" height="20">
+<div class="row">
+<a class="btn btn--small" href="index.html">Layouts</a>
+<a class="btn btn--small btn--solid" href="components.html">Components</a>
+</div>
+</div>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>Extensões / navegação de aplicação</span>
+</div>
+<div id="app-navigation" data-snippet>
+<div class="stack">
+<nav class="breadcrumb" aria-label="Breadcrumb">
+<a href="index.html">Workspace</a>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+<a href="#navigation">Projetos</a>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+<span aria-current="page">Design System</span>
+</nav>
+<div data-tabs>
+<div class="tabs" role="tablist" aria-label="Configuração do projeto">
+<button role="tab" id="tab-overview" type="button" aria-selected="true" aria-controls="panel-overview">Visão geral</button>
+<button role="tab" id="tab-files" type="button" aria-selected="false" aria-controls="panel-files" tabindex="-1">Arquivos</button>
+<button role="tab" id="tab-activity" type="button" aria-selected="false" aria-controls="panel-activity" tabindex="-1">Atividade</button>
+</div>
+<div class="tab-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">Resumo do projeto, arquivos e atividades recentes.</div>
+<div class="tab-panel" id="panel-files" role="tabpanel" aria-labelledby="tab-files" hidden>HTML, CSS, JavaScript, fontes e imagens estão disponíveis na pasta assets.</div>
+<div class="tab-panel" id="panel-activity" role="tabpanel" aria-labelledby="tab-activity" hidden>
+<span class="badge badge--success">Atualizado</span> Biblioteca de componentes atualizada.</div>
+</div>
+<div class="row between">
+<nav class="pagination" aria-label="Páginas de exemplo">
+<button class="btn btn--small" type="button" data-page="1" aria-current="page">1</button>
+<button class="btn btn--small" type="button" data-page="2">2</button>
+<button class="btn btn--small" type="button" data-page="3">3</button>
+<span class="sr-only" role="status" data-page-status>Página 1 selecionada</span>
+</nav>
+<details class="demo-dropdown">
+<summary class="btn btn--small">Ações do projeto <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m6 9 6 6 6-6"/>
+</svg>
+</summary>
+<div class="dropdown-menu">
+<button type="button" data-toast="Link de demonstração copiado.">Copiar referência</button>
+<button type="button" data-dialog="Detalhes do projeto">Ver detalhes</button>
+<button type="button" data-toast="Projeto de demonstração duplicado.">Duplicar projeto</button>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="library-section" id="forms" data-library-section>
+<header>
+<div>
+<h2>07 / Formulários e controles</h2>
+<p>Campos, seleção, switches e validação que usam as mesmas superfícies, bordas e cores sem perder legibilidade.</p>
+</div>
+<span class="badge badge--info">Extensão para apps</span>
+</header>
+<div class="specimen">
+<div class="specimen-label">
+<span>Formulário funcional / validação local</span>
+</div>
+<div id="form-example" data-snippet>
+<form data-demo-form novalidate class="stack">
+<div class="grid-2">
+<div class="field">
+<label for="project-name">Nome do projeto</label>
+<input id="project-name" name="project" placeholder="Ex.: Portal de cursos" required minlength="3" aria-describedby="project-help">
+<small id="project-help">Use pelo menos 3 caracteres.</small>
+</div>
+<div class="field">
+<label for="project-email">Seu e-mail</label>
+<input id="project-email" name="email" type="email" placeholder="voce@empresa.com" required aria-describedby="email-help">
+<small id="email-help">Usado apenas nesta demonstração local.</small>
+</div>
+</div>
+<div class="grid-2">
+<div class="field">
+<label for="project-type">Tipo de projeto</label>
+<select id="project-type" name="type">
+<option>Landing page</option>
+<option>Aplicativo</option>
+<option>Dashboard</option>
+</select>
+</div>
+<div class="field">
+<label for="project-readonly">Workspace</label>
+<input id="project-readonly" value="Asimov / Demonstração" disabled>
+<small>Exemplo de campo desabilitado.</small>
+</div>
+</div>
+<div class="field">
+<label for="project-description">Descrição do projeto</label>
+<textarea id="project-description" name="description" placeholder="Descreva o objetivo e o escopo do projeto…">
+</textarea>
+</div>
+<div class="row between">
+<label class="check-label">
+<input type="checkbox" name="updates" checked> Incluir biblioteca de componentes</label>
+<span class="row">
+<button type="button" role="switch" aria-checked="true" aria-label="Animações do projeto" class="switch">
+</button>
+<span class="muted" style="font-size:11px">Animações</span>
+</span>
+</div>
+<div class="row">
+<button class="btn btn--solid" type="submit">Criar projeto de exemplo <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</button>
+<span class="muted" style="font-size:10px">Nada é enviado ou salvo.</span>
+</div>
+<p role="status" data-form-status style="margin:0;font-size:12px" hidden>
+</p>
+</form>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>Seleção / radio / estados</span>
+</div>
+<div id="selection-controls" data-snippet>
+<fieldset style="border:0;padding:0;margin:0">
+<legend class="field-label" style="margin-bottom:12px">Densidade da interface</legend>
+<div class="row">
+<label class="check-label">
+<input type="radio" name="density" value="comfortable" checked> Confortável</label>
+<label class="check-label">
+<input type="radio" name="density" value="compact"> Compacta</label>
+</div>
+</fieldset>
+<div class="field" style="margin-top:22px">
+<label for="invalid-example">Exemplo de erro</label>
+<input id="invalid-example" type="email" value="email-incompleto" aria-invalid="true" aria-describedby="invalid-help">
+<small class="error" id="invalid-help">Digite um e-mail válido, como voce@empresa.com.</small>
+</div>
+</div>
+</div>
+</section>
+<section class="library-section" id="data" data-library-section>
+<header>
+<div>
+<h2>08 / Dados e dashboards</h2>
+<p>Métricas, gráfico de área, tabela, progresso e distribuição. Dados ilustrativos; os controles alternam os cenários locais.</p>
+</div>
+<span class="badge badge--info">Extensão para apps</span>
+</header>
+<div class="specimen">
+<div class="specimen-label">
+<span>Workspace completo</span>
+</div>
+<div id="dashboard-example" data-snippet>
+<div class="dashboard surface" data-dashboard>
+<div class="dashboard-top">
+<span class="dashboard-logo">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>
+</svg> Asimov Workspace <span class="badge badge--accent">DEMO</span>
+</span>
+<div class="row">
+<span class="muted" style="font-size:10px">Meu workspace</span>
+<button type="button" class="btn btn--square" aria-label="Notificações" data-toast="Nenhuma nova notificação.">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+</svg>
+</button>
+</div>
+</div>
+<div class="dashboard-shell">
+<div class="dashboard-side" role="tablist" aria-label="Área do aplicativo">
+<button type="button" role="tab" id="dash-4-overview" aria-selected="true" aria-controls="dash-4-panel" data-dashboard-view="overview">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="3" width="7" height="7" rx="2"/>
+<rect x="14" y="3" width="7" height="7" rx="2"/>
+<rect x="3" y="14" width="7" height="7" rx="2"/>
+<rect x="14" y="14" width="7" height="7" rx="2"/>
+</svg> Visão geral</button>
+<button type="button" role="tab" id="dash-4-projects" aria-selected="false" tabindex="-1" aria-controls="dash-4-panel" data-dashboard-view="projects">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
+</svg> Projetos</button>
+<button type="button" role="tab" id="dash-4-team" aria-selected="false" tabindex="-1" aria-controls="dash-4-panel" data-dashboard-view="team">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="9" cy="8" r="3"/>
+<path d="M3 21v-3a6 6 0 0 1 12 0v3m1-16a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/>
+</svg> Comunidade</button>
+</div>
+<div class="dashboard-body" role="tabpanel" id="dash-4-panel" aria-labelledby="dash-4-overview">
+<div class="dashboard-heading">
+<div>
+<h3 data-dashboard-title>Visão geral do workspace</h3>
+<p data-dashboard-subtitle>Indicadores do período selecionado.</p>
+</div>
+<div class="segmented" aria-label="Período do gráfico">
+<button type="button" data-period="7" aria-pressed="false">7 dias</button>
+<button type="button" data-period="30" aria-pressed="true">30 dias</button>
+<button type="button" data-period="90" aria-pressed="false">90 dias</button>
+</div>
+</div>
+<div class="grid-3">
+<div class="metric">
+<span class="metric-label">Alunos ativos<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="9" cy="8" r="3"/>
+<path d="M3 21v-3a6 6 0 0 1 12 0v3m1-16a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/>
+</svg>
+</span>
+<strong class="metric-value" data-metric="0">2.840</strong>
+<span class="metric-note">
+<b>+18,6%</b> vs. período anterior</span>
+</div>
+<div class="metric">
+<span class="metric-label">Projetos criados<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
+</svg>
+</span>
+<strong class="metric-value" data-metric="1">128</strong>
+<span class="metric-note">
+<b>+24,2%</b> vs. período anterior</span>
+</div>
+<div class="metric">
+<span class="metric-label">Taxa de conclusão<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M4 3v17h17M8 14l4-4 4 2 5-7"/>
+</svg>
+</span>
+<strong class="metric-value" data-metric="2">94,8%</strong>
+<span class="metric-note">
+<b>+6,4%</b> vs. período anterior</span>
+</div>
+</div>
+<div data-dashboard-chart>
+<div class="chart-panel">
+<div class="row between">
+<h4>Crescimento da comunidade</h4>
+<div class="row">
+<span class="status-dot accent">
+</span>
+<small>Alunos ativos</small>
+</div>
+</div>
+<div class="chart-visual">
+<div class="chart-scale">
+<span>3.000</span>
+<span>2.000</span>
+<span>1.000</span>
+<span>0</span>
+</div>
+<svg class="chart-svg" viewBox="0 0 600 180" role="img" aria-label="Gráfico ilustrativo: alunos ativos sobem de 680 para 2.840 ao longo do período">
+<defs>
+<linearGradient id="chart-5" x1="0" y1="0" x2="0" y2="1">
+<stop stop-color="var(--ui-accent)" stop-opacity=".23"/>
+<stop offset="1" stop-color="var(--ui-accent)" stop-opacity="0"/>
+</linearGradient>
+</defs>
+<path class="chart-grid" d="M0 10H600M0 62H600M0 114H600M0 166H600"/>
+<path data-chart-area fill="url(#chart-5)" d="M0 145 C30 145 35 122 65 128 S100 144 125 105 S170 125 200 91 S230 97 260 73 S300 105 325 63 S370 80 400 51 S455 75 480 35 S520 40 550 20 S585 28 600 10 V180 H0Z"/>
+<path class="chart-line" data-chart-line d="M0 145 C30 145 35 122 65 128 S100 144 125 105 S170 125 200 91 S230 97 260 73 S300 105 325 63 S370 80 400 51 S455 75 480 35 S520 40 550 20 S585 28 600 10"/>
+</svg>
+</div>
+<div class="chart-labels" data-chart-labels>
+<span>01 set</span>
+<span>06 set</span>
+<span>11 set</span>
+<span>16 set</span>
+<span>21 set</span>
+<span>26 set</span>
+</div>
+</div>
+</div>
+<div data-dashboard-table hidden style="margin-top:20px">
+<div class="table-wrap">
+<table class="data-table">
+<caption>Atividades recentes · dados de demonstração</caption>
+<thead>
+<tr>
+<th scope="col">Projeto</th>
+<th scope="col">Categoria</th>
+<th scope="col">Status</th>
+<th scope="col">Progresso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<span class="table-person">
+<img src="assets/images/avatar-1.webp" width="26" height="26" alt="">Agente de atendimento</span>
+</td>
+<td>IA</td>
+<td>
+<span class="badge badge--success">Ativo</span>
+</td>
+<td>
+<div class="row">
+<div class="progress" role="progressbar" aria-label="Agente de atendimento" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" style="width:70px;--progress:85%">
+<span>
+</span>
+</div>
+<span>85%</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<span class="table-person">
+<img src="assets/images/avatar-2.webp" width="26" height="26" alt="">Painel de resultados</span>
+</td>
+<td>Dados</td>
+<td>
+<span class="badge badge--warning">Em revisão</span>
+</td>
+<td>
+<div class="row">
+<div class="progress" role="progressbar" aria-label="Painel de resultados" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" style="width:70px;--progress:64%">
+<span>
+</span>
+</div>
+<span>64%</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<span class="table-person">
+<img src="assets/images/avatar-3.webp" width="26" height="26" alt="">Nova landing page</span>
+</td>
+<td>Design</td>
+<td>
+<span class="badge badge--info">Concluído</span>
+</td>
+<td>
+<div class="row">
+<div class="progress" role="progressbar" aria-label="Nova landing page" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" style="width:70px;--progress:100%">
+<span>
+</span>
+</div>
+<span>100%</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div data-dashboard-team hidden class="row surface surface-pad" style="margin-top:20px">
+<div class="avatar-stack">
+<img src="assets/images/avatar-1.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-2.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-3.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-4.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-5.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-6.webp" alt="" width="30" height="30" loading="lazy">
+</div>
+<div>
+<h4 style="margin:0 0 6px">Membros do workspace</h4>
+<p class="muted" style="font-size:12px;margin:0">6 membros ativos neste workspace de demonstração.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>Tabela / status / progressbar</span>
+</div>
+<div id="table-example" data-snippet>
+<div class="table-wrap">
+<table class="data-table">
+<caption>Atividades recentes · dados de demonstração</caption>
+<thead>
+<tr>
+<th scope="col">Projeto</th>
+<th scope="col">Categoria</th>
+<th scope="col">Status</th>
+<th scope="col">Progresso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<span class="table-person">
+<img src="assets/images/avatar-1.webp" width="26" height="26" alt="">Agente de atendimento</span>
+</td>
+<td>IA</td>
+<td>
+<span class="badge badge--success">Ativo</span>
+</td>
+<td>
+<div class="row">
+<div class="progress" role="progressbar" aria-label="Agente de atendimento" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" style="width:70px;--progress:85%">
+<span>
+</span>
+</div>
+<span>85%</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<span class="table-person">
+<img src="assets/images/avatar-2.webp" width="26" height="26" alt="">Painel de resultados</span>
+</td>
+<td>Dados</td>
+<td>
+<span class="badge badge--warning">Em revisão</span>
+</td>
+<td>
+<div class="row">
+<div class="progress" role="progressbar" aria-label="Painel de resultados" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" style="width:70px;--progress:64%">
+<span>
+</span>
+</div>
+<span>64%</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<span class="table-person">
+<img src="assets/images/avatar-3.webp" width="26" height="26" alt="">Nova landing page</span>
+</td>
+<td>Design</td>
+<td>
+<span class="badge badge--info">Concluído</span>
+</td>
+<td>
+<div class="row">
+<div class="progress" role="progressbar" aria-label="Nova landing page" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" style="width:70px;--progress:100%">
+<span>
+</span>
+</div>
+<span>100%</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>Gráficos / leitura complementar</span>
+</div>
+<div id="chart-types" data-snippet>
+<div class="grid-2">
+<div class="surface surface-pad stack" style="align-items:center">
+<div class="donut" role="img" aria-label="64% concluídos, 18% em andamento, 18% pendentes">
+<span>64%<small>concluído</small>
+</span>
+</div>
+<span class="muted" style="font-size:10px">Conclusão / andamento / pendentes</span>
+</div>
+<div class="surface surface-pad">
+<p style="font-size:12px">Entregas por semana</p>
+<div class="bar-chart" role="img" aria-label="Entregas: semana 1, 12; semana 2, 19; semana 3, 16; semana 4, 28; semana 5, 23; semana 6, 34">
+<span style="--bar:35%">
+</span>
+<span style="--bar:55%">
+</span>
+<span style="--bar:46%">
+</span>
+<span style="--bar:80%">
+</span>
+<span style="--bar:67%">
+</span>
+<span style="--bar:97%">
+</span>
+</div>
+<div class="chart-labels" style="margin-left:0">
+<span>S1</span>
+<span>S2</span>
+<span>S3</span>
+<span>S4</span>
+<span>S5</span>
+<span>S6</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="library-section" id="feedback" data-library-section>
+<header>
+<div>
+<h2>09 / Feedback e estados</h2>
+<p>Feedback visível para confirmar, orientar, carregar ou recuperar. Modal nativo com foco, Escape e retorno ao acionador.</p>
+</div>
+<span class="badge badge--info">Extensão para apps</span>
+</header>
+<div class="specimen">
+<div class="specimen-label">
+<span>Badges semânticos</span>
+</div>
+<div id="status-set" data-snippet>
+<div class="row">
+<span class="badge badge--success">Publicado</span>
+<span class="badge badge--warning">Em análise</span>
+<span class="badge badge--danger">Erro na conexão</span>
+<span class="badge badge--info">Atualização disponível</span>
+<span class="badge badge--accent">Novo</span>
+<span class="badge badge--neutral">Rascunho</span>
+</div>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>Mensagens contextuais</span>
+</div>
+<div id="alerts" data-snippet>
+<div class="stack">
+<div class="alert" role="status">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+<div>Seu projeto está pronto.<p>Todos os componentes estão disponíveis para uso.</p>
+</div>
+</div>
+<div class="alert" style="--alert-color:var(--warning)">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 11v6m0-10v.1"/>
+</svg>
+<div>Revise as informações.<p>Confira os campos antes de continuar.</p>
+</div>
+</div>
+<div class="alert" style="--alert-color:var(--danger)">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 11v6m0-10v.1"/>
+</svg>
+<div>Não foi possível concluir.<p>Tente novamente. Seus dados permanecem no formulário.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>Loading / vazio / ações de feedback</span>
+</div>
+<div id="loading-empty" data-snippet>
+<div class="grid-2">
+<div class="surface surface-pad">
+<div class="skeleton-card" role="status" aria-label="Carregando conteúdo">
+<div class="skeleton skeleton-avatar">
+</div>
+<div class="stack" style="flex:1;gap:9px">
+<div class="skeleton" style="width:80%">
+</div>
+<div class="skeleton" style="width:55%">
+</div>
+</div>
+</div>
+<div class="row" style="margin-top:30px">
+<button type="button" class="btn " data-dialog="Detalhes do componente">Abrir modal</button>
+<button type="button" class="btn btn--small" data-toast="Alterações salvas com sucesso.">Ver toast</button>
+</div>
+</div>
+<div class="surface empty-state">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
+</svg>
+<h3>Nenhum projeto cadastrado</h3>
+<p>Os projetos cadastrados serão listados nesta seção.</p>
+<button type="button" class="btn btn--small" data-dialog="Seu primeiro projeto">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14M12 5v14"/>
+</svg>Criar primeiro projeto</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="library-section" id="conversion" data-library-section>
+<header>
+<div>
+<h2>10 / Conversão e garantia</h2>
+<p>Pricing Cadence preservado, incluindo a borda mascarada, blur e destaque. O selo de garantia mantém sua rotação de 30 segundos.</p>
+</div>
+<span class="badge badge--accent">Home original</span>
+</header>
+<div class="specimen">
+<div class="specimen-label">
+<span>Index4PricingSection / planos demonstrativos</span>
+</div>
+<div id="pricing-example" data-snippet>
+<div class="index4-cadence index4-typography-lumina pricing-demo" data-pricing>
+<div class="segmented price-switch" aria-label="Período de cobrança">
+<button type="button" data-billing="monthly" aria-pressed="false">Mensal</button>
+<button type="button" data-billing="annual" aria-pressed="true">Anual <span class="accent">−20%</span>
+</button>
+</div>
+<div class="index4-pricing-grid">
+<article class="index4-pricing-card ">
+<div class="index4-pricing-card__head">
+<div>
+<h3 class="index4-pricing-card__name">Essencial</h3>
+<p class="muted" style="font-size:12px;margin:9px 0 0">Exemplo de plano com recursos básicos.</p>
+</div>
+<span class="index4-pricing-card__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>
+</svg>
+</span>
+</div>
+<div class="index4-pricing-card__price-block">
+<p class="index4-pricing-card__price">
+<span class="index4-pricing-card__installments">R$</span>
+<span class="index4-pricing-card__amount" data-monthly="29" data-annual="23">23</span>
+<span class="muted" style="font-size:12px">/ mês</span>
+</p>
+<p class="index4-pricing-card__cash" data-billing-note>Cobrado anualmente · valor ilustrativo</p>
+</div>
+<ul class="index4-pricing-card__benefits">
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Biblioteca de componentes</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Layouts responsivos</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Paletas e tipografia</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Efeitos e animações</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Arquivos de referência</span>
+</li>
+</ul>
+<div class="index4-pricing-card__footer">
+<button type="button" class="index4-pricing-card__cta index4-pricing-card__cta--outline" data-plan="Essencial">Selecionar Essencial <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</button>
+<p class="index4-pricing-card__guarantee">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/>
+<path d="m8 12 3 3 5-6"/>
+</svg> Demonstração de interface</p>
+</div>
+</article>
+<article class="index4-pricing-card index4-pricing-card--featured">
+<span class="index4-pricing-card__popular">Plano em destaque</span>
+<div class="index4-pricing-card__head">
+<div>
+<h3 class="index4-pricing-card__name">Professional</h3>
+<p class="muted" style="font-size:12px;margin:9px 0 0">Exemplo de plano com recursos adicionais.</p>
+</div>
+<span class="index4-pricing-card__icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Zm7 0v4m-2-2h4"/>
+</svg>
+</span>
+</div>
+<div class="index4-pricing-card__price-block">
+<p class="index4-pricing-card__price">
+<span class="index4-pricing-card__installments">R$</span>
+<span class="index4-pricing-card__amount" data-monthly="79" data-annual="63">63</span>
+<span class="muted" style="font-size:12px">/ mês</span>
+</p>
+<p class="index4-pricing-card__cash" data-billing-note>Cobrado anualmente · valor ilustrativo</p>
+</div>
+<ul class="index4-pricing-card__benefits">
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Tudo do plano Essencial</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Layouts responsivos</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Paletas e tipografia</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Dashboards e aplicações</span>
+</li>
+<li class="index4-pricing-card__benefit">
+<span class="index4-pricing-card__check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</span>
+<span class="index4-pricing-card__benefit-text">Configurações de interface</span>
+</li>
+</ul>
+<div class="index4-pricing-card__footer">
+<button type="button" class="index4-pricing-card__cta index4-pricing-card__cta--primary" data-plan="Professional">Selecionar Professional <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</button>
+<p class="index4-pricing-card__guarantee">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/>
+<path d="m8 12 3 3 5-6"/>
+</svg> Demonstração de interface</p>
+</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>GuaranteeBlock / selo orbital</span>
+</div>
+<div id="guarantee-example" data-snippet>
+<section class="guarantee-card">
+<div class="guarantee-seal" aria-hidden="true">
+<span class="guarantee-seal__ring">
+</span>
+<span class="guarantee-seal__text">
+<svg viewBox="0 0 200 200">
+<defs>
+<path id="seal-6" d="M100,100 m-85,0 a85,85 0 1,1 170,0 a85,85 0 1,1 -170,0"/>
+</defs>
+<text>
+<textPath href="#seal-6" startOffset="0%">GARANTIA DE 7 DIAS · EXEMPLO DE COMPONENTE · GARANTIA DE 7 DIAS · EXEMPLO DE COMPONENTE · </textPath>
+</text>
+</svg>
+</span>
+<div class="guarantee-seal__core">
+<svg class="icon guarantee-seal__icon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/>
+<path d="m8 12 3 3 5-6"/>
+</svg>
+<span class="guarantee-seal__label">7 DIAS</span>
+</div>
+</div>
+<div class="guarantee-card__content">
+<p class="guarantee-card__eyebrow">Exemplo de garantia</p>
+<h3 class="guarantee-card__title">Informações sobre garantia.</h3>
+<p class="guarantee-card__description">Componente para apresentar prazo, condições e procedimento de solicitação. Substitua os textos pelas regras do produto.</p>
+<div class="guarantee-steps">
+<div class="guarantee-step">
+<span class="guarantee-step__number">01 / PRAZO</span>
+<p class="guarantee-step__text">Informe o prazo aplicável.</p>
+</div>
+<div class="guarantee-step">
+<span class="guarantee-step__number">02 / CONDIÇÕES</span>
+<p class="guarantee-step__text">Descreva as condições.</p>
+</div>
+<div class="guarantee-step">
+<span class="guarantee-step__number">03 / SOLICITAÇÃO</span>
+<p class="guarantee-step__text">Indique o canal de contato.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<div class="specimen">
+<div class="specimen-label">
+<span>Barra de campanha / adaptação sem oferta real</span>
+</div>
+<div id="announcement-example" data-snippet>
+<div class="announcement">
+<span>
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Zm7 0v4m-2-2h4"/>
+</svg> Exemplo de aviso com prazo.</span>
+<span class="countdown" data-countdown data-seconds="86400" aria-label="Contagem regressiva de demonstração">
+<span>01d</span>
+<span>00h</span>
+<span>00m</span>
+<span>00s</span>
+</span>
+<a class="btn btn--small" href="starter.html">Ver exemplo <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</section>
+<section class="library-section" id="faq" data-library-section>
+<header>
+<div>
+<h2>11 / Accordion e FAQ</h2>
+<p>Transição original de grid, brilho na borda e ícone que gira. Botões semânticos com estado expandido e conteúdo acessível.</p>
+</div>
+<span class="badge badge--accent">Home original</span>
+</header>
+<div class="specimen">
+<div class="specimen-label">
+<span>FaqBlock</span>
+</div>
+<div id="faq-example" data-snippet>
+<div class="faq-accordion">
+<div class="faq-item">
+<h3 style="margin:0">
+<button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-7" id="faq-7-trigger">
+<span class="faq-question">Funciona fora do projeto Astro?</span>
+<span class="faq-icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14M12 5v14"/>
+</svg>
+</span>
+</button>
+</h3>
+<div class="faq-body" id="faq-7" role="region" aria-labelledby="faq-7-trigger" inert>
+<div class="faq-body-inner">
+<div class="faq-content">
+<p>Sim. Copie a pasta inteira e abra index.html. Todos os caminhos são relativos, os scripts são clássicos e as fontes, imagens e bibliotecas estão dentro de assets.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<h3 style="margin:0">
+<button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-8" id="faq-8-trigger">
+<span class="faq-question">Como levo a chuva para outro projeto?</span>
+<span class="faq-icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14M12 5v14"/>
+</svg>
+</span>
+</button>
+</h3>
+<div class="faq-body" id="faq-8" role="region" aria-labelledby="faq-8-trigger" inert>
+<div class="faq-body-inner">
+<div class="faq-content">
+<p>Use starter.html como base. Carregue assets/css/design-system.css e os scripts rain-shaders.js e rain.js, nesta ordem. Inclua um elemento com class="cadence-rain-bg" e data-rain.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<h3 style="margin:0">
+<button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-9" id="faq-9-trigger">
+<span class="faq-question">Como a identidade é preservada?</span>
+<span class="faq-icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14M12 5v14"/>
+</svg>
+</span>
+</button>
+</h3>
+<div class="faq-body" id="faq-9" role="region" aria-labelledby="faq-9-trigger" inert>
+<div class="faq-body-inner">
+<div class="faq-content">
+<p>As regras visuais originais estão em source-components.css, source-pricing.css e source-button-glow.css. Os novos controles usam os mesmos tokens em tokens.css.</p>
+</div>
+</div>
+</div>
+<div class="faq-item">
+<h3 style="margin:0">
+<button class="faq-trigger" type="button" aria-expanded="false" aria-controls="faq-10" id="faq-10-trigger">
+<span class="faq-question">E se as animações estiverem desativadas?</span>
+<span class="faq-icon">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14M12 5v14"/>
+</svg>
+</span>
+</button>
+</h3>
+<div class="faq-body" id="faq-10" role="region" aria-labelledby="faq-10-trigger" inert>
+<div class="faq-body-inner">
+<div class="faq-content">
+<p>A preferência de movimento reduzido do sistema é respeitada. O conteúdo permanece visível, e os efeitos WebGL usam um fallback visual estático.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="library-section" id="assets" data-library-section>
+<header>
+<div>
+<h2>12 / Assets locais</h2>
+<p>Fontes, marca, imagens da plataforma, paisagens e retratos usados na home. Os arquivos originais ficam disponíveis para reutilização.</p>
+</div>
+<span class="badge badge--accent">Home original</span>
+</header>
+<div class="grid-3 asset-grid">
+<a class="asset-thumb" href="assets/images/logo.svg" download>
+<img src="assets/images/logo.svg" alt="Logo / SVG" loading="lazy" width="250" height="140">
+<span>Logo / SVG<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb" href="assets/images/landscape-1280.webp" download>
+<img src="assets/images/landscape-1280.webp" alt="Landscape / 1280" loading="lazy" width="250" height="140">
+<span>Landscape / 1280<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb" href="assets/images/landscape-768.webp" download>
+<img src="assets/images/landscape-768.webp" alt="Landscape / 768" loading="lazy" width="250" height="140">
+<span>Landscape / 768<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb" href="assets/images/platform-1.png" download>
+<img src="assets/images/platform-1.png" alt="Plataforma / 1" loading="lazy" width="250" height="140">
+<span>Plataforma / 1<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb" href="assets/images/platform-2.png" download>
+<img src="assets/images/platform-2.png" alt="Plataforma / 2" loading="lazy" width="250" height="140">
+<span>Plataforma / 2<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb" href="assets/images/platform-3.png" download>
+<img src="assets/images/platform-3.png" alt="Plataforma / 3" loading="lazy" width="250" height="140">
+<span>Plataforma / 3<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb" href="assets/images/platform-4.png" download>
+<img src="assets/images/platform-4.png" alt="Plataforma / 4" loading="lazy" width="250" height="140">
+<span>Plataforma / 4<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb" href="assets/images/platform-5.png" download>
+<img src="assets/images/platform-5.png" alt="Plataforma / 5" loading="lazy" width="250" height="140">
+<span>Plataforma / 5<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb" href="assets/images/platform-6.png" download>
+<img src="assets/images/platform-6.png" alt="Plataforma / 6" loading="lazy" width="250" height="140">
+<span>Plataforma / 6<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+</div>
+<h3 class="spec-label">Retratos e avatares</h3>
+<div class="grid-4 asset-grid">
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-rodrigo.webp" download>
+<img src="assets/images/instructor-rodrigo.webp" alt="Retrato de rodrigo" loading="lazy" width="160" height="115">
+<span>rodrigo<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-juliano.webp" download>
+<img src="assets/images/instructor-juliano.webp" alt="Retrato de juliano" loading="lazy" width="160" height="115">
+<span>juliano<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-samuel.webp" download>
+<img src="assets/images/instructor-samuel.webp" alt="Retrato de samuel" loading="lazy" width="160" height="115">
+<span>samuel<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-lucas.webp" download>
+<img src="assets/images/instructor-lucas.webp" alt="Retrato de lucas" loading="lazy" width="160" height="115">
+<span>lucas<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-adriano.webp" download>
+<img src="assets/images/instructor-adriano.webp" alt="Retrato de adriano" loading="lazy" width="160" height="115">
+<span>adriano<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-viviane.webp" download>
+<img src="assets/images/instructor-viviane.webp" alt="Retrato de viviane" loading="lazy" width="160" height="115">
+<span>viviane<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-daniel.webp" download>
+<img src="assets/images/instructor-daniel.webp" alt="Retrato de daniel" loading="lazy" width="160" height="115">
+<span>daniel<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-ana-maria.webp" download>
+<img src="assets/images/instructor-ana-maria.webp" alt="Retrato de ana-maria" loading="lazy" width="160" height="115">
+<span>ana-maria<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-mykael.webp" download>
+<img src="assets/images/instructor-mykael.webp" alt="Retrato de mykael" loading="lazy" width="160" height="115">
+<span>mykael<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-cassio.webp" download>
+<img src="assets/images/instructor-cassio.webp" alt="Retrato de cassio" loading="lazy" width="160" height="115">
+<span>cassio<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-marcelo.png" download>
+<img src="assets/images/instructor-marcelo.png" alt="Retrato de marcelo" loading="lazy" width="160" height="115">
+<span>marcelo<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-otavio.png" download>
+<img src="assets/images/instructor-otavio.png" alt="Retrato de otavio" loading="lazy" width="160" height="115">
+<span>otavio<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+<a class="asset-thumb portrait-asset" href="assets/images/instructor-vitor.png" download>
+<img src="assets/images/instructor-vitor.png" alt="Retrato de vitor" loading="lazy" width="160" height="115">
+<span>vitor<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</span>
+</a>
+</div>
+<div class="row" style="margin-top:25px">
+<div class="avatar-stack">
+<img src="assets/images/avatar-1.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-2.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-3.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-4.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-5.webp" alt="" width="30" height="30" loading="lazy">
+<img src="assets/images/avatar-6.webp" alt="" width="30" height="30" loading="lazy">
+</div>
+<span class="muted" style="font-size:11px">6 avatares / assets/images/avatar-1.webp … avatar-6.webp</span>
+</div>
+<h3 class="spec-label">Ícones locais / SVG inline</h3>
+<div class="row">
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M5 12h14m-7-7 7 7-7 7&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone arrow" title="arrow">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m20 6-11 11-5-5&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone check" title="check">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone play" title="play">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M5 12h14M12 5v14&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone plus" title="plus">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14M12 5v14"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m6 9 6 6 6-6&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone chevron" title="chevron">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m6 9 6 6 6-6"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m9 18 6-6-6-6&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone right" title="right">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m6 6 12 12M6 18 18 6&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone close" title="close">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m6 6 12 12M6 18 18 6"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone layers" title="layers">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;3&quot; y=&quot;3&quot; width=&quot;7&quot; height=&quot;7&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;14&quot; y=&quot;3&quot; width=&quot;7&quot; height=&quot;7&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;3&quot; y=&quot;14&quot; width=&quot;7&quot; height=&quot;7&quot; rx=&quot;2&quot;/&gt;&lt;rect x=&quot;14&quot; y=&quot;14&quot; width=&quot;7&quot; height=&quot;7&quot; rx=&quot;2&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone grid" title="grid">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="3" width="7" height="7" rx="2"/>
+<rect x="14" y="3" width="7" height="7" rx="2"/>
+<rect x="3" y="14" width="7" height="7" rx="2"/>
+<rect x="14" y="14" width="7" height="7" rx="2"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone code" title="code">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Zm7 0v4m-2-2h4&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone spark" title="spark">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Zm7 0v4m-2-2h4"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m13 2-9 12h7l-1 8 10-13h-7l1-7Z&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone bolt" title="bolt">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m13 2-9 12h7l-1 8 10-13h-7l1-7Z"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M4 3v17h17M8 14l4-4 4 2 5-7&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone chart" title="chart">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M4 3v17h17M8 14l4-4 4 2 5-7"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;6&quot; y=&quot;6&quot; width=&quot;12&quot; height=&quot;12&quot; rx=&quot;3&quot;/&gt;&lt;rect x=&quot;9&quot; y=&quot;9&quot; width=&quot;6&quot; height=&quot;6&quot; rx=&quot;1&quot;/&gt;&lt;path d=&quot;M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone cpu" title="cpu">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="6" y="6" width="12" height="12" rx="3"/>
+<rect x="9" y="9" width="6" height="6" rx="1"/>
+<path d="M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-3.7c-1-.6-.6-2.3.6-2.3H18a4 4 0 0 0 3-4c0-4-4-8-9-8Z&quot;/&gt;&lt;circle cx=&quot;7&quot; cy=&quot;10&quot; r=&quot;.5&quot;/&gt;&lt;circle cx=&quot;10&quot; cy=&quot;6.5&quot; r=&quot;.5&quot;/&gt;&lt;circle cx=&quot;15&quot; cy=&quot;7&quot; r=&quot;.5&quot;/&gt;&lt;circle cx=&quot;18&quot; cy=&quot;10.5&quot; r=&quot;.5&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone palette" title="palette">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-3.7c-1-.6-.6-2.3.6-2.3H18a4 4 0 0 0 3-4c0-4-4-8-9-8Z"/>
+<circle cx="7" cy="10" r=".5"/>
+<circle cx="10" cy="6.5" r=".5"/>
+<circle cx="15" cy="7" r=".5"/>
+<circle cx="18" cy="10.5" r=".5"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;9&quot;/&gt;&lt;path d=&quot;M12 7v5l3 2&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone clock" title="clock">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 7v5l3 2"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z&quot;/&gt;&lt;path d=&quot;m8 12 3 3 5-6&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone shield" title="shield">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/>
+<path d="m8 12 3 3 5-6"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;9&quot;/&gt;&lt;ellipse cx=&quot;12&quot; cy=&quot;12&quot; rx=&quot;4&quot; ry=&quot;9&quot;/&gt;&lt;path d=&quot;M3 12h18&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone globe" title="globe">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<ellipse cx="12" cy="12" rx="4" ry="9"/>
+<path d="M3 12h18"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;8&quot; y=&quot;8&quot; width=&quot;12&quot; height=&quot;13&quot; rx=&quot;2&quot;/&gt;&lt;path d=&quot;M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone copy" title="copy">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="8" y="8" width="12" height="13" rx="2"/>
+<path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone download" title="download">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;circle cx=&quot;9&quot; cy=&quot;8&quot; r=&quot;3&quot;/&gt;&lt;path d=&quot;M3 21v-3a6 6 0 0 1 12 0v3m1-16a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone users" title="users">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="9" cy="8" r="3"/>
+<path d="M3 21v-3a6 6 0 0 1 12 0v3m1-16a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M4 7h16M4 17h16&quot;/&gt;&lt;circle cx=&quot;8&quot; cy=&quot;7&quot; r=&quot;3&quot; fill=&quot;#0b1213&quot;/&gt;&lt;circle cx=&quot;16&quot; cy=&quot;17&quot; r=&quot;3&quot; fill=&quot;#0b1213&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone settings" title="settings">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M4 7h16M4 17h16"/>
+<circle cx="8" cy="7" r="3" fill="#0b1213"/>
+<circle cx="16" cy="17" r="3" fill="#0b1213"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone bell" title="bell">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;circle cx=&quot;10.5&quot; cy=&quot;10.5&quot; r=&quot;7.5&quot;/&gt;&lt;path d=&quot;m16 16 5 5&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone search" title="search">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="10.5" cy="10.5" r="7.5"/>
+<path d="m16 16 5 5"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone folder" title="folder">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M12 5C8 2 3 3 3 3v16s5-1 9 2c4-3 9-2 9-2V3s-5-1-9 2v16&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone book" title="book">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 5C8 2 3 3 3 3v16s5-1 9 2c4-3 9-2 9-2V3s-5-1-9 2v16"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M21 11a9 9 0 0 1-9 9 10 10 0 0 1-4-.8L3 21l1.7-5A9 9 0 1 1 21 11Z&quot;/&gt;&lt;path d=&quot;M8 11h8M8 8h5&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone message" title="message">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M21 11a9 9 0 0 1-9 9 10 10 0 0 1-4-.8L3 21l1.7-5A9 9 0 1 1 21 11Z"/>
+<path d="M8 11h8M8 8h5"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;3&quot; y=&quot;5&quot; width=&quot;18&quot; height=&quot;15&quot; rx=&quot;3&quot;/&gt;&lt;path d=&quot;M4 5V4l13-2v3m4 6h-6v5h6&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone wallet" title="wallet">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="5" width="18" height="15" rx="3"/>
+<path d="M4 5V4l13-2v3m4 6h-6v5h6"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M12 12C8 5 3 5 3 12s5 7 9 0 9-7 9 0-5 7-9 0Z&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone infinity" title="infinity">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 12C8 5 3 5 3 12s5 7 9 0 9-7 9 0-5 7-9 0Z"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;3&quot; y=&quot;3&quot; width=&quot;18&quot; height=&quot;13&quot; rx=&quot;2&quot;/&gt;&lt;path d=&quot;M8 21h8m-4-5v5&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone monitor" title="monitor">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="3" width="18" height="13" rx="2"/>
+<path d="M8 21h8m-4-5v5"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;m8 15-2 5m7-5-2 5m7-5-2 5M5 13a4 4 0 0 1-.5-8A6 6 0 0 1 16 5a4 4 0 0 1 3 8&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone rain" title="rain">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m8 15-2 5m7-5-2 5m7-5-2 5M5 13a4 4 0 0 1-.5-8A6 6 0 0 1 16 5a4 4 0 0 1 3 8"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;9&quot;/&gt;&lt;path d=&quot;M12 11v6m0-10v.1&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone info" title="info">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M12 11v6m0-10v.1"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M4 4h16M12 4v16m-4 0h8&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone type" title="type">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M4 4h16M12 4v16m-4 0h8"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;4&quot; y=&quot;10&quot; width=&quot;16&quot; height=&quot;11&quot; rx=&quot;2&quot;/&gt;&lt;path d=&quot;M8 10V6a4 4 0 0 1 8 0v4m-4 5v2&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone lock" title="lock">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="4" y="10" width="16" height="11" rx="2"/>
+<path d="M8 10V6a4 4 0 0 1 8 0v4m-4 5v2"/>
+</svg>
+</button>
+<button type="button" class="btn btn--square" data-copy-text="&lt;svg class=&quot;icon &quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;&lt;rect x=&quot;3&quot; y=&quot;5&quot; width=&quot;18&quot; height=&quot;14&quot; rx=&quot;2&quot;/&gt;&lt;path d=&quot;m3 6 9 7 9-7&quot;/&gt;&lt;/svg&gt;" aria-label="Copiar ícone mail" title="mail">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="m3 6 9 7 9-7"/>
+</svg>
+</button>
+</div>
+<p class="muted" style="font-size:11px;margin-top:15px">Traço de 1,5px. Primitivos de Icon.astro preservados; ícones adicionais são adaptações locais de traço. Clique para copiar o SVG.</p>
+<h3 class="spec-label">Rodapé completo / estrutura da home</h3>
+<div class="specimen">
+<div class="specimen-label">
+<span>Footer / marca + colunas + watermark</span>
+</div>
+<div id="footer-example" data-snippet>
+<footer class="site-footer">
+<div class="site-footer__watermark" aria-hidden="true">ASIMOV</div>
+<div class="site-footer__inner">
+<div class="site-footer__grid">
+<div class="site-footer__brand">
+<a href="index.html" aria-label="Asimov">
+<img src="assets/images/logo.svg" alt="Asimov" width="79" height="24">
+</a>
+<p class="site-footer__tagline">Referências de interface da Asimov Academy.</p>
+<div class="site-footer__social-list">
+<a class="site-footer__social-link" href="AGENTS.md" aria-label="Guia de integração">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16"/>
+</svg>
+</a>
+<a class="site-footer__social-link" href="#assets" aria-label="Biblioteca de assets">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="3" width="7" height="7" rx="2"/>
+<rect x="14" y="3" width="7" height="7" rx="2"/>
+<rect x="3" y="14" width="7" height="7" rx="2"/>
+<rect x="14" y="14" width="7" height="7" rx="2"/>
+</svg>
+</a>
+</div>
+</div>
+<nav aria-label="Rodapé: Explore">
+<h3 class="site-footer__col-title">Explore</h3>
+<ul class="site-footer__links">
+<li>
+<a class="site-footer__link" href="index.html">Layouts</a>
+</li>
+<li>
+<a class="site-footer__link" href="components.html">Components</a>
+</li>
+</ul>
+</nav>
+<nav aria-label="Rodapé: Fundamentos">
+<h3 class="site-footer__col-title">Fundamentos</h3>
+<ul class="site-footer__links">
+<li>
+<a class="site-footer__link" href="#foundations">Cores</a>
+</li>
+<li>
+<a class="site-footer__link" href="#foundations">Tipografia</a>
+</li>
+</ul>
+</nav>
+<nav aria-label="Rodapé: Recursos">
+<h3 class="site-footer__col-title">Recursos</h3>
+<ul class="site-footer__links">
+<li>
+<a class="site-footer__link" href="#backgrounds">Backgrounds</a>
+</li>
+<li>
+<a class="site-footer__link" href="#assets">Assets</a>
+</li>
+</ul>
+</nav>
+<nav aria-label="Rodapé: Comece aqui">
+<h3 class="site-footer__col-title">Comece aqui</h3>
+<ul class="site-footer__links">
+<li>
+<a class="site-footer__link" href="starter.html">Starter</a>
+</li>
+<li>
+<a class="site-footer__link" href="AGENTS.md">Guia para IA</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class="site-footer__bar">
+<p>© 2026 Asimov · Exemplo de estrutura de rodapé.</p>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<footer class="ds-footer">
+<div class="container-ds">
+<div class="row">
+<img src="assets/images/logo.svg" alt="Asimov" width="65" height="20">
+<span>Asimov Academy · Biblioteca de interface</span>
+</div>
+<div class="row">
+<a href="AGENTS.md">Guia para IA <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 12h14m-7-7 7 7-7 7"/>
+</svg>
+</a>
+<span>2026 · v1.0</span>
+</div>
+</div>
+</footer>
+<div class="toast" role="status" aria-live="polite" aria-atomic="true" id="toast">
+</div>
+<dialog class="dialog" id="demo-dialog" aria-labelledby="dialog-title">
+<button type="button" class="btn btn--square dialog-close" data-close-dialog aria-label="Fechar modal">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m6 6 12 12M6 18 18 6"/>
+</svg>
+</button>
+<p class="eyebrow">Preview interativo</p>
+<h2 id="dialog-title">Exemplo de diálogo</h2>
+<p data-dialog-copy>Este é um componente de demonstração. Conecte esta ação à lógica do seu produto.</p>
+<form method="dialog">
+<button class="btn btn--solid" value="close">Entendi <svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="m20 6-11 11-5-5"/>
+</svg>
+</button>
+</form>
+</dialog>
+<button class="help-fab" type="button" data-dialog="Guia rápido" aria-label="Ajuda sobre o design system">
+<svg class="icon " viewBox="0 0 24 24" aria-hidden="true">
+<path d="M21 11a9 9 0 0 1-9 9 10 10 0 0 1-4-.8L3 21l1.7-5A9 9 0 1 1 21 11Z"/>
+<path d="M8 11h8M8 8h5"/>
+</svg>
+</button>
+</body>
+</html>

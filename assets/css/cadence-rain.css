@@ -1,0 +1,300 @@
+/**
+ * Fundo Cadence — aurora WebGL + orbs + shooting stars (chuva de luz).
+ * Espelha cadence-landing-19/design-system.html (sem cursor glow).
+ */
+.cadence-rain-bg {
+  position: fixed;
+  inset: 0;
+  /* Acima do background do body; conteúdo da LP já usa z-10 */
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Base opaca: evita flash branco antes do CSS do body / do 1º frame WebGL */
+  background-color: #050505;
+  /* iOS/Safari: mantém camadas de overlay compostas com position:fixed */
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  isolation: isolate;
+}
+
+.cadence-rain-bg__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  /* Oculto até o 1º frame WebGL — fallback CSS (#050505 + orbs) permanece */
+  opacity: 0;
+}
+
+.cadence-rain-bg[data-webgl-ready='true'] .cadence-rain-bg__canvas {
+  opacity: 1;
+  transition: opacity 180ms ease-out;
+}
+
+.cadence-rain-bg__orbs {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.cadence-rain-bg__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: cadence-rain-orb-drift 12s ease-in-out infinite alternate;
+}
+
+.cadence-rain-bg__orb--1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgb(var(--ui-accent-rgb-space) / var(--cadence-rain-orb-1-opacity, 0.13)),
+    transparent 70%
+  );
+  top: 15%;
+  left: 20%;
+}
+
+.cadence-rain-bg__orb--2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgb(var(--ui-accent-rgb-space) / var(--cadence-rain-orb-2-opacity, 0.1)),
+    transparent 70%
+  );
+  bottom: 10%;
+  right: 15%;
+  animation-delay: -4s;
+  animation-duration: 15s;
+}
+
+.cadence-rain-bg__orb--3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(
+    circle,
+    rgb(var(--ui-accent-rgb-space) / var(--cadence-rain-orb-3-opacity, 0.12)),
+    transparent 70%
+  );
+  top: 50%;
+  left: 55%;
+  animation-delay: -8s;
+  animation-duration: 18s;
+}
+
+@keyframes cadence-rain-orb-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 15px) scale(0.97);
+  }
+  100% {
+    transform: translate(15px, -10px) scale(1.02);
+  }
+}
+
+.cadence-rain-bg__stars {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.cadence-rain-bg__star {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--ui-accent-rgb-space) / var(--cadence-rain-star-opacity, 0.6)));
+  border-radius: 1px;
+  opacity: 0;
+  transform: rotate(45deg);
+  animation: cadence-rain-star-shoot linear infinite;
+}
+
+@keyframes cadence-rain-star-shoot {
+  0% {
+    translate: 0 0;
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  100% {
+    translate: 420px 420px;
+    opacity: 0;
+  }
+}
+
+.cadence-rain-bg__fade {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: linear-gradient(
+    to bottom,
+    rgb(6 6 16 / var(--cadence-rain-fade-top, 0.35)) 0%,
+    transparent 25%,
+    transparent 70%,
+    rgb(5 5 5 / var(--cadence-rain-fade-bottom, 0.85)) 100%
+  );
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+.cadence-rain-bg__lighten {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: var(--cadence-rain-lighten-opacity, 0);
+  background: radial-gradient(
+    ellipse 120% 85% at 50% 0%,
+    rgb(255 255 255 / var(--cadence-rain-lighten-strength, 0.16)),
+    transparent 58%
+  );
+  transform: translateZ(0);
+}
+
+.cadence-rain-bg__accent-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: var(--cadence-rain-accent-glow, 0);
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--ui-accent-glow) 72%, #050505) 0,
+    color-mix(in srgb, var(--ui-accent) 48%, #050505) var(--accent-overlay-glow-mid-1, 22vh),
+    color-mix(in srgb, var(--ui-accent-dark) 22%, #050505) var(--accent-overlay-glow-mid-2, 42vh),
+    #050505 var(--accent-overlay-glow-fade-end, 60vh),
+    #050505 100%
+  );
+  transform: translateZ(0);
+}
+
+/* Safari antigo / WebKit sem color-mix no gradiente */
+@supports not (color: color-mix(in srgb, #000, #fff)) {
+  .cadence-rain-bg__accent-glow {
+    background: linear-gradient(
+      to top,
+      rgb(var(--ui-accent-rgb-space) / 0.28) 0%,
+      rgb(var(--ui-accent-rgb-space) / 0.12) var(--accent-overlay-glow-mid-1, 22vh),
+      #050505 var(--accent-overlay-glow-mid-2, 42vh),
+      #050505 var(--accent-overlay-glow-fade-end, 60vh),
+      #050505 100%
+    );
+  }
+}
+
+/* WebGL indisponível (comum em alguns mobile) — reforça sombras CSS */
+.cadence-rain-bg--no-webgl .cadence-rain-bg__fade,
+.cadence-rain-bg--reduced-motion .cadence-rain-bg__fade {
+  background: linear-gradient(
+    to bottom,
+    rgb(6 6 16 / 0.5) 0%,
+    transparent 18%,
+    transparent 58%,
+    rgb(5 5 5 / 0.94) 100%
+  );
+}
+
+.cadence-rain-bg--no-webgl .cadence-rain-bg__lighten,
+.cadence-rain-bg--reduced-motion .cadence-rain-bg__lighten {
+  opacity: calc(var(--cadence-rain-lighten-opacity, 0) * 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cadence-rain-bg__orb,
+  .cadence-rain-bg__star {
+    animation: none !important;
+    opacity: 0;
+  }
+}
+
+/* Opt-in desktop/repouso: cliente Cadence adiciona esta classe fora do âncora
+   ou com aba oculta — congela orbs/streaks sem desmontar o fundo. */
+.cadence-rain-bg--css-paused .cadence-rain-bg__orb,
+.cadence-rain-bg--css-paused .cadence-rain-bg__star {
+  animation-play-state: paused !important;
+}
+
+/* Modo lite no mobile (opt-in via prop mobileLite no BackgroundCadenceRain):
+   sem WebGL (o boot pula o init), orbs estáticos e sem streaks animados —
+   remove o custo contínuo de GPU/main thread em celulares */
+@media (max-width: 768px) {
+  .cadence-rain-bg--mobile-lite .cadence-rain-bg__orb {
+    animation: none !important;
+  }
+
+  .cadence-rain-bg--mobile-lite .cadence-rain-bg__star {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .cadence-rain-bg__fade {
+    background: linear-gradient(
+      to bottom,
+      rgb(6 6 16 / 0.48) 0%,
+      transparent 16%,
+      transparent 52%,
+      rgb(5 5 5 / 0.94) 100%
+    );
+  }
+
+  .cadence-rain-bg__lighten {
+    opacity: calc(var(--cadence-rain-lighten-opacity, 0) * 0.5);
+  }
+
+  .cadence-rain-bg__accent-glow {
+    opacity: max(var(--cadence-rain-accent-glow, 0), 0.28);
+  }
+
+  /* Véu extra só no mobile — compensa overlays que somem no Safari */
+  .cadence-rain-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 7;
+    pointer-events: none;
+    background: #050505;
+    opacity: 0.32;
+    transform: translateZ(0);
+  }
+}
+
+/* iPad/tablet touch: alguns WebKit perdem camadas de overlay com fixed + WebGL */
+@media (max-width: 1024px) and (hover: none) and (pointer: coarse) {
+  .cadence-rain-bg__fade {
+    background: linear-gradient(
+      to bottom,
+      rgb(6 6 16 / 0.46) 0%,
+      transparent 18%,
+      transparent 56%,
+      rgb(5 5 5 / 0.9) 100%
+    );
+  }
+
+  .cadence-rain-bg__accent-glow {
+    opacity: max(var(--cadence-rain-accent-glow, 0), 0.24);
+  }
+
+  .cadence-rain-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    pointer-events: none;
+    background: #050505;
+    opacity: 0.18;
+    transform: translateZ(0);
+  }
+}
