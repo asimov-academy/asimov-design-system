@@ -1,0 +1,1 @@
+import{r as t}from"./ScrollReveal.client.aZGqK-Zn.js";function e(){const l=document.documentElement,n=document.body;l.style.overflowX="clip",n.style.overflowX="clip",window.scrollX!==0&&window.scrollTo(0,window.scrollY)}function r(){t("overflowLock",e)}let o=0;function c(){o&&window.clearTimeout(o),o=window.setTimeout(()=>{o=0,e()},100)}export{c as a,r as l};

@@ -1,0 +1,1 @@
+function a(){const t=window.asq;return typeof t=="function"?t:void 0}function c(t){try{a()?.("track","lead_form_submit",t)}catch{}}function n(t){try{a()?.("track","whatsapp_click",t)}catch{}}export{n as a,c as t};
