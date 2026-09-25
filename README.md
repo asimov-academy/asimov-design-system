@@ -1,5 +1,7 @@
 # Asimov Design System
 
+![Prévia animada do Asimov Design System](assets/readme/index-preview.gif)
+
 Biblioteca visual autocontida para criar landing pages e aplicativos com a identidade da Asimov Academy. A V2 reúne uma cópia funcional da landing page como **Overview** e um catálogo de **Components** extraído diretamente dela, preservando tipografia, temas, componentes, imagens e animações principais.
 
 Não exige framework, npm, CDN ou servidor local.
