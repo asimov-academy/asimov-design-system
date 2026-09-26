@@ -142,6 +142,7 @@
     }
   }
   var d3 = "vendor/unicornstudio/unicornStudio.umd.js";
+  var d4 = "vendor/unicornstudio/aura-scene.js";
   var g2 = () => {
     try {
       return /[?&](perfVariant=|perfDiag(?:[=&]|$)|delayed-spark-network=)/.test(location.search || "");
@@ -196,6 +197,26 @@
       const u = window.setInterval(() => {
         i++, (n?.querySelector("canvas") || i >= 60) && (window.clearInterval(u), a());
       }, 50);
+    }, h2 = () => {
+      // Cena local (sem projectId remoto) com orçamento de GPU explícito: dpi 1 e 30 fps.
+      // O runtime compensa a velocidade da animação pelo fps, então o ritmo não muda.
+      const n = e.querySelector("[data-us-project]"), a = () => {
+        if (!window.AsimovAuraScene || !n) return o();
+        let i = document.getElementById("asimov-aura-scene");
+        if (!i) {
+          i = document.createElement("script");
+          i.type = "application/json", i.id = "asimov-aura-scene", i.textContent = JSON.stringify(window.AsimovAuraScene);
+          document.head.appendChild(i);
+        }
+        // filePath com o id de um elemento: o runtime lê o JSON do DOM, sem fetch (funciona via file://).
+        t.UnicornStudio.addScene({
+          element: n, filePath: i.id, dpi: 1, fps: 30, scale: 1, production: true, lazyLoad: false,
+          fixed: getComputedStyle(e).position === "fixed", interactivity: { mouse: { disabled: true } }
+        }).catch(o);
+      };
+      if (window.AsimovAuraScene) return a();
+      const i = document.createElement("script");
+      i.src = d4, i.onload = a, i.onerror = o, (document.head || document.body).appendChild(i);
     }, s = () => {
       if (document.visibilityState !== "visible") {
         document.addEventListener("visibilitychange", () => {
@@ -209,7 +230,7 @@
       }
       t.UnicornStudio || (t.UnicornStudio = { isInitialized: false });
       const n = () => {
-        t.UnicornStudio?.isInitialized || (t.UnicornStudio?.init?.(), t.UnicornStudio && (t.UnicornStudio.isInitialized = true)), f2();
+        t.UnicornStudio?.isInitialized || (t.UnicornStudio?.addScene && h2(), t.UnicornStudio && (t.UnicornStudio.isInitialized = true)), f2();
       }, a = document.querySelector(`script[src="${d3}"]`);
       if (a) {
         t.UnicornStudio && "init" in t.UnicornStudio && typeof t.UnicornStudio.init == "function" ? n() : (a.addEventListener("load", n, { once: true }), window.setTimeout(n, 800));
