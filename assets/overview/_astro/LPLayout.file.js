@@ -193,7 +193,7 @@
   }
 
   // extract-ds/lp.asimov.academy 2.0-design-system/assets/overview/_astro/LPLayout.astro_astro_type_script_index_0_lang.DiO7WEqH.js
-  var w3 = "https://flowhooks.asimovautomations.com/webhook/form-pre-checkout";
+  // The original pre-checkout endpoint is intentionally absent from this offline catalog.
   function A2(e2) {
     const t2 = new URLSearchParams();
     t2.set("form_fields[name]", e2.name.trim()), t2.set("form_fields[email]", e2.email.trim()), t2.set("form_fields[phone]", e2.phone.trim());
@@ -273,21 +273,9 @@
       o2?.addEventListener("input", () => {
         o2 && (o2.value = K(o2.value));
       }), document.getElementById("pre-checkout-close")?.addEventListener("click", s3);
-      const r4 = document.getElementById("pre-checkout-error");
       t2.addEventListener("submit", (n2) => {
-        if (n2.preventDefault(), r4 && (r4.hidden = true), !t2.reportValidity()) return;
-        const c3 = t2.querySelector('[type="submit"]');
-        c3 && (c3.disabled = true, c3.classList.add("is-loading"));
-        const l4 = new FormData(t2), d3 = r3(String(l4.get("name") || "")), u2 = s2(String(l4.get("email") || "")), m = u(String(l4.get("phone") || "")), f2 = A2({ name: d3, email: u2, phone: m, pathname: window.location.pathname, planId: i2?.planId, productName: i2?.productName, hotmartCheckoutCode: g2 || void 0 });
-        c2({ form: "pre-checkout", email: u2, phone: m, name: d3, product_id: i2?.planId || void 0 });
-        const p2 = D(k2, { name: d3, email: u2, phone: m });
-        try {
-          let h2 = false;
-          typeof navigator.sendBeacon == "function" && (h2 = navigator.sendBeacon(w3, new Blob([f2], { type: "application/x-www-form-urlencoded;charset=UTF-8" }))), h2 || fetch(w3, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" }, body: f2, keepalive: true }).catch(() => {
-          });
-        } catch {
-        }
-        s3(), p2 && (window.location.href = p2);
+        n2.preventDefault();
+        s3();
       });
     }
     y2 || (y2 = true, document.addEventListener("keydown", (o2) => {

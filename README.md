@@ -4,7 +4,7 @@
 
 Biblioteca visual autocontida para criar landing pages e aplicativos com a identidade da Asimov Academy. A V2 reúne uma cópia funcional da landing page como **Overview** e um catálogo de **Components** extraído diretamente dela, preservando tipografia, temas, componentes, imagens e animações principais.
 
-Não exige framework, npm, CDN ou servidor local.
+Não exige framework, npm, CDN, internet ou servidor local para explorar o catálogo.
 
 ## Como explorar
 
@@ -31,7 +31,7 @@ Depois acesse `http://localhost:4173/design-system.html`.
 - `assets/themes.js`: variantes cromáticas compartilhadas.
 - `assets/components/backgrounds/`: cenas, shaders, imagens e runtime dos fundos animados.
 
-Todos os caminhos são relativos. Fontes, imagens e o runtime do Unicorn Studio estão armazenados localmente para preservar o funcionamento via `file://`.
+Todos os caminhos são relativos. Fontes, ícones, imagens e o runtime do Unicorn Studio estão armazenados localmente para preservar o funcionamento via `file://`. Os links de campanhas, redes sociais e checkout da página de referência são apenas demonstrativos: o catálogo avisa que são externos e não os abre. O formulário de pré-checkout também não envia dados.
 
 ## Como usar com IA
 

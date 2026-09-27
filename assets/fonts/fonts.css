@@ -1,0 +1,50 @@
+/* Local font files for the standalone design system. */
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../overview/_astro/inter-latin-400-normal.C38fXH4l.woff2") format("woff2");
+}
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../overview/_astro/inter-latin-500-normal.Cerq10X2.woff2") format("woff2");
+}
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../overview/_astro/inter-latin-600-normal.LgqL8muc.woff2") format("woff2");
+}
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("inter-latin-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../overview/_astro/instrument-serif-latin-400-normal.DnYpCC2O.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("instrument-serif-latin-400-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: Voltaire;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("voltaire-latin-400.woff2") format("woff2");
+}
