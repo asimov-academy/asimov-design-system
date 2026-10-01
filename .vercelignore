@@ -1,0 +1,4 @@
+# Geradores e fontes dos emails: só servem para gerar os HTML, não para o site.
+scripts/
+emails/black-friday/_src/
+README.md
