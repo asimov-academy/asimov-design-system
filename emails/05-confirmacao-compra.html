@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="color-scheme" content="dark">
+  <meta name="supported-color-schemes" content="dark">
+  <title>Compra confirmada</title>
+  <!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; padding: 0; width: 100% !important; background: #0a0a0a; }
+    table { border-collapse: collapse; mso-table-lspace: 0; mso-table-rspace: 0; }
+    img { border: 0; display: block; outline: none; text-decoration: none; }
+    a { color: #2dd4bf; }
+    @media (max-width: 620px) {
+      .container { width: 100% !important; }
+      .px { padding-left: 24px !important; padding-right: 24px !important; }
+      .h1 { font-size: 28px !important; line-height: 34px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background:#0a0a0a;">
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">Pedido {{numero_pedido}} confirmado. Seu acesso já está disponível.&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;</div>
+
+  <table role="presentation" width="100%" bgcolor="#0a0a0a" style="background:#0a0a0a;">
+    <tr>
+      <td align="center" style="padding:40px 12px;">
+        <table role="presentation" class="container" width="560" style="width:560px; max-width:560px;">
+
+          <tr>
+            <td align="center" style="padding:0 0 32px;">
+              <img src="../assets/asimov-logo.svg" width="79" height="24" alt="Asimov Academy">
+            </td>
+          </tr>
+
+          <tr>
+            <td bgcolor="#111111" style="background:#111111; border:1px solid #232323; border-radius:20px;">
+              <table role="presentation" width="100%">
+
+                <!-- Status -->
+                <tr>
+                  <td align="center" class="px" style="padding:48px 40px 0;">
+                    <div style="width:64px; height:64px; line-height:64px; text-align:center; background:#0f2d2a; border-radius:999px; box-shadow:inset 0 0 0 1px #134e48; font-family:Arial,sans-serif; font-size:28px; color:#2dd4bf;">&#10003;</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" class="px" style="padding:24px 40px 0; font-family:Inter,Arial,sans-serif;">
+                    <h1 class="h1" style="margin:0; font-size:32px; line-height:38px; color:#fafafa; font-weight:700; letter-spacing:-0.6px;">
+                      Pagamento <span style="font-family:'Instrument Serif',Georgia,serif; font-style:italic; font-weight:400; color:#5eead4;">confirmado</span>
+                    </h1>
+                    <p style="margin:12px 0 0; font-size:15px; line-height:24px; color:#a3a3a3;">Obrigado, {{nome}}. Seu acesso já está liberado.</p>
+                  </td>
+                </tr>
+
+                <!-- Resumo -->
+                <tr>
+                  <td class="px" style="padding:40px 40px 0;">
+                    <table role="presentation" width="100%" bgcolor="#0a0a0a" style="background:#0a0a0a; border:1px solid #232323; border-radius:14px; font-family:Inter,Arial,sans-serif; font-size:14px;">
+                      <tr>
+                        <td style="padding:20px 20px 12px; color:#737373;">Pedido</td>
+                        <td align="right" style="padding:20px 20px 12px; color:#fafafa; font-family:'SFMono-Regular',Menlo,Consolas,monospace;">#{{numero_pedido}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:0 20px 12px; color:#737373;">Data</td>
+                        <td align="right" style="padding:0 20px 12px; color:#fafafa;">{{data_compra}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:0 20px 20px; color:#737373;">Pagamento</td>
+                        <td align="right" style="padding:0 20px 20px; color:#fafafa;">{{forma_pagamento}}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="padding:0 20px;"><div style="height:1px; background:#232323; line-height:1px; font-size:0;">&nbsp;</div></td>
+                      </tr>
+                      <tr>
+                        <td style="padding:20px 20px 8px; color:#fafafa; font-weight:600;">{{produto}}</td>
+                        <td align="right" style="padding:20px 20px 8px; color:#fafafa;">{{valor_produto}}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:0 20px 20px; color:#2dd4bf;">Desconto</td>
+                        <td align="right" style="padding:0 20px 20px; color:#2dd4bf;">&minus;{{valor_desconto}}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="padding:0 20px;"><div style="height:1px; background:#232323; line-height:1px; font-size:0;">&nbsp;</div></td>
+                      </tr>
+                      <tr>
+                        <td style="padding:20px; color:#fafafa; font-weight:700; font-size:16px;">Total</td>
+                        <td align="right" style="padding:20px; color:#fafafa; font-weight:700; font-size:16px;">{{valor_total}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- CTA -->
+                <tr>
+                  <td align="center" class="px" style="padding:32px 40px 16px;">
+                    <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="{{link_plataforma}}" style="height:52px;v-text-anchor:middle;width:260px;" arcsize="50%" stroke="f" fillcolor="#14b8a6"><w:anchorlock/><center style="color:#0a0a0a;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Acessar a plataforma</center></v:roundrect><![endif]-->
+                    <!--[if !mso]><!-->
+                    <a href="{{link_plataforma}}" style="display:inline-block; background:#14b8a6; color:#0a0a0a; font-family:Inter,Arial,sans-serif; font-size:16px; font-weight:700; text-decoration:none; padding:16px 36px; border-radius:999px;">Acessar a plataforma &rarr;</a>
+                    <!--<![endif]-->
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" class="px" style="padding:0 40px 48px; font-family:Inter,Arial,sans-serif; font-size:13px; line-height:20px; color:#737373;">
+                    Login: <span style="color:#a3a3a3;">{{email}}</span><br>
+                    A nota fiscal chega em outro email em até 48 horas.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Ajuda -->
+          <tr>
+            <td style="padding:16px 0 0;">
+              <table role="presentation" width="100%" style="border:1px solid #232323; border-radius:16px;">
+                <tr>
+                  <td class="px" style="padding:24px 28px; font-family:Inter,Arial,sans-serif; font-size:14px; line-height:22px; color:#a3a3a3;">
+                    <strong style="color:#fafafa;">Precisa de ajuda?</strong> Fale com o suporte pelo <a href="{{link_whatsapp}}" style="color:#2dd4bf; text-decoration:none;">WhatsApp</a> ou responda este email. Você tem 7 dias de garantia a partir de hoje.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" class="px" style="padding:32px 40px 0; font-family:Inter,Arial,sans-serif; font-size:12px; line-height:18px; color:#525252;">
+              Este é um email transacional sobre o pedido #{{numero_pedido}}.<br>
+              Asimov Academy &middot; {{cnpj}} &middot; {{endereco}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
