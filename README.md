@@ -48,3 +48,15 @@ dependências remotas sem necessidade.
 ```
 
 Os textos e dados exibidos são demonstrativos e devem ser substituídos pelo conteúdo real de cada implementação.
+
+## Publicação na Vercel
+
+O repositório é um site estático, sem build. Na Vercel, importe o repositório com:
+
+- **Framework:** Other
+- **Build command:** vazio
+- **Output directory:** a raiz
+
+O `vercel.json` faz `/` abrir o `design-system.html` e marca o site inteiro como `noindex`. O `.vercelignore` deixa de fora os geradores (`scripts/`) e as fontes dos emails. O design system de emails fica em `/emails/`, acessível pela aba **Emails** do menu.
+
+Para o site ficar visível só para o time, ative **Deployment Protection** nas configurações do projeto na Vercel.
