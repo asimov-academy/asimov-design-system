@@ -23,12 +23,16 @@ Saída em emails/design-system-black/:
     em-XXX-<tema>.html                  emails conversacionais (copies reais, sem título)
     img/
 
+E o kit para download em emails/kits/asimov-email-black.zip (ver email_kit.py).
+
     python3 scripts/build-email-ds-black.py
 """
 import re
+import unicodedata
 from pathlib import Path
 
 from email_copies import COPIES, render_blocks
+from email_kit import Componente, Kit, Variante, write_kit
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system-black"
 
@@ -518,11 +522,10 @@ def email(theme):
 PREHEADER_LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
 
-def conversa(theme, copy):
-    """Email conversacional: sem título. Capa estreita, a conversa, botões no meio do texto, assinatura."""
-    t = THEMES[theme]
+def blocos(t, tom="chamativo"):
+    """Os blocos de texto do email conversacional, na ordem de email_copies.render_blocks."""
     p = lambda text: f'<p style="margin:0 0 18px; {ts("Corpo", t)}">{text}</p>'
-    cta_ = lambda label: f'<div style="padding:10px 0 28px;">{botao(t, label, copy.get("tom", "chamativo"))}</div>'
+    cta_ = lambda label: f'<div style="padding:10px 0 28px;">{botao(t, label, tom)}</div>'
     ul = lambda items: ('<table role="presentation" style="margin:0 0 22px;">' + "".join(
         f'<tr><td width="22" valign="top" style="padding:11px 0 0;"><div style="width:7px; height:7px; border-radius:999px; background:{BF["ORANGE"]}; font-size:0; line-height:0;">&nbsp;</div></td>'
         f'<td style="padding:0 0 6px; {ts("Corpo", t)}">{i}</td></tr>' for i in items) + "</table>")
@@ -531,14 +534,85 @@ def conversa(theme, copy):
         + (f'<div style="font-family:{BODY_FONT}; font-size:13px; line-height:20px; color:{t["MUTED"]};">{role}</div>' if role else ""))
     ps = lambda text: (f'<p style="margin:28px 0 0; padding-top:20px; border-top:1px solid {t["LINE"]}; {ts("Corpo", t)}">'
                        f'<strong style="font-family:{TITLE_FONT}; font-weight:700; color:{t["ACCENT_TEXT"]};">PS:</strong> {text}</p>')
-    body = render_blocks(copy["blocks"], p, cta_, ul, sign, ps)
+    return p, cta_, ul, sign, ps
+
+
+def capa(t):
+    return f'<img src="{t["CAPA"]}" width="600" height="150" alt="Asimov Academy" style="display:block; width:100%; max-width:600px; height:auto; border-radius:20px;">'
+
+
+def fill(t, rows, title, preheader):
+    """A casca já traz o fio do topo, a faixa ASIMOV e o rodapé; o conteúdo entra em ROWS."""
+    tokens = dict(t, ROWS=rows, FAIXA=fio(t), FAIXA2=faixa_asimov(t), FOOTER=footer(t), TITLE=title, PREHEADER=preheader)
+    return re.sub(r"%([A-Z_0-9]+)%", lambda m: tokens.get(m.group(1), m.group(0)), SHELL)
+
+
+def conversa(theme, copy):
+    """Email conversacional: sem título. Capa estreita, a conversa, botões no meio do texto, assinatura."""
+    t = THEMES[theme]
+    body = render_blocks(copy["blocks"], *blocos(t, copy.get("tom", "chamativo")))
     rows = [
-        row(f'<img src="{t["CAPA"]}" width="600" height="150" alt="Asimov Academy" style="display:block; width:100%; max-width:600px; height:auto; border-radius:20px;">', "0", cls=""),
+        row(capa(t), "0", cls=""),
         row(body, "40px 40px 0", "px body"),
     ]
-    tokens = dict(t, ROWS="\n\n".join(rows), FAIXA=fio(t), FAIXA2=faixa_asimov(t), FOOTER=footer(t),
-                  TITLE=copy["assunto"], PREHEADER=copy["preheader"])
-    return re.sub(r"%([A-Z_0-9]+)%", lambda m: tokens.get(m.group(1), m.group(0)), SHELL)
+    return fill(t, "\n\n".join(rows), copy["assunto"], copy["preheader"])
+
+
+# ------------------------------------------------------------------ kit para download
+
+def kit():
+    """O sistema inteiro para aplicações: casca, todas as peças e tokens (ver email_kit.py)."""
+    variantes = []
+    for theme, t in THEMES.items():
+        p, cta_, ul, sign, ps = blocos(t)
+        _, cta_discreto, *_ = blocos(t, "discreto")
+        pecas = [
+            ("capa", "Capa", "linha", "Topo dos emails conversacionais: a luz da campanha e só o ASIMOV, em 600x150.", row(capa(t), "0", cls="")),
+            ("topo", "Cartão de topo", "linha", "Topo dos emails com título: capa e título com uma expressão em laranja.", row(topo(t), "0", cls="")),
+            ("titulo", "Título de seção", "linha", "Sobretítulo e título que abrem um trecho do email. [[...]] no título vira laranja.",
+             row(meta("Lorem ipsum", t) + section_title("Lorem ipsum dolor sit amet, [[consectetur]] adipiscing.", t), "48px 40px 0")),
+            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "40px 40px 0", "px body")),
+            ("destaque", "Superfície com luz", "linha", "Uma ideia em evidência no meio do texto.", row(destaque(t), "36px 40px 0")),
+            ("destaque-selos", "Superfície com selos", "linha", "A superfície com selos de público (aluno Formação, Trilha, Anual).", row(destaque(t, True), "36px 40px 0")),
+            ("cta", "Cartão de CTA", "linha", "Fechamento com a ação principal, com a luz da Black por baixo.", row(cta(t), "48px 40px 0")),
+            ("ingresso", "Ingresso da live", "linha", "Opcional de campanha: data e horário da live como ingresso.", row(ticket(t), "36px 40px 0")),
+            ("contagem", "Contagem regressiva", "linha", "Opcional de campanha: estática; para andar, troque por um GIF de contador.", row(countdown(t), "36px 40px 0")),
+            ("pilula", "Pílula ao vivo", "linha", "Opcional de campanha: data e hora da live em destaque.", row(pill(t), "36px 40px 0")),
+            ("faixa", "Faixa da campanha", "linha", "Opcional de campanha: a faixa laranja com texto, de ponta a ponta.", row(faixa(t), "36px 0 0", cls="")),
+            ("faixa-espectro", "Faixa espectro", "linha", "Opcional de campanha: a faixa com o degradê teal, vermelho, teal.", row(faixa(t, "espectro"), "36px 0 0", cls="")),
+            ("paragrafo", "Parágrafo", "bloco", "Todo o texto corrido. Frases curtas, um parágrafo por ideia.", p(LOREM["medio"])),
+            ("botao", "Botão chamativo", "bloco", "Padrão quando a ação é o objetivo do email (cadastro, compra).", cta_("Lorem ipsum dolor")),
+            ("botao-discreto", "Botão discreto", "bloco", "Padrão quando o botão é um convite (relacionamento, conteúdo). Não misture com o chamativo.", cta_discreto("Lorem ipsum dolor")),
+            ("lista", "Lista", "bloco", "Itens curtos e paralelos.", ul(["Lorem ipsum dolor sit amet", "Consectetur adipiscing elit", "Sed do eiusmod tempor"])),
+            ("assinatura", "Assinatura", "bloco", "Quem assina o email. O cargo é opcional.", sign("Lorem Ipsum", "Dolor sit amet da Asimov Academy")),
+            ("ps", "PS", "bloco", "Pós-escrito no fim do texto.", ps(LOREM["curto"])),
+        ]
+        # As outras variações de botão da página do design system, como alternativas aos dois padrões.
+        for nome, uso, html in button_variants(t, "Lorem ipsum dolor"):
+            if "padrão" in nome:
+                continue
+            letra, rotulo = nome.split(" · ", 1)
+            ascii_ = unicodedata.normalize("NFKD", rotulo).encode("ascii", "ignore").decode().lower()
+            pecas.append((f"botao-{letra.lower()}-{re.sub(r'[^a-z]+', '-', ascii_).strip('-')}", f"Botão {nome}", "bloco", uso,
+                          f'<div style="padding:10px 0 28px;">{html.replace(chr(34) + "#" + chr(34), chr(34) + "{{link_cta}}" + chr(34))}</div>'))
+        variantes.append(Variante(
+            id=theme, rotulo=f"Tema {theme}", tema=theme,
+            casca=fill(t, "{{linhas}}", "{{assunto}}", "{{preheader}}"),
+            componentes=[Componente(s, n, tp, u, h) for s, n, tp, u, h in pecas],
+            cores=dict({k: v for k, v in t.items() if isinstance(v, str) and v.startswith("#")}, **{k: v for k, v in BF.items()})))
+    return Kit(
+        slug="black", nome="Black Friday", pasta="design-system-black",
+        descricao="A estrutura do design system Asimov nas cores da Black Friday 2026: preto, laranja #ff6e14, luz teal e Rethink Sans. O visual não escreve \"Black Friday\"; quem fala da Black é o texto.",
+        fontes=["Rethink Sans nos títulos e botões (Google Fonts)", "Inter no corpo (Google Fonts)", "Helvetica e Arial de reserva"],
+        tipografia=[dict(nome=n, familia="Rethink Sans" if fam == "TITLE" else "Inter", tamanho=s, entrelinha=lh, peso=w, tracking=tr, mobile=m, uso=u)
+                    for n, (fam, s, lh, w, tr, _, m, u) in TYPE.items()],
+        variantes=variantes,
+        exemplos=sorted(p.name for p in OUT.glob("*.html") if p.name != "index.html"),
+        montagem=[("Conversacional", ["capa", "corpo"]),
+                  ("Com título", ["topo", "titulo", "corpo", "destaque", "corpo", "cta"])],
+        notas=["A casca deste sistema já traz o fio de cor do topo, a faixa ASIMOV e o rodapé. Não há linha de rodapé.",
+               "Peças de campanha (ingresso, contagem, pílula, faixas) são opcionais. Use com parcimônia."],
+    )
 
 
 def spec_conversas():
@@ -820,6 +894,7 @@ def main():
             print(name)
     (OUT / "index.html").write_text(specimen())
     print("index.html")
+    write_kit(kit())
 
 
 if __name__ == "__main__":

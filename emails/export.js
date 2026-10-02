@@ -1,4 +1,4 @@
-/* Seção "Exportar HTML" do hub de emails.
+/* Seção "Exportar" do hub de emails: a lista "Um email por vez".
  *
  * Lista os templates de window.AsimovEmailTemplates (gerado por
  * scripts/build-email-export.py) e, para cada um, copia ou baixa o HTML completo

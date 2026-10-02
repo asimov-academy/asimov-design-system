@@ -134,10 +134,24 @@
     .xp-actions button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .xp-actions button:disabled { opacity: .5; cursor: progress; }
     .xp-notes { margin-top: 14px; }
+    .xp-h { margin: 0; font-weight: 500; font-size: 22px; letter-spacing: -.4px; }
+    .xp-h + .xp-sub { margin: 6px 0 18px; max-width: 720px; color: #a1a1aa; font-size: 14px; line-height: 22px; }
+    .kits + .xp-h { margin-top: 48px; }
+    .kits { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .kit { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 18px; border: 1px solid var(--line-2); border-radius: 18px; background: var(--surface); color: var(--text); text-decoration: none; transition: border-color .2s, transform .2s; }
+    .kit:hover { border-color: var(--c); transform: translateY(-1px); }
+    .kit:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .kit i { width: 10px; height: 10px; margin-bottom: 10px; border-radius: 99px; background: var(--c); box-shadow: 0 0 10px var(--c); }
+    .kit b { font-weight: 500; font-size: 17px; }
+    .kit span { color: var(--muted); font-size: 12px; line-height: 17px; }
+    .kit svg { position: absolute; top: 16px; right: 16px; width: 18px; height: 18px; color: #a1a1aa; }
+    .kit:hover svg { color: var(--c); }
+    .kit-all { background: linear-gradient(135deg, #0a0a0a, #151518); }
+    .link.dl::before { content: "↓ "; }
     footer { margin-top: 120px; padding: 32px 0 48px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; color: var(--muted); font-size: 13px; flex-wrap: wrap; }
     footer a { color: #a1a1aa; text-decoration: none; }
 
-    @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, 1fr); } .kits { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 900px) {
       .ds { grid-template-columns: 1fr; }
       .ds-visual { min-height: 380px; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -151,7 +165,7 @@
       .xp-count { margin-left: 0; width: 100%; }
     }
     @media (max-width: 560px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
+      .grid, .kits { grid-template-columns: repeat(2, 1fr); }
       .ds-visual { min-height: 300px; }
       .ds-info h3 { font-size: 30px; line-height: 34px; }
       .traits li { grid-template-columns: 1fr; gap: 2px; }
@@ -168,7 +182,7 @@
           <a href="#design-systems">Design systems</a>
           <a href="design-system-black/index.html">Black Friday DS</a>
           <a href="#conversacionais">Conversacionais</a>
-          <a href="#exportar">Exportar HTML</a>
+          <a href="#exportar">Exportar</a>
           <a href="../design-system.html">Asimov Design System &rarr;</a>
         </nav>
       </div>
@@ -210,6 +224,7 @@
           </ul>
           <div class="actions">
             <a class="btn" href="design-system/index.html">Abrir design system <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
+            <a class="link dl" href="kits/asimov-email-aura.zip" download>Baixar kit (.zip)</a>
             <a class="link" href="design-system/email-escuro.html">Email escuro</a>
             <a class="link" href="design-system/email-claro.html">Email claro</a>
           </div>
@@ -233,6 +248,7 @@
           </ul>
           <div class="actions">
             <a class="btn" href="design-system-cadence/index.html">Abrir design system <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
+            <a class="link dl" href="kits/asimov-email-cadence.zip" download>Baixar kit (.zip)</a>
             <a class="link" href="design-system-cadence/email-escuro.html">Email escuro</a>
             <a class="link" href="design-system-cadence/email-claro.html">Email claro</a>
           </div>
@@ -263,6 +279,7 @@
           </div>
           <div class="actions">
             <a class="btn" href="design-system-trilhas/index.html">Abrir design system <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
+            <a class="link dl" href="kits/asimov-email-trilhas.zip" download>Baixar kit (.zip)</a>
             <a class="link" href="design-system-trilhas/email-analista-dados-escuro.html">Email escuro</a>
             <a class="link" href="design-system-trilhas/email-ai-designer-claro.html">Email claro</a>
           </div>
@@ -286,6 +303,7 @@
           </ul>
           <div class="actions">
             <a class="btn" href="design-system-black/index.html" style="background:linear-gradient(180deg,#d48859,#ff6e14); color:#fff; box-shadow:0 10px 32px rgba(255,110,20,.32);">Abrir design system <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
+            <a class="link dl" href="kits/asimov-email-black.zip" download>Baixar kit (.zip)</a>
             <a class="link" href="design-system-black/em-022-escuro.html">EM-022 escuro</a>
             <a class="link" href="design-system-black/em-022-claro.html">EM-022 claro</a>
           </div>
@@ -310,9 +328,20 @@
 
     <section id="exportar" data-export>
       <div class="sec-head">
-        <div><div class="kicker">Para aplicações</div><h2>Exportar HTML</h2></div>
-        <p>O HTML completo de cada template, com as imagens em URL absoluta deste site. Funciona fora daqui: numa ferramenta de email ou entregue a uma LLM junto com a copy.</p>
+        <div><div class="kicker">Para aplicações</div><h2>Exportar</h2></div>
+        <p>O design system inteiro num .zip, para montar emails novos numa aplicação, ou o HTML de um email pronto. As imagens já apontam para este site, então tudo funciona fora daqui.</p>
       </div>
+      <h3 class="xp-h">Design system completo</h3>
+      <p class="xp-sub">Casca do email, todos os componentes em cada tema (e cor, no Trilhas), catálogo visual, tokens em JSON, emails de exemplo, imagens e um LEIA-ME com as regras e um prompt para LLM.</p>
+      <div class="kits">
+        <a class="kit" href="kits/asimov-email-aura.zip" download style="--c:#2dd4bf;"><i></i><b>Aura</b><span>2 temas · 16 peças</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        <a class="kit" href="kits/asimov-email-cadence.zip" download style="--c:#5eead4;"><i></i><b>Cadence</b><span>2 temas · 13 peças</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        <a class="kit" href="kits/asimov-email-trilhas.zip" download style="--c:#fb923c;"><i></i><b>Trilhas</b><span>5 cores × 2 temas · 14 peças</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        <a class="kit" href="kits/asimov-email-black.zip" download style="--c:#ff6e14;"><i></i><b>Black Friday</b><span>2 temas · 26 peças</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+        <a class="kit kit-all" href="kits/asimov-email-design-systems.zip" download style="--c:#a1a1aa;"><i></i><b>Os quatro</b><span>Todos os kits num .zip só</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+      </div>
+      <h3 class="xp-h">Um email por vez</h3>
+      <p class="xp-sub">O HTML completo de um email pronto, para colar numa ferramenta de email ou entregar a uma LLM junto com a copy.</p>
       <div class="xp-bar">
         <label>Design system<select data-filter="sistema"><option value="">Todos</option></select></label>
         <label>Tema<select data-filter="tema"><option value="">Todos</option><option value="escuro">Escuro</option><option value="claro">Claro</option></select></label>
@@ -336,7 +365,7 @@
       </div>
       <div class="notes">
         <div class="note"><b>Edite o gerador, não o HTML</b><p>Cada design system tem um script que gera a página e os emails a partir dos mesmos tokens.</p><code>python3 scripts/build-email-ds.py</code></div>
-        <div class="note"><b>Imagens em URL absoluta</b><p>O <a href="#exportar" style="color:inherit;">Exportar HTML</a> já entrega as imagens apontando para este site. Fundos e ícones são JPG e PNG, porque email não aceita SVG.</p><code>img/aura-hero-escuro.jpg → https://…/emails/design-system/img/…</code></div>
+        <div class="note"><b>Imagens em URL absoluta</b><p>O <a href="#exportar" style="color:inherit;">Exportar</a> já entrega as imagens apontando para este site. Fundos e ícones são JPG e PNG, porque email não aceita SVG.</p><code>img/aura-hero-escuro.jpg → https://…/emails/design-system/img/…</code></div>
         <div class="note"><b>Teste nos clientes</b><p>Gmail e Outlook não carregam Inter nem degradês. Tudo tem cor sólida e fonte substituta, mas vale um teste real antes do envio.</p><code>Gmail · Outlook · Apple Mail · iOS</code></div>
       </div>
     </section>

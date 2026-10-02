@@ -65,18 +65,27 @@ Os textos e dados exibidos são demonstrativos e devem ser substituídos pelo co
 
 ## Usar os emails em outras aplicações
 
-No hub de emails (`/emails/`), a seção **Exportar HTML** lista os templates e tem, em cada um, **Copiar HTML** e **Baixar .html**. O arquivo sai completo e com as imagens em URL absoluta do site, então funciona fora daqui: numa ferramenta de email ou entregue a uma LLM junto com a copy.
+No hub de emails (`/emails/`), a seção **Exportar** tem dois caminhos.
 
-- Exporte pelo site publicado. Por um servidor local, as imagens apontam para `localhost`; via `file://` o navegador bloqueia a leitura dos arquivos.
-- Os links ficam como variáveis para a aplicação trocar no envio: `{{link_cta}}`, `{{link_descadastro}}`, `{{link_youtube}}`, `{{link_instagram}}`, `{{link_linkedin}}` e `{{endereco}}`.
-- Com uma LLM, peça para trocar só os textos: tabelas, estilos inline, os blocos `<!--[if mso]>` do Outlook e as variáveis precisam ficar como estão.
-- Para código, `emails/templates.json` lista todos os templates com sistema, peça, tema, cor e caminho. A URL de cada um é o endereço do site seguido de `/emails/` e o `caminho`.
+**Design system completo (.zip).** Um kit por sistema (Aura, Cadence, Trilhas, Black Friday) ou os quatro juntos, em `emails/kits/`. Serve para uma aplicação montar emails novos:
 
-A lista é gerada por `scripts/build-email-export.py`. Rode o script depois de criar ou remover templates:
+- `<variante>/casca.html`: o documento do email, com `{{linhas}}` no lugar do conteúdo.
+- `<variante>/componentes/`: uma peça por arquivo. **Linhas** (capa, hero, corpo, cartões, CTA, rodapé) vão na casca; **blocos** (parágrafo, botões, lista, assinatura, PS) vão dentro da linha `corpo`, em `{{blocos}}`.
+- `<variante>/catalogo.html`: todas as peças empilhadas, para ver de uma vez.
+- `design-system.json`: variantes, componentes, cores, tipografia, variáveis e receitas de montagem.
+- `exemplos/`, `img/` e um `LEIA-ME.md` com as regras e um prompt para LLM.
+
+**Um email por vez.** Em cada template, **Copiar HTML** e **Baixar .html**. A lista para código fica em `emails/templates.json`.
+
+Nos dois casos as imagens já apontam para o site publicado (`https://asimov-design-system.vercel.app`), e os links ficam como variáveis para a aplicação trocar no envio: `{{link_cta}}`, `{{link_descadastro}}`, `{{link_youtube}}`, `{{link_instagram}}`, `{{link_linkedin}}` e `{{endereco}}`. Com uma LLM, peça para trocar só os textos: tabelas, estilos inline, os blocos `<!--[if mso]>` do Outlook e as variáveis precisam ficar como estão.
+
+Os kits e a lista são gerados pelos scripts. Depois de mudar um design system de email, rode:
 
 ```bash
-python3 scripts/build-email-export.py
+python3 scripts/build-email-ds.py && python3 scripts/build-email-ds-cadence.py && python3 scripts/build-email-ds-trilhas.py && python3 scripts/build-email-ds-black.py && python3 scripts/build-email-export.py
 ```
+
+O processo completo para criar um design system de email novo está em `AGENTS.md`.
 
 ## Publicação na Vercel
 

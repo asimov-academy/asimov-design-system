@@ -4,20 +4,25 @@
 Varre emails/ e grava a mesma lista em dois formatos:
 
     emails/templates.json   para aplicações (descobrir templates por código)
-    emails/templates.js     para a seção "Exportar HTML" do hub (funciona via file://)
+    emails/templates.js     para a seção "Exportar" do hub (funciona via file://)
+
+E junta os kits de cada sistema (emails/kits/asimov-email-<slug>.zip, gravados pelos
+build-email-ds*.py) num pacote único: emails/kits/asimov-email-design-systems.zip.
 
 Entram os templates dos quatro design systems (Aura, Cadence, Trilhas e Black Friday).
 
-Rode depois de qualquer build-email-*.py que crie ou remova templates:
+Rode por último, depois dos build-email-ds*.py:
 
     python3 scripts/build-email-export.py
 """
 import importlib.util
 import json
 import re
+import zipfile
 from pathlib import Path
 
 from email_copies import COPIES
+from email_kit import KITS, write_zip
 
 ROOT = Path(__file__).resolve().parent.parent
 EMAILS = ROOT / "emails"
@@ -87,6 +92,15 @@ def main():
         encoding="utf-8",
     )
     print(f"{len(templates)} templates em emails/templates.json e emails/templates.js")
+
+    files = {}
+    for kit in sorted(KITS.glob("asimov-email-*.zip")):
+        if kit.name == "asimov-email-design-systems.zip":
+            continue
+        with zipfile.ZipFile(kit) as z:
+            files.update({f"asimov-email-design-systems/{n}": z.read(n) for n in z.namelist()})
+    write_zip(KITS / "asimov-email-design-systems.zip", files)
+    print(f"kits/asimov-email-design-systems.zip ({len(files)} arquivos)")
 
 
 if __name__ == "__main__":

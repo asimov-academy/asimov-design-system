@@ -12,7 +12,10 @@ Saída em emails/design-system-trilhas/:
 
     index.html                      página do design system, com seletor de cor
     email-<trilha>-<tema>.html      aplicação, 5 cores x 2 temas
+    em-XXX-<trilha>-<tema>.html     emails conversacionais (copies reais, sem título)
     img/                            halos gerados por cor e tema
+
+E o kit para download em emails/kits/asimov-email-trilhas.zip (ver email_kit.py).
 
     python3 scripts/build-email-ds-trilhas.py
 """
@@ -20,6 +23,7 @@ import re
 from pathlib import Path
 
 from email_copies import COPIES, render_blocks
+from email_kit import Componente, Kit, Variante, write_kit
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system-trilhas"
 
@@ -338,9 +342,8 @@ def email(slug, mode):
     return html
 
 
-def conversa(slug, mode, copy):
-    """Email conversacional (sem título e sem halo): logo, faixa de espectro, a conversa e a assinatura."""
-    t = theme(slug, mode)
+def blocos(t):
+    """Os blocos de texto do email conversacional, na ordem de email_copies.render_blocks."""
     p = lambda text: f'<p style="margin:0 0 18px; {ts("Corpo", t)}">{text}</p>'
     cta_ = lambda label: f'<div style="padding:12px 0 30px;">{button(t, label)}</div>'
     ul = lambda items: ('<table role="presentation" style="margin:0 0 22px;">' + "".join(
@@ -351,14 +354,74 @@ def conversa(slug, mode, copy):
         + (f'<div style="font-family:{FONT}; font-size:13px; line-height:20px; color:{t["MUTED"]};">{role}</div>' if role else ""))
     ps = lambda text: (f'<p style="margin:28px 0 0; padding-top:20px; border-top:1px solid {t["LINE"]}; {ts("Corpo", t)}">'
                        f'<strong style="font-weight:600; color:{t["ACCENT_TEXT"]};">PS:</strong> {text}</p>')
+    return p, cta_, ul, sign, ps
+
+
+def topo(t):
+    """Topo dos emails conversacionais: logo centralizado e a faixa de espectro (duas linhas)."""
+    return (row(f'<img src="{t["LOGO"]}" width="66" height="20" alt="Asimov Academy" style="width:66px; height:20px; margin:0 auto;">', "36px 40px 22px")
+            + "\n\n" + row(spectrum(t, 3), "0 40px"))
+
+
+def fill(t, rows, title, preheader):
+    tokens = dict(t, ROWS=rows, TITLE=title, PREHEADER=preheader)
+    return re.sub(r"%([A-Z_]+)%", lambda m: tokens.get(m.group(1), m.group(0)), SHELL)
+
+
+def conversa(slug, mode, copy):
+    """Email conversacional (sem título e sem halo): logo, faixa de espectro, a conversa e a assinatura."""
+    t = theme(slug, mode)
     rows = [
-        row(f'<img src="{t["LOGO"]}" width="66" height="20" alt="Asimov Academy" style="width:66px; height:20px; margin:0 auto;">', "36px 40px 22px"),
-        row(spectrum(t, 3), "0 40px"),
-        row(render_blocks(copy["blocks"], p, cta_, ul, sign, ps), "44px 40px 0", "px body"),
+        topo(t),
+        row(render_blocks(copy["blocks"], *blocos(t)), "44px 40px 0", "px body"),
         row(footer(t), "48px 40px 0"),
     ]
-    tokens = dict(t, ROWS="\n\n".join(rows), TITLE=copy["assunto"], PREHEADER=copy["preheader"])
-    return re.sub(r"%([A-Z_]+)%", lambda m: tokens.get(m.group(1), m.group(0)), SHELL)
+    return fill(t, "\n\n".join(rows), copy["assunto"], copy["preheader"])
+
+
+# ------------------------------------------------------------------ kit para download
+
+def kit():
+    """O sistema inteiro para aplicações: casca, todas as peças e tokens, por cor e tema (ver email_kit.py)."""
+    variantes = []
+    for slug, (name, kind, _) in ACCENTS.items():
+        for mode in BASE:
+            t = theme(slug, mode)
+            p, cta_, ul, sign, ps = blocos(t)
+            pecas = [
+                ("topo", "Topo", "linha", "Topo dos emails conversacionais: logo e a faixa com a paleta da trilha.", topo(t)),
+                ("hero", "Halo", "linha", "Topo dos emails com título: o halo na cor da trilha, com o título dentro do anel.", row(hero(t), "0", cls="")),
+                ("ficha", "Ficha da trilha", "linha", "Nome da formação ou trilha, pontos e faixa do espectro. Logo abaixo do halo.", row(trail_card(t), "8px 40px 0")),
+                ("titulo", "Título de seção", "linha", "Sobretítulo e título que abrem um trecho do email.",
+                 row(meta("Lorem ipsum", t) + f'<div class="h2" style="margin:10px 0 0; {ts("Título de seção", t)}">Lorem ipsum dolor sit amet, consectetur adipiscing.</div>', "52px 40px 0")),
+                ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "44px 40px 0", "px body")),
+                ("marcos", "Marcos", "linha", "Três etapas em colunas, com números na cor da trilha.", row(milestones(t), "44px 40px 0")),
+                ("citacao", "Citação", "linha", "Uma frase de destaque por email, ao lado da barra de espectro.", row(quote(t), "40px 40px 0")),
+                ("cta", "CTA no halo", "linha", "Fechamento com a ação: título e o botão dentro de um halo menor.", row(cta(t), "64px 40px 0")),
+                ("rodape", "Rodapé", "linha", "Pontos da paleta, redes, endereço e descadastro. Obrigatório.", row(footer(t), "48px 40px 0")),
+                ("paragrafo", "Parágrafo", "bloco", "Todo o texto corrido. Frases curtas, um parágrafo por ideia.", p(LOREM["medio"])),
+                ("botao", "Botão", "bloco", "A ação do email: pílula na cor da trilha, centralizada.", cta_("Lorem ipsum dolor")),
+                ("lista", "Lista", "bloco", "Itens curtos e paralelos.", ul(["Lorem ipsum dolor sit amet", "Consectetur adipiscing elit", "Sed do eiusmod tempor"])),
+                ("assinatura", "Assinatura", "bloco", "Quem assina o email. O cargo é opcional.", sign("Lorem Ipsum", "Dolor sit amet da Asimov Academy")),
+                ("ps", "PS", "bloco", "Pós-escrito no fim do texto.", ps(LOREM["curto"])),
+            ]
+            variantes.append(Variante(
+                id=f"{slug}-{mode}", rotulo=f"{name} ({kind}), tema {mode}", tema=mode, cor=name,
+                casca=fill(t, "{{linhas}}", "{{assunto}}", "{{preheader}}"),
+                componentes=[Componente(s, n, tp, u, h) for s, n, tp, u, h in pecas],
+                cores={k: v for k, v in t.items() if isinstance(v, str) and v.startswith("#")}))
+    return Kit(
+        slug="trilhas", nome="Trilhas", pasta="design-system-trilhas",
+        descricao="Um halo de luz na cor de cada formação ou trilha. A paleta (dark, accent, light, glow) vem do assets/themes.js e vira faixa, pontos e citação.",
+        fontes=["Inter (Google Fonts), com Helvetica e Arial de reserva"],
+        tipografia=[dict(nome=n, tamanho=s, entrelinha=lh, peso=w, tracking=tr, mobile=m, uso=u)
+                    for n, (s, lh, w, tr, _, m, u) in TYPE.items()],
+        variantes=variantes,
+        exemplos=sorted(p.name for p in OUT.glob("*.html") if p.name != "index.html"),
+        montagem=[("Conversacional", ["topo", "corpo", "rodape"]),
+                  ("Com título", ["hero", "ficha", "titulo", "corpo", "marcos", "corpo", "citacao", "cta", "rodape"])],
+        notas=["Escolha a variante pela formação ou trilha do público. Para a marca Asimov em geral, use teal."],
+    )
 
 
 # ------------------------------------------------------------------ página do design system
@@ -540,6 +603,7 @@ def main():
                 (OUT / f'{copy["id"]}-{slug}-{mode}.html').write_text(conversa(slug, mode, copy))
     (OUT / "index.html").write_text(specimen())
     print("index.html")
+    write_kit(kit())
 
 
 if __name__ == "__main__":
