@@ -298,6 +298,102 @@ def button(t, label="Lorem ipsum dolor", href="{{link_cta}}", full=False, align=
             f'</tr></table></a><!--<![endif]--></td></tr></table>')
 
 
+# ------------------------------------------------------------------ variações de botão
+
+def _btn(t, label, href="#", *, bg, fg, arrow, border=None, grad=None, radius=999, upper=False, shadow=None,
+         pad="15px 22px 15px 28px", size=15, full=False, after=None):
+    """Botão genérico à prova de cliente: célula com cor sólida (+ degradê opcional) e VML no Outlook."""
+    text = label.upper() if upper else label
+    bstyle = f" border:{border};" if border else ""
+    gstyle = f" background-image:{grad};" if grad else ""
+    sstyle = f" box-shadow:{shadow};" if shadow else ""
+    width = ' width="100%"' if full else ""
+    arc = "50%" if radius >= 999 else f"{round(radius / 52 * 100)}%"
+    stroke = f'strokecolor="{border.split()[-1]}" strokeweight="1px"' if border else 'stroke="f"'
+    vml_w = 518 if full else max(200, round(len(text) * size * 0.62) + 100)
+    tail = after or (f'<td width="12" style="font-size:0;">&nbsp;</td>'
+                     f'<td valign="middle"><img src="{arrow}" width="18" height="18" alt="" style="width:18px; height:18px;"></td>')
+    return (f'<table role="presentation"{width} style="border-collapse:separate;"><tr>'
+            f'<td align="center" bgcolor="{bg}" style="background:{bg};{gstyle}{bstyle} border-radius:{radius}px;{sstyle}">'
+            f'<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" href="{href}" style="height:50px;v-text-anchor:middle;width:{vml_w}px;" '
+            f'arcsize="{arc}" {stroke} fillcolor="{bg}"><w:anchorlock/><center style="color:{fg};font-family:Arial,sans-serif;font-size:{size}px;font-weight:bold;">{text}</center></v:roundrect><![endif]-->'
+            f'<!--[if !mso]><!--><a href="{href}" style="display:{"block" if full else "inline-block"}; padding:{pad}; text-decoration:none; border-radius:{radius}px;">'
+            f'<table role="presentation" align="center" style="border-collapse:separate; margin:0 auto;"><tr>'
+            f'<td class="btn-t" style="font-family:{TITLE_FONT}; font-size:{size}px; line-height:20px; font-weight:600; letter-spacing:-0.2px; color:{fg};">{text}</td>'
+            f'{tail}</tr></table></a><!--<![endif]--></td></tr></table>')
+
+
+def botao_chamativo(t, label, href="{{link_cta}}"):
+    """Padrão chamativo (G): laranja sólido, texto normal, seta num círculo branco."""
+    circle = (f'<td width="12" style="font-size:0;">&nbsp;</td>'
+              f'<td valign="middle"><table role="presentation" style="border-collapse:separate;"><tr>'
+              f'<td width="30" height="30" align="center" valign="middle" bgcolor="#ffffff" style="width:30px; height:30px; background:#ffffff; border-radius:999px;">'
+              f'<img src="img/seta-laranja.png" width="16" height="16" alt="" style="width:16px; height:16px; margin:0 auto;"></td></tr></table></td>')
+    return _btn(t, label, href, bg=BF["ORANGE"], fg="#ffffff", arrow="", pad="9px 9px 9px 24px", after=circle,
+                shadow="0 10px 28px rgba(255,110,20,.30)")
+
+
+def botao_discreto(t, label, href="{{link_cta}}"):
+    """Padrão discreto (D): branco quente no escuro, preto no claro; o laranja fica só na seta."""
+    dark = t["SCHEME"] == "dark"
+    return _btn(t, label, href, bg="#fff2ec" if dark else "#0a0a0a", fg="#0a0a0a" if dark else "#ffffff",
+                arrow="img/seta-laranja-escuro.png" if dark else "img/seta-laranja.png")
+
+
+def botao(t, label, tom="chamativo", href="{{link_cta}}"):
+    return botao_discreto(t, label, href) if tom == "discreto" else botao_chamativo(t, label, href)
+
+
+def button_variants(t, label="Quero me cadastrar na Black"):
+    """As opções de botão da Black, para escolher. Cada uma: (nome, quando usar, html)."""
+    dark = t["SCHEME"] == "dark"
+    orange_text = t["ACCENT_TEXT"]
+    arrow_orange = "img/seta-laranja.png" if dark else "img/seta-laranja-escuro.png"
+    spectrum_border = (
+        f'<table role="presentation" style="border-collapse:separate;"><tr>'
+        f'<td bgcolor="{BF["ORANGE"]}" style="background:{BF["ORANGE"]}; background-image:{SPECTRUM}; border-radius:999px; padding:2px;">'
+        + _btn(t, label, bg=t["SURFACE"], fg=t["TEXT"], arrow=arrow_orange, pad="13px 20px 13px 26px")
+        + '</td></tr></table>')
+    items = [
+        ("A · Degradê", "Pílula em degradê vertical, caixa alta. A mais próxima das peças da campanha: guarde para emails de venda direta.",
+         button(t, label, "#", align="left")),
+        ("B · Sólido", "Laranja chapado, cantos de 12px, texto normal. Mais sóbrio, bom para emails conversacionais.",
+         _btn(t, label, bg=BF["ORANGE"], fg="#ffffff", arrow="img/seta-branca.png", radius=12)),
+        ("C · Contorno", "Só a borda laranja. Para uma segunda ação, ou quando o email já tem muita cor.",
+         _btn(t, label, bg=t["PAGE"], fg=orange_text, arrow=arrow_orange, border=f"1.5px solid {BF['ORANGE']}", pad="14px 21px 14px 27px")),
+        ("D · Neutro · padrão discreto", "Branco quente no escuro, preto no claro; o laranja fica só na seta. Para emails de relacionamento, em que o botão é um convite.",
+         botao_discreto(t, label, "#")),
+        ("E · Brasa", "Fundo laranja bem escuro e texto pêssego (no claro, pêssego claro e texto terracota). Discreto e quente.",
+         _btn(t, label, bg=t["PILL_BG"], fg="#ffae6b" if dark else "#9a3412",
+              arrow="img/seta-pessego.png" if dark else "img/seta-laranja-escuro.png", border=f"1px solid {t['CTA_LINE']}")),
+        ("F · Borda espectro", "Contorno com o degradê teal, vermelho, teal da faixa. Onde não há degradê, a borda fica laranja.",
+         spectrum_border),
+        ("G · Seta em círculo · padrão chamativo", "Laranja sólido com a seta num círculo branco, sem caixa alta. Para emails cuja ação é o objetivo: cadastro, compra.",
+         botao_chamativo(t, label, "#")),
+        ("H · Compacto", "Pílula menor, 13px. Para ações secundárias no meio do texto.",
+         _btn(t, "Ver a programação", bg=BF["ORANGE"], fg="#ffffff", arrow="img/seta-branca.png", pad="10px 16px 10px 20px", size=13)),
+        ("I · Link", "Texto laranja sublinhado com seta. Para quando o botão seria demais.",
+         f'<a href="#" style="text-decoration:none;"><table role="presentation" style="border-collapse:separate;"><tr>'
+         f'<td style="font-family:{TITLE_FONT}; font-size:16px; line-height:22px; font-weight:600; color:{orange_text}; border-bottom:1.5px solid {BF["ORANGE"]}; padding-bottom:2px;">{label}</td>'
+         f'<td width="8" style="font-size:0;">&nbsp;</td><td valign="middle"><img src="{arrow_orange}" width="18" height="18" alt="" style="width:18px; height:18px;"></td>'
+         f'</tr></table></a>'),
+        ("J · Largura total", "Degradê ocupando a coluna inteira. Para o fim de emails curtos e para o mobile.",
+         button(t, label, "#", full=True)),
+    ]
+    padrao = [i for i in items if "padrão" in i[0]]
+    return padrao + [i for i in items if "padrão" not in i[0]]
+
+
+def spec_buttons(t):
+    out = ""
+    for name, use, html in button_variants(t):
+        out += (f'<div class="btn-item" style="border-color:{t["LINE"]};">'
+                f'<div class="btn-name" style="color:{t["TEXT"]};">{name}</div>'
+                f'<div class="btn-use" style="color:{t["MUTED"]};">{use}</div>'
+                f'<div style="margin-top:14px;">{html}</div></div>')
+    return out
+
+
 def cta(t, href="{{link_cta}}"):
     """O cartão de CTA do design system (Pricing), com a luz da Black subindo por baixo."""
     return (f'<table role="presentation" width="100%" style="border-collapse:separate;"><tr>'
@@ -305,7 +401,7 @@ def cta(t, href="{{link_cta}}"):
             f'border:1px solid {t["CTA_LINE"]}; border-radius:24px; padding:36px 28px 34px;">'
             f'{meta("Lorem ipsum", t, align="center")}'
             f'<div class="h2" style="margin:10px auto 0; max-width:420px; text-align:center; {ts("Título de seção", t)}">{hl("Lorem ipsum dolor: [[sit amet]] consectetur", t)}</div>'
-            f'<table role="presentation" align="center" style="margin:26px auto 0;"><tr><td>{button(t, href=href)}</td></tr></table>'
+            f'<table role="presentation" align="center" style="margin:26px auto 0;"><tr><td>{botao_chamativo(t, "Lorem ipsum dolor", href)}</td></tr></table>'
             f'<div style="margin-top:16px; font-family:{TITLE_FONT}; font-size:12px; line-height:16px; font-weight:600; color:{t["MUTED"]};">Lorem ipsum dolor sit amet, consectetur.</div>'
             f'</td></tr></table>')
 
@@ -426,7 +522,7 @@ def conversa(theme, copy):
     """Email conversacional: sem título. Capa estreita, a conversa, botões no meio do texto, assinatura."""
     t = THEMES[theme]
     p = lambda text: f'<p style="margin:0 0 18px; {ts("Corpo", t)}">{text}</p>'
-    cta_ = lambda label: f'<div style="padding:10px 0 28px;">{button(t, label, align="left")}</div>'
+    cta_ = lambda label: f'<div style="padding:10px 0 28px;">{botao(t, label, copy.get("tom", "chamativo"))}</div>'
     ul = lambda items: ('<table role="presentation" style="margin:0 0 22px;">' + "".join(
         f'<tr><td width="22" valign="top" style="padding:11px 0 0;"><div style="width:7px; height:7px; border-radius:999px; background:{BF["ORANGE"]}; font-size:0; line-height:0;">&nbsp;</div></td>'
         f'<td style="padding:0 0 6px; {ts("Corpo", t)}">{i}</td></tr>' for i in items) + "</table>")
@@ -539,6 +635,11 @@ SPEC = """<!DOCTYPE html>
     .brand span { display: block; padding: 10px 12px; color: #d4d4d8; } .brand code { display: block; color: #777; }
     code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 11px; }
     .full { margin-top: 0; }
+    .btn-item { padding: 22px 0; border-bottom: 1px solid; }
+    .btn-item:first-of-type { padding-top: 4px; }
+    .btn-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .btn-name { font-family: %TITLE_FONT%; font-size: 15px; font-weight: 600; }
+    .btn-use { margin-top: 4px; font-size: 13px; line-height: 20px; }
     .convs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .conv { border: 1px solid #1b1b1b; border-radius: 20px; padding: 22px; background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(255,110,20,.14), transparent 60%), #070504; }
     .conv-head { display: flex; justify-content: space-between; font-size: 12px; color: #777; }
@@ -637,6 +738,12 @@ SPEC = """<!DOCTYPE html>
       %TICKET%
     </section>
 
+    <section id="botoes">
+      <div class="sec-head"><div><div class="k">Components</div><h2>Botões</h2></div>
+        <p>Dois padrões, escolhidos por email no campo “tom” da copy: G (chamativo) quando a ação é o objetivo, D (discreto) quando o botão é um convite. O mesmo email não mistura os dois. As outras opções ficam de referência. Todas têm cor sólida por baixo e VML para o Outlook.</p></div>
+      %BOTOES%
+    </section>
+
     <section>
       <div class="sec-head"><div><div class="k">Components</div><h2>Destaque e CTA</h2></div>
         <p>As superfícies do design system com a luz da campanha subindo pelo canto. O CTA é o cartão do Pricing com o botão em degradê laranja.</p></div>
@@ -687,6 +794,7 @@ def specimen():
         "TITLE_FONT": TITLE_FONT, "BODY_FONT": BODY_FONT,
         "FAIXA": fio(d), "FAIXA_END": faixa_asimov(d),
         "CONVERSAS": spec_conversas(),
+        "BOTOES": both(spec_buttons),
         "OPCIONAIS": both(lambda t: pill(t) + '<div style="height:24px;"></div>' + countdown(t) + '<div style="height:28px;"></div>' + ticket(t) + '<div style="height:24px;"></div>' + chips(t)
                           + '<div style="height:16px;"></div>' + faixa(t)),
         "TYPE": both(spec_type),
