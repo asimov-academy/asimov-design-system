@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../modo.js"></script>
     <!-- Anti-FOUC: fundo no html (não no body — body cobria o Cadence com z negativo) -->
     <style>
       html {
@@ -840,6 +841,7 @@
         .dsx-background-copy h3 { font-size: 34px; }
       }
     </style>
+    <link rel="stylesheet" href="../modo-claro.css" />
   </head>
   <body
     class="lp-index"
@@ -2022,6 +2024,7 @@
                 <p
                   class="text-copy hero-video__subtitle animate-fade-slide-in anim-delay-350"
                   data-astro-cid-eo7eigcm
+                  data-texto-claro="Uma linguagem visual clara, tecnológica e editorial, com acentos luminosos, superfícies limpas e movimento sutil."
                 >
                   Uma linguagem visual escura, tecnológica e editorial, com
                   acentos luminosos, superfícies profundas e movimento sutil.
@@ -5340,10 +5343,18 @@
           ["Borders", "Card border", cssValue(formationStyle, "border-color"), "Cards and containers"],
           ["Borders", "Divider", cssValue(faqStyle, "border-color"), "FAQ rows"],
           ["Overlays", "Image overlay", cssValue(overlayStyle, "background"), "Instructor portrait"],
-          ["Semantic", "Success", "#4ade80", "Positive status"],
-          ["Semantic", "Warning", "#fbbf24", "Attention status"],
-          ["Semantic", "Danger", "#fb7185", "Error status"],
-          ["Semantic", "Info", "#60a5fa", "Informational status"],
+          // No modo claro os semânticos descem um tom para manter contraste sobre branco.
+          ...(window.AsimovModo === "claro" ? [
+            ["Semantic", "Success", "#16a34a", "Positive status"],
+            ["Semantic", "Warning", "#d97706", "Attention status"],
+            ["Semantic", "Danger", "#e11d48", "Error status"],
+            ["Semantic", "Info", "#2563eb", "Informational status"],
+          ] : [
+            ["Semantic", "Success", "#4ade80", "Positive status"],
+            ["Semantic", "Warning", "#fbbf24", "Attention status"],
+            ["Semantic", "Danger", "#fb7185", "Error status"],
+            ["Semantic", "Info", "#60a5fa", "Informational status"],
+          ]),
         ];
 
         const doc = (html) => {
@@ -5504,7 +5515,9 @@
           backgroundExample("aura-landscape", 1, "Aura + paisagem", "Aurora boreal, paisagem e camadas de composição."),
           backgroundExample("rain", 2, "Cadence Rain", "Chuva WebGL com o shader e as camadas originais."),
           backgroundExample("aura", 3, "Aura sem imagem", "Aurora boreal do Unicorn Studio, sem a paisagem."),
-          backgroundExample("landscape", 4, "Paisagem estática", "Paisagem original com transparência, gradiente e glow."),
+          window.AsimovModo === "claro"
+            ? backgroundExample("landscape", 4, "Paisagem de dia", "Versão diurna da paisagem, com véu claro. É o fundo do hero no modo claro.")
+            : backgroundExample("landscape", 4, "Paisagem estática", "Paisagem original com transparência, gradiente e glow."),
         ]);
 
         const pricingContext = context("index4-cadence index4-typography-lumina dsx-stage--grid", sourceNodes.pricing);

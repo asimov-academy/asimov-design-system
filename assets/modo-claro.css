@@ -1,0 +1,472 @@
+/* Asimov Design System — modo claro.
+ *
+ * Camada única por cima dos estilos originais (que são escuros). Só vale quando
+ * o <html> tem data-modo="claro" (ver assets/modo.js), então o modo escuro fica
+ * intacto. A paleta é a mesma dos emails claros da Asimov: base zinc, superfícies
+ * brancas e o acento do tema escurecido para texto.
+ *
+ * Truque principal: --color-white vira a tinta escura. As utilidades do Tailwind
+ * (text-white, border-white/10, bg-white/5...) passam a ser tinta sobre claro sem
+ * precisar reescrever uma por uma.
+ */
+
+html[data-modo="claro"] {
+  color-scheme: light;
+
+  /* Superfícies */
+  --claro-page: #f4f4f5;
+  --claro-surface: #ffffff;
+  --claro-surface-2: #fafafa;
+  --claro-sunken: #ececee;
+
+  /* Vidro claro: a versão clara do vidro escuro dos cards. A paisagem fixa atrás
+   * da página aparece de leve através dele. */
+  --claro-glass: rgb(255 255 255 / .7);
+  --claro-glass-hover: rgb(255 255 255 / .85);
+  --claro-glass-line: rgb(9 9 11 / .08);
+  --claro-glass-blur: blur(10px);
+
+  /* Texto */
+  --claro-ink: #09090b;
+  --claro-body: #52525b;
+  --claro-muted: #71717a;
+  --claro-faint: #a1a1aa;
+
+  /* Linhas */
+  --claro-line: #e4e4e7;
+  --claro-line-strong: #d4d4d8;
+
+  /* Sombras: no claro a profundidade vem da sombra, não do brilho */
+  --claro-shadow-sm: 0 1px 2px rgb(9 9 11 / .04), 0 1px 3px rgb(9 9 11 / .06);
+  --claro-shadow-md: 0 1px 2px rgb(9 9 11 / .04), 0 12px 32px -14px rgb(9 9 11 / .16);
+  --claro-shadow-lg: 0 2px 4px rgb(9 9 11 / .04), 0 24px 56px -24px rgb(9 9 11 / .24);
+
+  /* Tokens originais remapeados */
+  --color-white: var(--claro-ink);
+  --color-surface: var(--claro-page);
+  --color-text-copy: var(--claro-body);
+  --color-text-card: var(--claro-body);
+  --color-text-secondary: var(--claro-body);
+  --color-neutral-200: #3f3f46;
+  --color-neutral-400: var(--claro-muted);
+  --color-neutral-500: var(--claro-muted);
+  --color-neutral-900: var(--claro-sunken);
+  --color-neutral-950: var(--claro-surface);
+  --color-zinc-400: var(--claro-muted);
+  --color-zinc-500: var(--claro-muted);
+
+  background-color: var(--claro-page);
+}
+
+/* Acento: o tom do tema escurecido para passar contraste AA sobre branco.
+ * Fica no body porque é lá que o Overview define --ui-accent. */
+html[data-modo="claro"] body {
+  --claro-accent-ink: color-mix(in srgb, var(--ui-accent-dark) 78%, #000);
+  --claro-accent-wash: color-mix(in srgb, var(--ui-accent) 9%, #fff);
+  --claro-accent-line: color-mix(in srgb, var(--ui-accent) 32%, #fff);
+
+  background-color: var(--claro-page);
+  color: var(--claro-ink);
+}
+html[data-modo="claro"] ::selection { background-color: color-mix(in srgb, var(--ui-accent) 22%, transparent); }
+
+/* ───────────────────────── Fundo do hero ───────────────────────── */
+
+/* A aurora é uma cena WebGL em mix-blend-screen: some sobre fundo claro. */
+html[data-modo="claro"] [data-aura-root],
+html[data-modo="claro"] .dsx-catalog > .aura-background { display: none; }
+
+/* Paisagem de dia (trocada em modo.js) com a mesma receita do escuro: imagem a
+ * 30% (classe opacity-30 do original), fixa atrás da página, sob um véu da cor
+ * do fundo que vai de 90% no topo a 60% no meio e cobre tudo embaixo. */
+html[data-modo="claro"] .from-\[\#050505\]\/90 { --tw-gradient-from: rgb(244 244 245 / .9); }
+html[data-modo="claro"] .via-\[\#050505\]\/60 { --tw-gradient-via: rgb(244 244 245 / .6); }
+html[data-modo="claro"] .to-\[\#050505\] { --tw-gradient-to: var(--claro-page); }
+
+/* ───────────────────────── Header ───────────────────────── */
+
+html[data-modo="claro"] .cadence-header {
+  --cadence-heading: var(--claro-ink);
+  --cadence-text: var(--claro-ink);
+  --cadence-muted: var(--claro-body);
+  --cadence-bg-2: var(--claro-surface);
+}
+html[data-modo="claro"] .cadence-header__nav {
+  background: rgb(255 255 255 / .78);
+  border-bottom: 1px solid rgb(9 9 11 / .06);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+html[data-modo="claro"] .cadence-header__logo,
+html[data-modo="claro"] .cadence-header__mobile-login,
+html[data-modo="claro"] .cadence-header__btn--ghost { color: var(--claro-ink); }
+html[data-modo="claro"] .cadence-header__logo img,
+html[data-modo="claro"] .cadence-header__logo svg { filter: brightness(0); }
+html[data-modo="claro"] .cadence-header__btn--ghost { border-color: var(--claro-line-strong); }
+html[data-modo="claro"] .cadence-header__btn--ghost:hover { border-color: var(--claro-accent-line); background: var(--claro-accent-wash); box-shadow: none; }
+html[data-modo="claro"] .cadence-header__btn--solid { box-shadow: 0 4px 14px -4px color-mix(in srgb, var(--ui-accent) 55%, transparent); }
+html[data-modo="claro"] .cadence-header__hamburger span { background: var(--claro-ink); }
+html[data-modo="claro"] .cadence-header__mobile { background: rgb(255 255 255 / .97); }
+html[data-modo="claro"] .cadence-header__dropdown-menu { background: var(--claro-surface); border-color: var(--claro-line); box-shadow: var(--claro-shadow-lg); }
+html[data-modo="claro"] .cadence-header__dropdown-menu a:hover,
+html[data-modo="claro"] .cadence-header__dropdown-menu a:focus-visible { background: rgb(9 9 11 / .04); }
+
+/* ───────────────────────── Hero ───────────────────────── */
+
+/* O "prata" do escuro (branco → cinza) invertido em tinta. O cinza do fim fica
+ * perto da tinta: com o tom do escuro, a base das letras parecia uma sombra. */
+html[data-modo="claro"] .text-gradient-silver {
+  --tw-gradient-from: var(--claro-ink);
+  --tw-gradient-via: #18181b;
+  --tw-gradient-to: #3f3f46;
+}
+/* A entrada termina em filter: blur(0) e, com fill both, o filtro fica aplicado e
+ * tira a nitidez do texto. Sem o fill final, o título volta ao estilo normal. */
+html[data-modo="claro"] .hero-video h1 { animation-fill-mode: backwards; }
+
+/* O CTA do hero continua uma pílula escura: no claro ela vira o ponto mais forte da tela.
+ * Mantém o halo e a luz girando do original; o halo usa o acento (o glow, mais
+ * claro, some sobre fundo claro) e a borda de 1px ganha cor, já que o branco a
+ * 20% do escuro não aparece sobre o claro. */
+html[data-modo="claro"] .button-glow {
+  box-shadow:
+    0 0 25px color-mix(in srgb, var(--ui-accent) 38%, transparent),
+    0 8px 40px color-mix(in srgb, var(--ui-accent) 22%, transparent),
+    0 6px 16px -6px rgb(9 9 11 / .35);
+}
+html[data-modo="claro"] .button-glow:hover {
+  box-shadow:
+    0 0 50px 10px color-mix(in srgb, var(--ui-accent) 40%, transparent),
+    0 6px 16px -6px rgb(9 9 11 / .35);
+}
+/* No escuro o vidro do botão desfoca a aurora atrás dele; aqui o reflexo é desenhado. */
+html[data-modo="claro"] .button-glow__inner {
+  background-color: rgb(11 11 14 / .94);
+  background-image: radial-gradient(120% 160% at 12% 0%, color-mix(in srgb, var(--ui-accent) 16%, transparent), transparent 55%), linear-gradient(to bottom, rgb(255 255 255 / .06), transparent 60%);
+}
+/* Borda de 1px neutra e escura: é sobre ela que a luz girando aparece. */
+html[data-modo="claro"] .button-glow.from-white\/20 { --tw-gradient-from: #3f3f46; }
+html[data-modo="claro"] .button-glow.via-white\/0 { --tw-gradient-via: #18181b; }
+html[data-modo="claro"] .button-glow.to-white\/5 { --tw-gradient-to: #27272a; }
+html[data-modo="claro"] .button-glow__border-spin { background: conic-gradient(from 0deg, transparent 0deg, transparent 80deg, var(--ui-accent-glow) 180deg, transparent 280deg, transparent 360deg); }
+html[data-modo="claro"] .button-glow .text-white,
+html[data-modo="claro"] .button-glow .text-white\/95,
+html[data-modo="claro"] .button-glow .text-white\/80 { color: #fff; }
+html[data-modo="claro"] .button-glow .bg-white\/10 { background-color: rgb(255 255 255 / .12); }
+html[data-modo="claro"] .button-glow .ring-white\/20 { --tw-ring-color: rgb(255 255 255 / .2); }
+
+html[data-modo="claro"] .hero-social-proof__line1,
+html[data-modo="claro"] .hero-social-proof__line2 { color: var(--claro-body); }
+html[data-modo="claro"] .hero-social-proof__highlight { color: var(--claro-ink); }
+html[data-modo="claro"] .hero-social-proof__avatar { border-color: #fff; box-shadow: var(--claro-shadow-sm); }
+
+/* ───────────────────────── Seções ───────────────────────── */
+
+html[data-modo="claro"] .section-container { border-color: var(--claro-line); }
+html[data-modo="claro"] .section-title { color: var(--claro-ink); }
+
+/* Formações */
+html[data-modo="claro"] .learning-paths {
+  --lp-border: var(--claro-line);
+  --lp-card-from: var(--claro-glass);
+  --lp-card-to: rgb(250 250 250 / .62);
+}
+html[data-modo="claro"] .formation-card {
+  border-color: var(--claro-glass-line);
+  box-shadow: inset 0 1px rgb(255 255 255 / .7), var(--claro-shadow-sm);
+  -webkit-backdrop-filter: var(--claro-glass-blur);
+  backdrop-filter: var(--claro-glass-blur);
+}
+html[data-modo="claro"] .formation-card:hover {
+  border-color: color-mix(in srgb, var(--card-accent) 40%, transparent);
+  box-shadow: var(--claro-shadow-md), 0 0 34px -16px color-mix(in srgb, var(--card-accent-glow) 70%, transparent);
+}
+html[data-modo="claro"] .formation-card__glow { background: radial-gradient(ellipse at top, color-mix(in srgb, var(--card-accent) 12%, transparent), transparent 70%); }
+html[data-modo="claro"] .formation-card__dots { background-image: radial-gradient(rgb(9 9 11 / .06) 1px, transparent 1px); }
+html[data-modo="claro"] .formation-card__icon { background: color-mix(in srgb, var(--card-accent) 10%, transparent); color: color-mix(in srgb, var(--card-accent-dark) 80%, #000); }
+html[data-modo="claro"] .formation-card:hover .formation-card__icon { color: #fff; }
+html[data-modo="claro"] .formation-card__eyebrow { color: color-mix(in srgb, var(--card-accent-dark) 80%, #000); }
+html[data-modo="claro"] .formation-card__title,
+html[data-modo="claro"] .formation-card__cta,
+html[data-modo="claro"] .learning-paths__trails-title { color: var(--claro-ink); }
+
+/* Trilhas */
+/* No escuro as trilhas são vidro quase transparente; no claro, vidro claro translúcido. */
+html[data-modo="claro"] .trail-card {
+  background: var(--claro-glass);
+  border-color: var(--claro-glass-line);
+  box-shadow: inset 0 1px rgb(255 255 255 / .7), 0 1px 2px rgb(9 9 11 / .03);
+  -webkit-backdrop-filter: var(--claro-glass-blur);
+  backdrop-filter: var(--claro-glass-blur);
+}
+html[data-modo="claro"] .trail-card:hover { background: color-mix(in srgb, var(--card-accent) 6%, var(--claro-glass-hover)); border-color: color-mix(in srgb, var(--card-accent) 34%, transparent); }
+html[data-modo="claro"] .trail-card__icon { color: color-mix(in srgb, var(--card-accent-dark) 80%, #000); background: color-mix(in srgb, var(--card-accent) 8%, transparent); }
+html[data-modo="claro"] .trail-card:hover .trail-card__icon { color: #fff; }
+html[data-modo="claro"] .trail-card__title { color: var(--claro-ink); }
+html[data-modo="claro"] .trail-card__arrow { color: var(--claro-faint); }
+html[data-modo="claro"] .trail-card--more { background: transparent; border-color: var(--claro-line-strong); border-style: dashed; box-shadow: none; }
+html[data-modo="claro"] .trail-card--more:hover { background: var(--claro-glass); border-color: var(--claro-faint); }
+html[data-modo="claro"] .trail-card--more .trail-card__icon { border-color: var(--claro-line-strong); color: var(--claro-body); background: transparent; }
+html[data-modo="claro"] .trail-card--more:hover .trail-card__icon,
+html[data-modo="claro"] .trail-card--more:hover .trail-card__arrow { color: var(--claro-ink); }
+
+/* Cards de benefício */
+html[data-modo="claro"] .trail-overview-v2-card {
+  border-color: var(--claro-glass-line);
+  background-color: var(--claro-glass);
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--card-tone) 7%, transparent) 0%, transparent 46%);
+  box-shadow: inset 0 1px rgb(255 255 255 / .7), var(--claro-shadow-sm);
+  -webkit-backdrop-filter: var(--claro-glass-blur);
+  backdrop-filter: var(--claro-glass-blur);
+}
+html[data-modo="claro"] .trail-overview-v2-card:hover {
+  border-color: color-mix(in srgb, var(--card-tone) 34%, transparent);
+  box-shadow: var(--claro-shadow-md), 0 0 40px -18px color-mix(in srgb, var(--card-halo) 55%, transparent);
+}
+html[data-modo="claro"] .trail-overview-v2-card::before {
+  background: linear-gradient(165deg, color-mix(in srgb, var(--card-tone) 30%, transparent) 0%, rgb(9 9 11 / .04) 18%, transparent 58%, color-mix(in srgb, var(--card-halo) 18%, transparent) 100%);
+}
+html[data-modo="claro"] .trail-overview-v2-card::after {
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--card-halo) 55%, transparent), transparent);
+}
+html[data-modo="claro"] .trail-overview-v2-card__shine { background: radial-gradient(ellipse 95% 58% at 50% 0%, color-mix(in srgb, var(--card-halo) 10%, transparent), transparent 64%); }
+html[data-modo="claro"] .trail-overview-v2-card__grid { background-image: radial-gradient(rgb(9 9 11 / .06) 1px, transparent 1px); }
+/* O pedestal do ícone é um brilho escuro no escuro; no claro, em cinza, virava
+ * uma mancha. Aqui ele é um reflexo leve do acento. */
+html[data-modo="claro"] .trail-overview-v2-card__icon-pedestal {
+  background: radial-gradient(ellipse 100% 100% at 50% 100%, color-mix(in srgb, var(--ui-accent) 10%, transparent), transparent 72%);
+}
+html[data-modo="claro"] .trail-overview-v2-card__icon-pedestal::before { background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--ui-accent) 35%, transparent), transparent); }
+html[data-modo="claro"] .trail-overview-v2-card__icon { color: var(--claro-accent-ink); }
+html[data-modo="claro"] .trail-overview-v2-card__title { color: var(--claro-ink); }
+
+/* Plataforma */
+html[data-modo="claro"] .platform-row__title { color: var(--claro-ink); }
+html[data-modo="claro"] .platform-row__icon { color: var(--claro-accent-ink); background: var(--claro-accent-wash); border-color: var(--claro-accent-line); }
+html[data-modo="claro"] .platform-media-card {
+  background: var(--claro-glass);
+  border-color: var(--claro-glass-line);
+  box-shadow: inset 0 1px rgb(255 255 255 / .7), var(--claro-shadow-md);
+  -webkit-backdrop-filter: var(--claro-glass-blur);
+  backdrop-filter: var(--claro-glass-blur);
+}
+html[data-modo="claro"] .platform-media-card:hover { border-color: rgba(var(--card-rgb), .35); box-shadow: var(--claro-shadow-md), 0 0 36px -14px rgba(var(--card-rgb), .45); }
+html[data-modo="claro"] .platform-media-card__glow { background: radial-gradient(ellipse at top, rgba(var(--card-rgb), .12), transparent 72%); }
+html[data-modo="claro"] .platform-media-card__dots { background-image: radial-gradient(rgb(9 9 11 / .06) 1px, transparent 1px); }
+/* As capturas da plataforma são telas escuras do produto: ficam numa moldura clara. */
+html[data-modo="claro"] .platform-media-card__inner { background: #0b0b0e; border-color: var(--claro-line); }
+
+/* Instrutores: fotos com overlay escuro continuam escuras, só os controles mudam */
+html[data-modo="claro"] .instructors-carousel { --instructors-card-bg: #111116; }
+html[data-modo="claro"] .instructor-card { border-color: var(--claro-line); box-shadow: var(--claro-shadow-md); }
+html[data-modo="claro"] .instructor-card__name { color: #fff; }
+html[data-modo="claro"] .instructors-carousel__nav {
+  color: var(--claro-ink);
+  background: var(--claro-surface);
+  border-color: var(--claro-line);
+  box-shadow: var(--claro-shadow-sm);
+}
+html[data-modo="claro"] .instructors-carousel__nav:hover:not(:disabled) { color: var(--claro-ink); background: var(--claro-surface); border-color: var(--claro-accent-line); }
+html[data-modo="claro"] .instructors-carousel__progress { background: var(--claro-line); }
+
+/* ───────────────────────── Preços ───────────────────────── */
+
+html[data-modo="claro"] .index4-cadence .index4-pricing-section::before {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 100%, color-mix(in srgb, var(--ui-accent) 10%, transparent), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 20% 20%, color-mix(in srgb, var(--ui-accent) 5%, transparent), transparent 55%);
+}
+html[data-modo="claro"] .index4-cadence .index4-pricing-badge { color: var(--claro-accent-ink); background: var(--claro-accent-wash); border-color: var(--claro-accent-line); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-title { color: var(--claro-ink); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-title-highlight,
+html[data-modo="claro"] .index4-typography-lumina .index4-pricing-title-highlight {
+  background: linear-gradient(90deg, var(--claro-accent-ink) 0%, var(--ui-accent-dark) 55%, var(--ui-accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+html[data-modo="claro"] .index4-cadence .index4-pricing-card {
+  border-color: var(--claro-glass-line);
+  background-color: var(--claro-glass);
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--pricing-card-tone) 6%, transparent) 0%, transparent 42%);
+  box-shadow: inset 0 1px rgb(255 255 255 / .7), var(--claro-shadow-sm);
+  -webkit-backdrop-filter: var(--claro-glass-blur);
+  backdrop-filter: var(--claro-glass-blur);
+}
+html[data-modo="claro"] .index4-cadence .index4-pricing-card::before {
+  background: linear-gradient(165deg, color-mix(in srgb, var(--pricing-card-tone) 30%, transparent) 0%, rgb(9 9 11 / .04) 18%, transparent 58%, color-mix(in srgb, var(--pricing-card-halo) 18%, transparent) 100%);
+}
+html[data-modo="claro"] .index4-cadence .index4-pricing-card::after {
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--pricing-card-halo) 55%, transparent), transparent);
+}
+html[data-modo="claro"] .index4-cadence .index4-pricing-card:hover {
+  border-color: color-mix(in srgb, var(--pricing-card-tone) 30%, transparent);
+  box-shadow: var(--claro-shadow-lg);
+}
+html[data-modo="claro"] .index4-cadence .index4-pricing-card--featured {
+  border-color: color-mix(in srgb, var(--ui-accent) 45%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ui-accent) 18%, transparent), var(--claro-shadow-lg), 0 0 64px -20px color-mix(in srgb, var(--pricing-card-halo) 45%, transparent);
+}
+html[data-modo="claro"] .index4-cadence .index4-pricing-card--featured:hover {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ui-accent) 28%, transparent), var(--claro-shadow-lg), 0 0 80px -16px color-mix(in srgb, var(--pricing-card-halo) 55%, transparent);
+}
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__popular { box-shadow: 0 6px 18px -6px color-mix(in srgb, var(--ui-accent) 60%, transparent); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__name,
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__amount,
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__benefit-text strong { color: var(--claro-ink); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card--featured .index4-pricing-card__amount {
+  background: linear-gradient(90deg, var(--claro-ink) 0%, var(--claro-accent-ink) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__icon { border-color: var(--claro-glass-line); background: rgb(255 255 255 / .5); color: var(--claro-muted); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card--featured .index4-pricing-card__icon { border-color: var(--claro-accent-line); background: var(--claro-accent-wash); color: var(--claro-accent-ink); box-shadow: none; }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__price-block { border-bottom-color: var(--claro-line); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card--featured .index4-pricing-card__price-block { border-bottom-color: color-mix(in srgb, var(--ui-accent) 22%, transparent); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__installments { color: var(--claro-body); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__cash,
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__guarantee,
+html[data-modo="claro"] .index4-pricing-card__original { color: var(--claro-muted); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__check { color: var(--claro-faint); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card--featured .index4-pricing-card__check { color: var(--ui-accent); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__cta--primary {
+  color: #fff;
+  background: linear-gradient(135deg, var(--ui-accent) 0%, var(--ui-accent-dark) 100%);
+  box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--ui-accent) 70%, transparent), inset 0 1px rgb(255 255 255 / .25);
+}
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__cta--primary:hover { box-shadow: 0 12px 30px -8px color-mix(in srgb, var(--ui-accent) 75%, transparent), inset 0 1px rgb(255 255 255 / .3); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__cta--outline { color: var(--claro-ink); border-color: var(--claro-line-strong); background: rgb(255 255 255 / .5); }
+html[data-modo="claro"] .index4-cadence .index4-pricing-card__cta--outline:hover { border-color: var(--claro-accent-line); background: var(--claro-accent-wash); }
+
+/* ───────────────────────── Garantia ───────────────────────── */
+
+html[data-modo="claro"] .guarantee-section { color: var(--claro-ink); }
+html[data-modo="claro"] .guarantee-card {
+  border-color: var(--claro-accent-line);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ui-accent) 12%, var(--claro-glass)) 0%, var(--claro-glass) 100%);
+  box-shadow: inset 0 1px rgb(255 255 255 / .7), var(--claro-shadow-md), 0 0 80px -30px rgb(var(--gt-cyan-rgb) / .3);
+  -webkit-backdrop-filter: var(--claro-glass-blur);
+  backdrop-filter: var(--claro-glass-blur);
+}
+html[data-modo="claro"] .guarantee-seal__ring { border-color: rgb(var(--gt-cyan-rgb) / .45); }
+html[data-modo="claro"] .guarantee-seal__text text { fill: var(--claro-accent-ink); }
+html[data-modo="claro"] .guarantee-seal__core {
+  color: var(--claro-accent-ink);
+  background: linear-gradient(135deg, rgb(var(--gt-cyan-rgb) / .14), rgb(var(--gt-cyan-rgb) / .04));
+  border-color: rgb(var(--gt-cyan-rgb) / .45);
+  box-shadow: inset 0 1px #fff, 0 0 24px rgb(var(--gt-cyan-rgb) / .22);
+}
+html[data-modo="claro"] .guarantee-card__title,
+html[data-modo="claro"] .guarantee-card__description strong { color: var(--claro-ink); }
+html[data-modo="claro"] .guarantee-steps { border-top-color: var(--claro-line); }
+html[data-modo="claro"] .guarantee-step__number { color: var(--claro-accent-ink); }
+
+/* ───────────────────────── FAQ ───────────────────────── */
+
+html[data-modo="claro"] .faq-accordion {
+  --faq-border: var(--claro-line);
+  --faq-border-active: var(--claro-accent-line);
+  --faq-bg-card: var(--claro-glass);
+  --faq-text-body: var(--claro-body);
+  --faq-text-title: var(--claro-ink);
+}
+html[data-modo="claro"] .faq-item {
+  border-color: var(--claro-glass-line);
+  box-shadow: inset 0 1px rgb(255 255 255 / .7), 0 1px 2px rgb(9 9 11 / .03);
+  -webkit-backdrop-filter: var(--claro-glass-blur);
+  backdrop-filter: var(--claro-glass-blur);
+}
+html[data-modo="claro"] .faq-item.is-open { box-shadow: var(--claro-shadow-md); }
+html[data-modo="claro"] .faq-trigger:hover .faq-question { color: var(--claro-ink); }
+html[data-modo="claro"] .faq-icon { border-color: var(--claro-line-strong); }
+html[data-modo="claro"] .faq-icon svg { stroke: var(--claro-muted); }
+
+/* ───────────────────────── Rodapé ───────────────────────── */
+
+html[data-modo="claro"] .site-footer {
+  --footer-border: var(--claro-line);
+  --footer-text: var(--claro-body);
+  --footer-title: var(--claro-ink);
+  background: var(--claro-surface);
+  border-top: 1px solid var(--claro-line);
+}
+html[data-modo="claro"] .site-footer__watermark { color: rgb(9 9 11 / .035); }
+html[data-modo="claro"] .site-footer__logo { color: var(--claro-ink); }
+html[data-modo="claro"] .site-footer__logo img,
+html[data-modo="claro"] .site-footer__logo svg { filter: brightness(0); }
+html[data-modo="claro"] .site-footer__social-link { color: var(--claro-accent-ink); }
+html[data-modo="claro"] .site-footer__social-link:hover { background: var(--claro-accent-wash); color: var(--claro-accent-ink); }
+html[data-modo="claro"] .site-footer__link:hover { color: var(--claro-ink); }
+html[data-modo="claro"] .site-footer__link-check { color: var(--claro-accent-ink); }
+html[data-modo="claro"] .site-footer__legal { color: var(--claro-muted); }
+
+html[data-modo="claro"] .whatsapp-fab { box-shadow: 0 8px 20px -6px rgb(9 9 11 / .35); }
+html[data-modo="claro"] .whatsapp-fab:focus-visible { outline-color: var(--claro-ink); }
+
+/* ───────────────────────── Pré-checkout ─────────────────────────
+ * Os seletores originais do modal carregam atributos do Astro e vencem por
+ * especificidade, por isso as cores aqui usam !important. */
+
+html[data-modo="claro"] .pco-backdrop { background: rgb(24 24 27 / .45) !important; }
+html[data-modo="claro"] .pco-dialog { background: var(--claro-surface) !important; border-color: var(--claro-line) !important; box-shadow: var(--claro-shadow-lg) !important; color: var(--claro-ink); }
+html[data-modo="claro"] .pco-close { border-color: transparent !important; background: transparent !important; color: var(--claro-muted) !important; }
+html[data-modo="claro"] .pco-close:hover { background: var(--claro-sunken) !important; color: var(--claro-ink) !important; border-color: var(--claro-line-strong) !important; }
+html[data-modo="claro"] .pco-subtitle { color: var(--claro-body) !important; }
+html[data-modo="claro"] .pco-label { color: var(--claro-ink) !important; }
+html[data-modo="claro"] .pco-field input { color: var(--claro-ink) !important; background: var(--claro-surface) !important; border-color: var(--claro-line-strong) !important; }
+html[data-modo="claro"] .pco-field input::placeholder { color: var(--claro-faint) !important; }
+html[data-modo="claro"] .pco-field input:hover { border-color: var(--claro-faint) !important; }
+html[data-modo="claro"] .pco-field input:focus { border-color: var(--ui-accent) !important; box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-accent) 18%, transparent) !important; }
+html[data-modo="claro"] .pco-error { color: #b91c1c !important; background: #fef2f2 !important; border-color: #fecaca !important; }
+
+/* ───────────────────────── Catálogo de componentes ───────────────────────── */
+
+html[data-modo="claro"] body.dsx-ready { background: var(--claro-page); }
+html[data-modo="claro"] .dsx-catalog { color: var(--claro-ink); }
+html[data-modo="claro"] .dsx-sidebar { border-right-color: var(--claro-line); background: rgb(255 255 255 / .6); }
+html[data-modo="claro"] .dsx-nav-label { color: var(--claro-muted); }
+html[data-modo="claro"] .dsx-nav a { color: var(--claro-body); }
+html[data-modo="claro"] .dsx-nav a:hover,
+html[data-modo="claro"] .dsx-nav a:focus-visible { color: var(--claro-ink); background: rgb(9 9 11 / .05); }
+html[data-modo="claro"] .dsx-group { border-top-color: var(--claro-line); }
+html[data-modo="claro"] .dsx-group-head small { color: var(--claro-accent-ink); }
+html[data-modo="claro"] .dsx-group-head h2 { color: var(--claro-ink); }
+html[data-modo="claro"] .dsx-group-head p { color: var(--claro-body); }
+html[data-modo="claro"] .dsx-block-head h3 { color: var(--claro-ink); }
+html[data-modo="claro"] .dsx-meta { color: var(--claro-muted); }
+html[data-modo="claro"] .dsx-meta code { color: var(--claro-muted); }
+html[data-modo="claro"] .dsx-type-list { border-color: var(--claro-line); }
+html[data-modo="claro"] .dsx-type-row { border-bottom-color: var(--claro-line); }
+html[data-modo="claro"] .dsx-type-label strong { color: var(--claro-ink); }
+html[data-modo="claro"] .dsx-type-label span,
+html[data-modo="claro"] .dsx-type-values { color: var(--claro-muted); }
+html[data-modo="claro"] .dsx-swatch { border-color: var(--claro-line); background: var(--claro-surface); box-shadow: var(--claro-shadow-sm); }
+html[data-modo="claro"] .dsx-swatch-color { box-shadow: inset 0 -1px 0 var(--claro-line); }
+html[data-modo="claro"] .dsx-swatch-info strong { color: var(--claro-ink); }
+html[data-modo="claro"] .dsx-swatch-info code { color: var(--claro-body); }
+html[data-modo="claro"] .dsx-swatch-info span { color: var(--claro-muted); }
+html[data-modo="claro"] .dsx-theme-palette { border-bottom-color: var(--claro-line); }
+html[data-modo="claro"] .dsx-theme-palette strong { color: var(--claro-ink); }
+html[data-modo="claro"] .dsx-theme-palette code,
+html[data-modo="claro"] .dsx-theme-tone span { color: var(--claro-muted); }
+html[data-modo="claro"] .dsx-theme-tone code { color: var(--claro-body); }
+html[data-modo="claro"] .dsx-theme-tone i { box-shadow: inset 0 0 0 1px rgb(9 9 11 / .08); }
+html[data-modo="claro"] .dsx-icon-preview > * { color: var(--claro-accent-ink); }
+html[data-modo="claro"] .dsx-icon-item code { color: var(--claro-muted); }
+html[data-modo="claro"] .dsx-catalog-nav { border-color: var(--claro-line); background: rgb(255 255 255 / .9); }
+html[data-modo="claro"] .dsx-catalog-nav img { filter: brightness(0); }
+html[data-modo="claro"] .dsx-catalog-actions span { color: var(--claro-body); }
+html[data-modo="claro"] .dsx-background-label { color: var(--claro-muted); }
+html[data-modo="claro"] .dsx-background-lab { border-color: var(--claro-line); }
+html[data-modo="claro"] .dsx-background-controls label { color: var(--claro-body); }
+html[data-modo="claro"] .dsx-background-controls button { border-color: var(--claro-line-strong); color: var(--claro-ink); background: var(--claro-surface); }
+html[data-modo="claro"] .dsx-background-status { color: var(--claro-muted); }
+
+/* A paisagem de dia no catálogo usa o mesmo véu claro do Overview. */
+html[data-modo="claro"] [data-background-example="landscape"] .dsx-background-lab { background: var(--claro-page); }
+html[data-modo="claro"] [data-background-example="landscape"] .landscape-layer__image { opacity: .9; }
+html[data-modo="claro"] [data-background-example="landscape"] .landscape-layer::after {
+  background: linear-gradient(to bottom, rgb(244 244 245 / .2), rgb(244 244 245 / .35) 50%, rgb(244 244 245 / .85));
+}
+html[data-modo="claro"] [data-background-example="landscape"] .dsx-background-copy h3 { color: var(--claro-ink); }
+html[data-modo="claro"] [data-background-example="landscape"] .dsx-background-copy p { color: #3f4a63; }
+html[data-modo="claro"] [data-background-example="landscape"] .dsx-background-copy small { color: var(--claro-accent-ink); }

@@ -20,8 +20,21 @@ Depois acesse `http://localhost:4173/design-system.html`.
 
 - **Overview:** adaptação funcional da landing page original, com copy demonstrativa.
 - **Components:** foundations e componentes reais reutilizados do Overview.
-- **Cores:** 17 variantes de tema disponíveis no seletor da navbar.
+- **Modo:** escuro (padrão) ou claro, no seletor **Escuro / Claro** da navbar.
+- **Cores:** 17 variantes de tema disponíveis no seletor da navbar, nos dois modos.
 - **Backgrounds:** Aura + paisagem, Cadence Rain, Aura isolada e paisagem estática.
+
+## Modo claro
+
+O modo claro é uma camada por cima do design system escuro, não uma cópia. Os mesmos componentes, classes e temas valem nos dois modos.
+
+- Ative pelo seletor da navbar ou abrindo `design-system.html?modo=claro`. A escolha fica salva no navegador.
+- Cada página também abre sozinha no claro: `assets/overview/index.html?modo=claro` e `assets/components/index.html?modo=claro`.
+- A paleta é a mesma dos emails claros: fundo `#f4f4f5`, superfícies brancas, texto `#09090b` / `#52525b`, linhas `#e4e4e7` e o acento do tema escurecido para texto (contraste AA).
+- No claro, a profundidade vem de sombras suaves em vez de brilho. A aurora WebGL some e o hero usa a paisagem de dia, que se dissolve no fundo da página.
+- Fotos de instrutores e capturas da plataforma continuam escuras, em molduras claras.
+
+Para levar o modo claro a uma nova página, inclua `assets/modo.js` no `<head>` (antes dos estilos) e `assets/modo-claro.css` depois de todos os outros estilos. Tudo em `modo-claro.css` está preso a `html[data-modo="claro"]`, então o escuro continua intacto.
 
 ## Estrutura
 
@@ -29,6 +42,7 @@ Depois acesse `http://localhost:4173/design-system.html`.
 - `assets/overview/index.html`: Overview completo e autocontido.
 - `assets/components/index.html`: catálogo de foundations e componentes.
 - `assets/themes.js`: variantes cromáticas compartilhadas.
+- `assets/modo.js` e `assets/modo-claro.css`: ativação e camada do modo claro.
 - `assets/components/backgrounds/`: cenas, shaders, imagens e runtime dos fundos animados.
 
 Todos os caminhos são relativos. Fontes, ícones, imagens e o runtime do Unicorn Studio estão armazenados localmente para preservar o funcionamento via `file://`. Os links de campanhas, redes sociais e checkout da página de referência são apenas demonstrativos: o catálogo avisa que são externos e não os abre. O formulário de pré-checkout também não envia dados.
