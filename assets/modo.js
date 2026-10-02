@@ -13,8 +13,6 @@
   const dia = (largura) => new URL(`components/backgrounds/images/landscape-dia-${largura}.webp`, assets).href;
   const trocarPaisagem = () => {
     document.querySelectorAll('img[src*="landscape-1280"]').forEach((img) => {
-      // A demonstração "Aura + paisagem" é uma cena noturna e continua escura no catálogo.
-      if (img.closest('[data-background-example="aura-landscape"]')) return;
       img.srcset = `${dia(768)} 768w, ${dia(1200)} 1200w`;
       img.src = dia(1200);
     });

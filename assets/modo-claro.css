@@ -72,8 +72,10 @@ html[data-modo="claro"] ::selection { background-color: color-mix(in srgb, var(-
 
 /* ───────────────────────── Fundo do hero ───────────────────────── */
 
-/* A aurora é uma cena WebGL em mix-blend-screen: some sobre fundo claro. */
-html[data-modo="claro"] [data-aura-root],
+/* A aurora é luz sobre preto, somada em screen: some sobre o claro. Invertida
+ * (o hue-rotate devolve o matiz do tema) e em multiply, vira traços do acento
+ * sobre o claro. O filtro vai no contêiner porque o filtro do tema é inline. */
+html[data-modo="claro"] [data-aura-root] { filter: invert(1) hue-rotate(180deg); mix-blend-mode: multiply; }
 html[data-modo="claro"] .dsx-catalog > .aura-background { display: none; }
 
 /* Paisagem de dia (trocada em modo.js) com a mesma receita do escuro: imagem a
@@ -124,36 +126,34 @@ html[data-modo="claro"] .text-gradient-silver {
  * tira a nitidez do texto. Sem o fill final, o título volta ao estilo normal. */
 html[data-modo="claro"] .hero-video h1 { animation-fill-mode: backwards; }
 
-/* O CTA do hero continua uma pílula escura: no claro ela vira o ponto mais forte da tela.
- * Mantém o halo e a luz girando do original; o halo usa o acento (o glow, mais
- * claro, some sobre fundo claro) e a borda de 1px ganha cor, já que o branco a
- * 20% do escuro não aparece sobre o claro. */
+/* CTA do hero em vidro claro. Mantém o halo e a luz girando do original: o halo
+ * usa o acento (o glow, mais claro, some sobre fundo claro) e a borda de 1px é
+ * um cinza suave, onde a luz do acento aparece. */
 html[data-modo="claro"] .button-glow {
   box-shadow:
-    0 0 25px color-mix(in srgb, var(--ui-accent) 38%, transparent),
-    0 8px 40px color-mix(in srgb, var(--ui-accent) 22%, transparent),
-    0 6px 16px -6px rgb(9 9 11 / .35);
+    0 0 25px color-mix(in srgb, var(--ui-accent) 32%, transparent),
+    0 8px 40px color-mix(in srgb, var(--ui-accent) 18%, transparent),
+    0 4px 12px -4px rgb(9 9 11 / .12);
 }
 html[data-modo="claro"] .button-glow:hover {
   box-shadow:
-    0 0 50px 10px color-mix(in srgb, var(--ui-accent) 40%, transparent),
-    0 6px 16px -6px rgb(9 9 11 / .35);
+    0 0 50px 10px color-mix(in srgb, var(--ui-accent) 32%, transparent),
+    0 4px 12px -4px rgb(9 9 11 / .12);
 }
-/* No escuro o vidro do botão desfoca a aurora atrás dele; aqui o reflexo é desenhado. */
 html[data-modo="claro"] .button-glow__inner {
-  background-color: rgb(11 11 14 / .94);
-  background-image: radial-gradient(120% 160% at 12% 0%, color-mix(in srgb, var(--ui-accent) 16%, transparent), transparent 55%), linear-gradient(to bottom, rgb(255 255 255 / .06), transparent 60%);
+  background-color: rgb(255 255 255 / .82);
+  background-image: linear-gradient(to bottom, rgb(255 255 255 / .9), transparent 70%);
 }
-/* Borda de 1px neutra e escura: é sobre ela que a luz girando aparece. */
-html[data-modo="claro"] .button-glow.from-white\/20 { --tw-gradient-from: #3f3f46; }
-html[data-modo="claro"] .button-glow.via-white\/0 { --tw-gradient-via: #18181b; }
-html[data-modo="claro"] .button-glow.to-white\/5 { --tw-gradient-to: #27272a; }
-html[data-modo="claro"] .button-glow__border-spin { background: conic-gradient(from 0deg, transparent 0deg, transparent 80deg, var(--ui-accent-glow) 180deg, transparent 280deg, transparent 360deg); }
-html[data-modo="claro"] .button-glow .text-white,
-html[data-modo="claro"] .button-glow .text-white\/95,
-html[data-modo="claro"] .button-glow .text-white\/80 { color: #fff; }
-html[data-modo="claro"] .button-glow .bg-white\/10 { background-color: rgb(255 255 255 / .12); }
-html[data-modo="claro"] .button-glow .ring-white\/20 { --tw-ring-color: rgb(255 255 255 / .2); }
+html[data-modo="claro"] .button-glow.from-white\/20 { --tw-gradient-from: rgb(9 9 11 / .16); }
+html[data-modo="claro"] .button-glow.via-white\/0 { --tw-gradient-via: rgb(9 9 11 / .06); }
+html[data-modo="claro"] .button-glow.to-white\/5 { --tw-gradient-to: rgb(9 9 11 / .12); }
+html[data-modo="claro"] .button-glow__border-spin { background: conic-gradient(from 0deg, transparent 0deg, transparent 80deg, var(--ui-accent) 180deg, transparent 280deg, transparent 360deg); }
+html[data-modo="claro"] .button-glow__label { color: var(--claro-ink); }
+html[data-modo="claro"] .button-glow__icon .text-white { color: #fff; }
+html[data-modo="claro"] .button-glow .bg-white\/10 { background-color: rgb(9 9 11 / .06); }
+html[data-modo="claro"] .button-glow .text-white\/80 { color: var(--claro-body); }
+html[data-modo="claro"] .button-glow:hover .text-white\/80 { color: var(--claro-ink); }
+html[data-modo="claro"] .button-glow .ring-white\/20 { --tw-ring-color: rgb(255 255 255 / .35); }
 
 html[data-modo="claro"] .hero-social-proof__line1,
 html[data-modo="claro"] .hero-social-proof__line2 { color: var(--claro-body); }
@@ -407,7 +407,11 @@ html[data-modo="claro"] .whatsapp-fab:focus-visible { outline-color: var(--claro
  * especificidade, por isso as cores aqui usam !important. */
 
 html[data-modo="claro"] .pco-backdrop { background: rgb(24 24 27 / .45) !important; }
-html[data-modo="claro"] .pco-dialog { background: var(--claro-surface) !important; border-color: var(--claro-line) !important; box-shadow: var(--claro-shadow-lg) !important; color: var(--claro-ink); }
+/* O modal é um card de preço (já em vidro claro). Aberto sobre o véu escuro, ele
+ * fica sólido. Só o .pco-shell: no catálogo, .pco-dialog também é usado como
+ * contexto do formulário e não deve ganhar fundo. */
+html[data-modo="claro"] .pco-dialog { color: var(--claro-ink); }
+html[data-modo="claro"] .pco-shell .pco-dialog { background-color: var(--claro-surface) !important; box-shadow: var(--claro-shadow-lg) !important; }
 html[data-modo="claro"] .pco-close { border-color: transparent !important; background: transparent !important; color: var(--claro-muted) !important; }
 html[data-modo="claro"] .pco-close:hover { background: var(--claro-sunken) !important; color: var(--claro-ink) !important; border-color: var(--claro-line-strong) !important; }
 html[data-modo="claro"] .pco-subtitle { color: var(--claro-body) !important; }
@@ -461,12 +465,38 @@ html[data-modo="claro"] .dsx-background-controls label { color: var(--claro-body
 html[data-modo="claro"] .dsx-background-controls button { border-color: var(--claro-line-strong); color: var(--claro-ink); background: var(--claro-surface); }
 html[data-modo="claro"] .dsx-background-status { color: var(--claro-muted); }
 
-/* A paisagem de dia no catálogo usa o mesmo véu claro do Overview. */
-html[data-modo="claro"] [data-background-example="landscape"] .dsx-background-lab { background: var(--claro-page); }
-html[data-modo="claro"] [data-background-example="landscape"] .landscape-layer__image { opacity: .9; }
-html[data-modo="claro"] [data-background-example="landscape"] .landscape-layer::after {
+/* ───────────────────────── Fundos no claro ─────────────────────────
+ * Aura: a cena do Unicorn é luz sobre preto, somada em screen. Invertida (com o
+ * matiz devolvido por hue-rotate) e em multiply, vira traços do acento sobre o
+ * claro. Cadence Rain: o shader já desenha o acento em canvas transparente; só
+ * as camadas de base e véu, que eram #050505, viram a cor da página. */
+html[data-modo="claro"] .dsx-background-lab { background: var(--claro-page); }
+html[data-modo="claro"] .dsx-background-lab .aura-background { background: var(--claro-page); }
+html[data-modo="claro"] .dsx-background-lab .aura-background::before {
+  background:
+    radial-gradient(ellipse at 20% 75%, color-mix(in srgb, var(--ui-accent) 12%, transparent), transparent 55%),
+    radial-gradient(ellipse at 80% 30%, color-mix(in srgb, var(--ui-accent-light) 10%, transparent), transparent 60%);
+}
+html[data-modo="claro"] .dsx-background-lab .aura-background::after { background: none; }
+html[data-modo="claro"] .aura-background__scene { mix-blend-mode: multiply; filter: var(--aura-filter) invert(1) hue-rotate(180deg); }
+
+html[data-modo="claro"] .cadence-rain-bg { background-color: var(--claro-page); }
+html[data-modo="claro"] .cadence-rain-bg__fade {
+  background: linear-gradient(to bottom, rgb(244 244 245 / .3) 0%, transparent 25%, transparent 70%, rgb(244 244 245 / .8) 100%);
+}
+html[data-modo="claro"] .cadence-rain-bg__lighten { display: none; }
+html[data-modo="claro"] .cadence-rain-bg__accent-glow {
+  background: linear-gradient(to top, color-mix(in srgb, var(--ui-accent) 22%, #f4f4f5) 0, #f4f4f5 var(--accent-overlay-glow-fade-end, 60vh));
+}
+html[data-modo="claro"] .cadence-rain-bg::before,
+html[data-modo="claro"] .cadence-rain-bg::after { background: var(--claro-page); }
+
+/* Paisagem de dia nos exemplos do catálogo, com o mesmo véu claro do Overview. */
+html[data-modo="claro"] .dsx-background-lab .landscape-layer__image { opacity: .9; }
+html[data-modo="claro"] [data-background-example="aura-landscape"] .landscape-layer__image { opacity: .55; }
+html[data-modo="claro"] .dsx-background-lab .landscape-layer::after {
   background: linear-gradient(to bottom, rgb(244 244 245 / .2), rgb(244 244 245 / .35) 50%, rgb(244 244 245 / .85));
 }
-html[data-modo="claro"] [data-background-example="landscape"] .dsx-background-copy h3 { color: var(--claro-ink); }
-html[data-modo="claro"] [data-background-example="landscape"] .dsx-background-copy p { color: #3f4a63; }
-html[data-modo="claro"] [data-background-example="landscape"] .dsx-background-copy small { color: var(--claro-accent-ink); }
+html[data-modo="claro"] .dsx-background-copy h3 { color: var(--claro-ink); }
+html[data-modo="claro"] .dsx-background-copy p { color: #3f4a63; }
+html[data-modo="claro"] .dsx-background-copy small { color: var(--claro-accent-ink); }
