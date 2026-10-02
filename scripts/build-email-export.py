@@ -6,8 +6,7 @@ Varre emails/ e grava a mesma lista em dois formatos:
     emails/templates.json   para aplicações (descobrir templates por código)
     emails/templates.js     para a seção "Exportar HTML" do hub (funciona via file://)
 
-Entram os quatro design systems e a campanha Black Friday 2026. Os rascunhos v1
-(emails/0*.html) ficam de fora: usam logo em SVG, que o Gmail não mostra.
+Entram os templates dos quatro design systems (Aura, Cadence, Trilhas e Black Friday).
 
 Rode depois de qualquer build-email-*.py que crie ou remova templates:
 
@@ -41,13 +40,6 @@ SISTEMAS = {
     "design-system-black": "Black Friday",
 }
 
-BF_PECAS = {
-    "01-captacao-ingresso": ("01 · Captação", "Ingresso"),
-    "02-live-terminal": ("02 · Live", "Terminal"),
-    "03-carrinho-editorial": ("03 · Carrinho", "Editorial"),
-    "04-escassez-recibo": ("04 · Escassez", "Recibo"),
-    "05-ultimo-dia-calendario": ("05 · Último dia", "Calendário"),
-}
 
 
 def title(path):
@@ -85,25 +77,8 @@ def ds_templates():
             }
 
 
-def bf_templates():
-    for tema in ("escuro", "claro"):
-        for path in sorted((EMAILS / "black-friday" / tema).glob("*.html")):
-            peca, nome = BF_PECAS[path.stem]
-            yield {
-                "id": path.relative_to(EMAILS).with_suffix("").as_posix().replace("/", "--"),
-                "caminho": path.relative_to(EMAILS).as_posix(),
-                "sistema": "Campanha Black Friday 2026",
-                "peca": peca,
-                "nome": nome,
-                "descricao": "Email de campanha com layout próprio.",
-                "tema": tema,
-                "cor": None,
-                "assunto": title(path),
-            }
-
-
 def main():
-    templates = [*ds_templates(), *bf_templates()]
+    templates = list(ds_templates())
     data = json.dumps(templates, ensure_ascii=False, indent=2)
     (EMAILS / "templates.json").write_text(data + "\n", encoding="utf-8")
     (EMAILS / "templates.js").write_text(

@@ -76,7 +76,7 @@
     .link { font-size: 14px; color: #d4d4d8; text-decoration: none; border-bottom: 1px solid var(--line-2); padding-bottom: 2px; }
     .link:hover { color: #fff; border-color: var(--accent); }
 
-    /* comparativo */
+    /* tabelas */
     .compare { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 21px; }
     .compare th, .compare td { text-align: left; vertical-align: top; padding: 14px 16px; border-bottom: 1px solid var(--line); }
     .compare th { font-weight: 500; font-size: 15px; }
@@ -166,12 +166,9 @@
         <img src="design-system/img/logo-branco.png" alt="Asimov Academy">
         <nav>
           <a href="#design-systems">Design systems</a>
-          <a href="#comparativo">Comparativo</a>
           <a href="design-system-black/index.html">Black Friday DS</a>
           <a href="#conversacionais">Conversacionais</a>
-          <a href="#black-friday">Black Friday</a>
           <a href="#exportar">Exportar HTML</a>
-          <a href="#rascunhos">Rascunhos</a>
           <a href="../design-system.html">Asimov Design System &rarr;</a>
         </nav>
       </div>
@@ -183,7 +180,7 @@
           <div><b>4</b><span>design systems</span></div>
           <div><b>2</b><span>temas em cada</span></div>
           <div><b>5</b><span>cores de trilha</span></div>
-          <div><b>79</b><span>emails prontos</span></div>
+          <div><b>64</b><span>emails prontos</span></div>
         </div>
       </div>
     </div>
@@ -296,27 +293,6 @@
       </article>
     </section>
 
-    <section id="comparativo">
-      <div class="sec-head">
-        <div><div class="kicker">Comparativo</div><h2>Lado a lado</h2></div>
-        <p>O que cada sistema faz diferente, para escolher pelo tipo de email e não pelo gosto do dia. Para a campanha, use o da Black Friday.</p>
-      </div>
-      <div class="scroll-x">
-        <table class="compare">
-          <thead><tr><th></th><th style="--c:#2dd4bf;"><i></i>Aura</th><th style="--c:#5eead4;"><i></i>Cadence</th><th style="--c:#fb923c;"><i></i>Trilhas</th><th style="--c:#ff6e14;"><i></i>Black Friday</th></tr></thead>
-          <tbody>
-            <tr><td>Fundo do topo</td><td>Paisagem Aura (acervo de 10 imagens)</td><td>Chuva de luz gerada</td><td>Halo gerado por cor</td><td>Capa estreita com a luz da campanha</td></tr>
-            <tr><td>Tipografia</td><td>Inter</td><td>Inter + mono nos rótulos</td><td>Inter</td><td>Rethink Sans + Inter no corpo</td></tr>
-            <tr><td>Alinhamento</td><td>Esquerda</td><td>Esquerda, com trilho numerado</td><td>Topo e CTA centrados, corpo à esquerda</td><td>Topo e CTA centrados, corpo à esquerda</td></tr>
-            <tr><td>Cor</td><td>Teal Asimov</td><td>Teal Asimov, em doses pequenas</td><td>5 paletas de trilha</td><td>Laranja #ff6e14 com luz teal</td></tr>
-            <tr><td>Destaque no texto</td><td>Cartão de formação</td><td>Janela de editor</td><td>Marcos e citação</td><td>Superfície com luz; peças de campanha opcionais</td></tr>
-            <tr><td>CTA</td><td>Pílula no cartão do Pricing</td><td>Tecla teal alinhada ao texto</td><td>Pílula dentro do halo</td><td>Pílula laranja em caixa alta</td></tr>
-            <tr><td>Temas</td><td>Escuro e claro, com imagens próprias</td><td>Escuro e claro, chuva própria</td><td>Escuro e claro em cada cor</td><td>Escuro e claro</td></tr>
-            <tr><td>Gerador</td><td><code>build-email-ds.py</code></td><td><code>build-email-ds-cadence.py</code></td><td><code>build-email-ds-trilhas.py</code></td><td><code>build-email-ds-black.py</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
 
     <section id="conversacionais">
       <div class="sec-head">
@@ -331,29 +307,6 @@
       </div>
     </section>
 
-    <section id="black-friday">
-      <div class="sec-head">
-        <div><div class="kicker">Campanha</div><h2>Black Friday 2026</h2></div>
-        <p>A primeira rodada da campanha, antes do Figma da Black: cinco emails, um por fase, em versão escura e clara. Para os próximos, parta do design system Black Friday.</p>
-      </div>
-      <div class="grid">
-        <article class="mail"><a class="shot" href="black-friday/escuro/01-captacao-ingresso.html"><img src="_hub/bf-01-captacao-ingresso.jpg" alt="" loading="lazy"></a>
-          <div class="meta"><small>01 · Captação</small><b>Ingresso</b><span>Lista VIP com bilhete e código de barras</span>
-            <nav><a href="black-friday/escuro/01-captacao-ingresso.html">Escuro</a><a href="black-friday/claro/01-captacao-ingresso.html">Claro</a></nav></div></article>
-        <article class="mail"><a class="shot" href="black-friday/escuro/02-live-terminal.html"><img src="_hub/bf-02-live-terminal.jpg" alt="" loading="lazy"></a>
-          <div class="meta"><small>02 · Live</small><b>Terminal</b><span>Pauta da live como linha de comando</span>
-            <nav><a href="black-friday/escuro/02-live-terminal.html">Escuro</a><a href="black-friday/claro/02-live-terminal.html">Claro</a></nav></div></article>
-        <article class="mail"><a class="shot" href="black-friday/escuro/03-carrinho-editorial.html"><img src="_hub/bf-03-carrinho-editorial.jpg" alt="" loading="lazy"></a>
-          <div class="meta"><small>03 · Carrinho</small><b>Editorial</b><span>Faixa, 60% gigante e grade suíça</span>
-            <nav><a href="black-friday/escuro/03-carrinho-editorial.html">Escuro</a><a href="black-friday/claro/03-carrinho-editorial.html">Claro</a></nav></div></article>
-        <article class="mail"><a class="shot" href="black-friday/escuro/04-escassez-recibo.html"><img src="_hub/bf-04-escassez-recibo.jpg" alt="" loading="lazy"></a>
-          <div class="meta"><small>04 · Escassez</small><b>Recibo</b><span>Desconto reservado e barra do lote</span>
-            <nav><a href="black-friday/escuro/04-escassez-recibo.html">Escuro</a><a href="black-friday/claro/04-escassez-recibo.html">Claro</a></nav></div></article>
-        <article class="mail"><a class="shot" href="black-friday/escuro/05-ultimo-dia-calendario.html"><img src="_hub/bf-05-ultimo-dia-calendario.jpg" alt="" loading="lazy"></a>
-          <div class="meta"><small>05 · Último dia</small><b>Calendário</b><span>Semana riscada e relógio 23:59</span>
-            <nav><a href="black-friday/escuro/05-ultimo-dia-calendario.html">Escuro</a><a href="black-friday/claro/05-ultimo-dia-calendario.html">Claro</a></nav></div></article>
-      </div>
-    </section>
 
     <section id="exportar" data-export>
       <div class="sec-head">
@@ -375,24 +328,6 @@
       </div>
     </section>
 
-    <section id="rascunhos">
-      <div class="sec-head">
-        <div><div class="kicker">Arquivo</div><h2>Rascunhos v1</h2></div>
-        <p>A primeira rodada, antes dos design systems. Fica aqui como referência; para emails novos, parta de um dos três sistemas acima.</p>
-      </div>
-      <div class="grid muted-grid">
-        <article class="mail"><a class="shot" href="01-boas-vindas.html"><img src="_hub/v1-01-boas-vindas.jpg" alt="" loading="lazy"></a>
-          <div class="meta"><small>v1 · 01</small><b>Boas-vindas</b><span>Acesso liberado e próximos passos</span></div></article>
-        <article class="mail"><a class="shot" href="02-newsletter.html"><img src="_hub/v1-02-newsletter.jpg" alt="" loading="lazy"></a>
-          <div class="meta"><small>v1 · 02</small><b>Newsletter</b><span>Destaque, cards e citação</span></div></article>
-        <article class="mail"><a class="shot" href="03-oferta.html"><img src="_hub/v1-03-oferta.jpg" alt="" loading="lazy"></a>
-          <div class="meta"><small>v1 · 03</small><b>Oferta</b><span>Contagem, preço e garantia</span></div></article>
-        <article class="mail"><a class="shot" href="04-convite-live.html"><img src="_hub/v1-04-convite-live.jpg" alt="" loading="lazy"></a>
-          <div class="meta"><small>v1 · 04</small><b>Convite para live</b><span>Data, tópicos e professor</span></div></article>
-        <article class="mail"><a class="shot" href="05-confirmacao-compra.html"><img src="_hub/v1-05-confirmacao-compra.jpg" alt="" loading="lazy"></a>
-          <div class="meta"><small>v1 · 05</small><b>Confirmação de compra</b><span>Resumo do pedido e acesso</span></div></article>
-      </div>
-    </section>
 
     <section>
       <div class="sec-head">
@@ -401,7 +336,7 @@
       </div>
       <div class="notes">
         <div class="note"><b>Edite o gerador, não o HTML</b><p>Cada design system tem um script que gera a página e os emails a partir dos mesmos tokens.</p><code>python3 scripts/build-email-ds.py</code></div>
-        <div class="note"><b>Hospede as imagens</b><p>Troque os caminhos img/... por URLs absolutas. Fundos e ícones são JPG e PNG, porque email não aceita SVG.</p><code>img/aura-hero-escuro.jpg → https://…</code></div>
+        <div class="note"><b>Imagens em URL absoluta</b><p>O <a href="#exportar" style="color:inherit;">Exportar HTML</a> já entrega as imagens apontando para este site. Fundos e ícones são JPG e PNG, porque email não aceita SVG.</p><code>img/aura-hero-escuro.jpg → https://…/emails/design-system/img/…</code></div>
         <div class="note"><b>Teste nos clientes</b><p>Gmail e Outlook não carregam Inter nem degradês. Tudo tem cor sólida e fonte substituta, mas vale um teste real antes do envio.</p><code>Gmail · Outlook · Apple Mail · iOS</code></div>
       </div>
     </section>
