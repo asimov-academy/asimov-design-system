@@ -197,7 +197,7 @@
   </div>
   <script>
     document.querySelectorAll("iframe").forEach(f => f.addEventListener("load", () => {
-      try { f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}
+      try { f.style.height = "0px"; f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
     }));
   </script>
 </body>

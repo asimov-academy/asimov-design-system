@@ -17,7 +17,7 @@ Saída em emails/design-system-cadence/:
 import re
 from pathlib import Path
 
-from email_copies import COPIES, initials, render_blocks
+from email_copies import COPIES, render_blocks
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system-cadence"
 
@@ -507,7 +507,7 @@ SPEC = """<!DOCTYPE html>
   </div>
   <script>
     document.querySelectorAll("iframe").forEach(f => f.addEventListener("load", () => {
-      try { f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}
+      try { f.style.height = "0px"; f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
     }));
   </script>
 </body>

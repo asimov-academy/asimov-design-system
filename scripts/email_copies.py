@@ -9,6 +9,10 @@ lista de blocos:
     ("ul", [itens])         lista
     ("sign", nome, cargo)   assinatura (cargo pode ser "")
     ("ps", texto)           pós-escrito
+
+"tom" escolhe o peso do botão nos sistemas que têm dois níveis (hoje, o da Black):
+"chamativo" quando a ação é o objetivo do email (cadastro, compra), "discreto" quando o
+botão é um convite (relacionamento, conteúdo). O mesmo email não mistura os dois.
 """
 
 COPIES = [
@@ -19,6 +23,7 @@ COPIES = [
         "data": "06/10, terça, 14h",
         "publico": "Não aluno não engajado",
         "assunto": "Você sumiu…",
+        "tom": "discreto",
         "preheader": "Trouxe um presente pra você voltar.",
         "blocks": [
             ("p", "Faz tempo que você não aparece por aqui."),
@@ -50,6 +55,7 @@ COPIES = [
         "data": "13/10, terça, 10h30",
         "publico": "Aluno Trilha",
         "assunto": "Convite Exclusivo para você!",
+        "tom": "chamativo",
         "preheader": "Vem pra Black Friday da Asimov",
         "blocks": [
             ("p", "Como você já é aluno de uma Trilha da Asimov, queria que você soubesse antes de todo mundo."),
@@ -81,6 +87,7 @@ COPIES = [
         "data": "23/10, sexta, 11h",
         "publico": "Não aluno não engajado",
         "assunto": "Essa Black vai ser ao vivo",
+        "tom": "chamativo",
         "preheader": "E tem um motivo pra isso...",
         "blocks": [
             ("p", "Black Friday de curso online costuma chegar do mesmo jeito: um cupom e um cronômetro na sua caixa de entrada."),
@@ -100,11 +107,6 @@ COPIES = [
         ],
     },
 ]
-
-
-def initials(name):
-    parts = name.split()
-    return (parts[0][0] + parts[-1][0]).upper()
 
 
 def render_blocks(blocks, p, cta, ul, sign, ps):
