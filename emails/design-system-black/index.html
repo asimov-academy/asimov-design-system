@@ -267,7 +267,7 @@
   <table role="presentation" width="100%"><tr><td align="center" bgcolor="#ff6e14" style="background:#ff6e14; background-image:linear-gradient(90deg, #01caca, #2b1a10 22%, #ff3700 50%, #2b1a10 78%, #01caca); padding:14px 12px;"><img src="img/logo-branco.png" width="66" height="20" alt="Asimov Academy" style="display:block; width:66px; height:20px; margin:0 auto;"></td></tr></table>
   <script>
     document.querySelectorAll("iframe").forEach(f => f.addEventListener("load", () => {
-      try { f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}
+      try { f.style.height = "0px"; f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
     }));
   </script>
 </body>

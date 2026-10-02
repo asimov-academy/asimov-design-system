@@ -28,7 +28,7 @@ Saída em emails/design-system-black/:
 import re
 from pathlib import Path
 
-from email_copies import COPIES, initials, render_blocks
+from email_copies import COPIES, render_blocks
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system-black"
 
@@ -431,12 +431,8 @@ def conversa(theme, copy):
         f'<tr><td width="22" valign="top" style="padding:11px 0 0;"><div style="width:7px; height:7px; border-radius:999px; background:{BF["ORANGE"]}; font-size:0; line-height:0;">&nbsp;</div></td>'
         f'<td style="padding:0 0 6px; {ts("Corpo", t)}">{i}</td></tr>' for i in items) + "</table>")
     sign = lambda name, role: (
-        f'<table role="presentation" style="border-collapse:separate; margin:4px 0 0;"><tr>'
-        f'<td width="44" height="44" align="center" valign="middle" style="width:44px; height:44px; border:1.5px solid {BF["ORANGE"]}; border-radius:999px; '
-        f'font-family:{TITLE_FONT}; font-size:14px; font-weight:700; color:{t["ACCENT_TEXT"]};">{initials(name)}</td>'
-        f'<td style="padding-left:14px;"><div style="font-family:{TITLE_FONT}; font-size:16px; line-height:22px; font-weight:600; color:{t["TEXT"]};">{name}</div>'
-        + (f'<div style="font-family:{BODY_FONT}; font-size:13px; line-height:20px; color:{t["MUTED"]};">{role}</div>' if role else "")
-        + '</td></tr></table>')
+        f'<div style="margin-top:4px; font-family:{TITLE_FONT}; font-size:16px; line-height:22px; font-weight:600; color:{t["TEXT"]};">{name}</div>'
+        + (f'<div style="font-family:{BODY_FONT}; font-size:13px; line-height:20px; color:{t["MUTED"]};">{role}</div>' if role else ""))
     ps = lambda text: (f'<p style="margin:28px 0 0; padding-top:20px; border-top:1px solid {t["LINE"]}; {ts("Corpo", t)}">'
                        f'<strong style="font-family:{TITLE_FONT}; font-weight:700; color:{t["ACCENT_TEXT"]};">PS:</strong> {text}</p>')
     body = render_blocks(copy["blocks"], p, cta_, ul, sign, ps)
@@ -677,7 +673,7 @@ SPEC = """<!DOCTYPE html>
   %FAIXA_END%
   <script>
     document.querySelectorAll("iframe").forEach(f => f.addEventListener("load", () => {
-      try { f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}
+      try { f.style.height = "0px"; f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
     }));
   </script>
 </body>

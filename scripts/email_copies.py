@@ -102,11 +102,6 @@ COPIES = [
 ]
 
 
-def initials(name):
-    parts = name.split()
-    return (parts[0][0] + parts[-1][0]).upper()
-
-
 def render_blocks(blocks, p, cta, ul, sign, ps):
     """Monta o corpo chamando os renderizadores do design system para cada tipo de bloco.
 

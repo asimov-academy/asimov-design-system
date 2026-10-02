@@ -19,7 +19,7 @@ Saída em emails/design-system-trilhas/:
 import re
 from pathlib import Path
 
-from email_copies import COPIES, initials, render_blocks
+from email_copies import COPIES, render_blocks
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system-trilhas"
 
@@ -213,12 +213,8 @@ def quote(t, text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
 
 
 def signature(t):
-    return (f'<table role="presentation" style="border-collapse:separate;"><tr>'
-            f'<td width="40" height="40" align="center" valign="middle" style="width:40px; height:40px; border:1px solid {t["ACCENT"]}; border-radius:999px; '
-            f'font-family:{FONT}; font-size:13px; font-weight:600; letter-spacing:0.5px; color:{t["ACCENT_TEXT"]};">LI</td>'
-            f'<td style="padding-left:14px;"><div style="font-family:{FONT}; font-size:15px; line-height:22px; font-weight:500; color:{t["TEXT"]};">Lorem Ipsum</div>'
-            f'<div style="font-family:{FONT}; font-size:13px; line-height:20px; color:{t["MUTED"]};">Dolor sit amet &middot; {t["NAME"]}</div></td>'
-            f'</tr></table>')
+    return (f'<div style="font-family:{FONT}; font-size:15px; line-height:22px; font-weight:500; color:{t["TEXT"]};">Lorem Ipsum</div>'
+            f'<div style="font-family:{FONT}; font-size:13px; line-height:20px; color:{t["MUTED"]};">Dolor sit amet &middot; {t["NAME"]}</div>')
 
 
 def button(t, label="Lorem ipsum dolor", href="{{link_cta}}"):
@@ -343,7 +339,7 @@ def email(slug, mode):
 
 
 def conversa(slug, mode, copy):
-    """Email conversacional (sem título e sem halo): logo, faixa de espectro, a conversa e a assinatura em anel."""
+    """Email conversacional (sem título e sem halo): logo, faixa de espectro, a conversa e a assinatura."""
     t = theme(slug, mode)
     p = lambda text: f'<p style="margin:0 0 18px; {ts("Corpo", t)}">{text}</p>'
     cta_ = lambda label: f'<div style="padding:12px 0 30px;">{button(t, label)}</div>'
@@ -351,12 +347,8 @@ def conversa(slug, mode, copy):
         f'<tr><td width="22" valign="top" style="padding:11px 0 0;"><div style="width:8px; height:8px; border-radius:999px; background:{t["ACCENT"]}; font-size:0; line-height:0;">&nbsp;</div></td>'
         f'<td style="padding:0 0 6px; {ts("Corpo", t)}">{i}</td></tr>' for i in items) + "</table>")
     sign = lambda name, role: (
-        f'<table role="presentation" style="border-collapse:separate; margin-top:4px;"><tr>'
-        f'<td width="44" height="44" align="center" valign="middle" style="width:44px; height:44px; border:1.5px solid {t["ACCENT"]}; border-radius:999px; '
-        f'font-family:{FONT}; font-size:14px; font-weight:600; color:{t["ACCENT_TEXT"]};">{initials(name)}</td>'
-        f'<td style="padding-left:14px;"><div style="font-family:{FONT}; font-size:16px; line-height:22px; font-weight:500; color:{t["TEXT"]};">{name}</div>'
-        + (f'<div style="font-family:{FONT}; font-size:13px; line-height:20px; color:{t["MUTED"]};">{role}</div>' if role else "")
-        + '</td></tr></table>')
+        f'<div style="margin-top:4px; font-family:{FONT}; font-size:16px; line-height:22px; font-weight:500; color:{t["TEXT"]};">{name}</div>'
+        + (f'<div style="font-family:{FONT}; font-size:13px; line-height:20px; color:{t["MUTED"]};">{role}</div>' if role else ""))
     ps = lambda text: (f'<p style="margin:28px 0 0; padding-top:20px; border-top:1px solid {t["LINE"]}; {ts("Corpo", t)}">'
                        f'<strong style="font-weight:600; color:{t["ACCENT_TEXT"]};">PS:</strong> {text}</p>')
     rows = [
@@ -487,7 +479,7 @@ SPEC = """<!DOCTYPE html>
     }
     function fit() {
       document.querySelectorAll("[data-accent]:not([hidden]) iframe").forEach(f => {
-        try { f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}
+        try { f.style.height = "0px"; f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
       });
     }
     document.querySelectorAll(".picker button").forEach(b => b.onclick = () => pick(b.dataset.slug));
@@ -514,13 +506,13 @@ def sections(slug):
         {both(slug, trail_card)}</section>
       <section>{head("Components", "Marcos", "Três colunas com o número na cor da trilha. No mobile, viram uma lista.")}
         {both(slug, milestones)}</section>
-      <section>{head("Components", "Citação e assinatura", "A barra da citação é um degradê do glow ao dark. Onde não há degradê, fica na cor accent. A assinatura usa as iniciais num anel.")}
+      <section>{head("Components", "Citação e assinatura", "A barra da citação é um degradê do glow ao dark. Onde não há degradê, fica na cor accent. A assinatura é nome e cargo, sem ornamento.")}
         {both(slug, lambda t: quote(t) + '<div style="height:36px;"></div>' + signature(t))}</section>
       <section>{head("Components", "CTA no halo", "O botão fica dentro de um anel menor. O texto do botão fica branco ou preto conforme o contraste com a cor.")}
         {both(slug, lambda t: cta(t, "#"))}</section>
       <section>{head("Components", "Parágrafos", "Corpo 17/29 com 20px entre parágrafos. No mobile, 16/27.")}
         {both(slug, lambda t: paragraphs([LOREM["curto"], LOREM["medio"], LOREM["longo"]], t))}</section>
-      <section>{head("Aplicação", f"Emails conversacionais · {name}", "Copies reais, sem título e sem halo: o logo, a faixa de espectro, a conversa, o botão na cor da trilha e a assinatura em anel.")}
+      <section>{head("Aplicação", f"Emails conversacionais · {name}", "Copies reais, sem título e sem halo: o logo, a faixa de espectro, a conversa, o botão na cor da trilha e a assinatura.")}
         <div class="frames" style="grid-template-columns:repeat(3,1fr);">''' + "".join(f'<figure><figcaption>{c["code"]} &middot; {c["fase"]} <span><a href="{c["id"]}-{slug}-escuro.html" target="_blank">Escuro</a> &middot; <a href="{c["id"]}-{slug}-claro.html" target="_blank">Claro</a></span></figcaption><iframe loading="lazy" src="{c["id"]}-{slug}-{"escuro" if i % 2 == 0 else "claro"}.html" title="{c["code"]}"></iframe></figure>' for i, c in enumerate(COPIES)) + f'''
         </div></section>
       <section>{head("Aplicação", f"Email escrito · {name}", "Montado com os componentes acima. Troque a cor no seletor para ver a mesma estrutura em outra trilha.")}
