@@ -63,6 +63,21 @@ dependências remotas sem necessidade.
 
 Os textos e dados exibidos são demonstrativos e devem ser substituídos pelo conteúdo real de cada implementação.
 
+## Usar os emails em outras aplicações
+
+No hub de emails (`/emails/`), a seção **Exportar HTML** lista os templates e tem, em cada um, **Copiar HTML** e **Baixar .html**. O arquivo sai completo e com as imagens em URL absoluta do site, então funciona fora daqui: numa ferramenta de email ou entregue a uma LLM junto com a copy.
+
+- Exporte pelo site publicado. Por um servidor local, as imagens apontam para `localhost`; via `file://` o navegador bloqueia a leitura dos arquivos.
+- Os links ficam como variáveis para a aplicação trocar no envio: `{{link_cta}}`, `{{link_descadastro}}`, `{{link_youtube}}`, `{{link_instagram}}`, `{{link_linkedin}}` e `{{endereco}}`.
+- Com uma LLM, peça para trocar só os textos: tabelas, estilos inline, os blocos `<!--[if mso]>` do Outlook e as variáveis precisam ficar como estão.
+- Para código, `emails/templates.json` lista todos os templates com sistema, peça, tema, cor e caminho. A URL de cada um é o endereço do site seguido de `/emails/` e o `caminho`.
+
+A lista é gerada por `scripts/build-email-export.py`. Rode o script depois de criar ou remover templates:
+
+```bash
+python3 scripts/build-email-export.py
+```
+
 ## Publicação na Vercel
 
 O repositório é um site estático, sem build. Na Vercel, importe o repositório com:

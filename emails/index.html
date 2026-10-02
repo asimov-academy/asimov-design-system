@@ -109,6 +109,31 @@
     .note b { display: block; font-weight: 500; font-size: 16px; margin-bottom: 8px; }
     .note p { margin: 0; color: #a1a1aa; font-size: 14px; line-height: 22px; }
     .note code { display: block; margin-top: 6px; font-family: var(--mono); font-size: 12px; color: var(--accent-glow); overflow-wrap: anywhere; }
+    /* exportar HTML */
+    .xp-bar { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin-bottom: 14px; }
+    .xp-bar label { display: grid; gap: 6px; color: var(--muted); font-size: 12px; }
+    .xp-bar label[hidden] { display: none; }
+    .xp-bar select { min-width: 180px; padding: 10px 12px; border: 1px solid var(--line-2); border-radius: 12px; color: var(--text); background: var(--surface); font: inherit; font-size: 14px; }
+    .xp-bar select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+    .xp-count { margin-left: auto; padding-bottom: 11px; color: var(--muted); font-size: 13px; }
+    .xp-status { min-height: 21px; margin: 0 0 14px; color: var(--body); font-size: 14px; line-height: 21px; }
+    .xp-status[data-tone="ok"] { color: var(--accent-glow); }
+    .xp-status[data-tone="warn"] { color: #fbbf24; }
+    .xp-status[data-tone="error"] { color: #fb7185; }
+    .xp-list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); max-height: 560px; overflow: auto; }
+    .xp-list li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+    .xp-list li:last-child { border-bottom: 0; }
+    .xp-name b { display: block; font-weight: 500; font-size: 15px; }
+    .xp-name b span { color: var(--body); font-weight: 400; }
+    .xp-name small { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; }
+    .xp-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+    .xp-actions a { margin-right: 6px; color: #d4d4d8; font-size: 13px; text-decoration: none; border-bottom: 1px solid var(--line-2); }
+    .xp-actions a:hover { color: #fff; border-color: var(--accent); }
+    .xp-actions button { padding: 8px 14px; border: 1px solid var(--line-2); border-radius: 999px; color: var(--text); background: transparent; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: border-color .2s, background .2s; }
+    .xp-actions button:hover { border-color: var(--accent); background: rgba(20,184,166,.08); }
+    .xp-actions button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .xp-actions button:disabled { opacity: .5; cursor: progress; }
+    .xp-notes { margin-top: 14px; }
     footer { margin-top: 120px; padding: 32px 0 48px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; color: var(--muted); font-size: 13px; flex-wrap: wrap; }
     footer a { color: #a1a1aa; text-decoration: none; }
 
@@ -122,6 +147,8 @@
       .stats div:nth-child(3) { border-left: 0; }
       .stats div:nth-child(n+3) { border-top: 1px solid var(--line); }
       .top nav { display: none; }
+      .xp-list li { flex-direction: column; align-items: flex-start; }
+      .xp-count { margin-left: 0; width: 100%; }
     }
     @media (max-width: 560px) {
       .grid { grid-template-columns: repeat(2, 1fr); }
@@ -143,6 +170,7 @@
           <a href="design-system-black/index.html">Black Friday DS</a>
           <a href="#conversacionais">Conversacionais</a>
           <a href="#black-friday">Black Friday</a>
+          <a href="#exportar">Exportar HTML</a>
           <a href="#rascunhos">Rascunhos</a>
           <a href="../design-system.html">Asimov Design System &rarr;</a>
         </nav>
@@ -327,6 +355,26 @@
       </div>
     </section>
 
+    <section id="exportar" data-export>
+      <div class="sec-head">
+        <div><div class="kicker">Para aplicações</div><h2>Exportar HTML</h2></div>
+        <p>O HTML completo de cada template, com as imagens em URL absoluta deste site. Funciona fora daqui: numa ferramenta de email ou entregue a uma LLM junto com a copy.</p>
+      </div>
+      <div class="xp-bar">
+        <label>Design system<select data-filter="sistema"><option value="">Todos</option></select></label>
+        <label>Tema<select data-filter="tema"><option value="">Todos</option><option value="escuro">Escuro</option><option value="claro">Claro</option></select></label>
+        <label>Cor da trilha<select data-filter="cor"><option value="">Todas</option></select></label>
+        <span class="xp-count" data-export-count></span>
+      </div>
+      <p class="xp-status" data-export-status role="status" aria-live="polite"></p>
+      <ul class="xp-list" data-export-list></ul>
+      <div class="notes xp-notes">
+        <div class="note"><b>Variáveis</b><p>Os links ficam como variáveis para a aplicação trocar no envio.</p><code>{{link_cta}} {{link_descadastro}} {{link_youtube}} {{link_instagram}} {{link_linkedin}} {{endereco}}</code></div>
+        <div class="note"><b>Com uma LLM</b><p>Peça para trocar só os textos. Tabelas, estilos inline, os blocos <code style="display:inline; margin:0;">&lt;!--[if mso]&gt;</code> do Outlook e as variáveis precisam ficar como estão.</p></div>
+        <div class="note"><b>Lista para código</b><p>Todos os templates, com sistema, peça, tema, cor e caminho, num JSON público.</p><code><a href="templates.json" style="color:inherit;">emails/templates.json</a></code></div>
+      </div>
+    </section>
+
     <section id="rascunhos">
       <div class="sec-head">
         <div><div class="kicker">Arquivo</div><h2>Rascunhos v1</h2></div>
@@ -363,5 +411,7 @@
       <a href="../design-system.html">Voltar ao Asimov Design System &rarr;</a>
     </footer>
   </main>
+  <script src="templates.js"></script>
+  <script src="export.js"></script>
 </body>
 </html>
