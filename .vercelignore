@@ -1,3 +1,5 @@
 # Geradores dos emails: só servem para gerar os HTML, não para o site.
 scripts/
 README.md
+AGENTS.md
+CLAUDE.md
