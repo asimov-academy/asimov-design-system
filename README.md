@@ -89,6 +89,8 @@ python3 scripts/build-email-ds.py && python3 scripts/build-email-ds-cadence.py &
 
 As imagens dos emails não saem deste site: ficam no bunny.net (Storage Zone `asimov-email`, região São Paulo), servidas em `https://img.asimov.academy` pela Pull Zone `asimov-email`, com SSL e cache de 1 ano. O DNS é um CNAME `img` na Hostinger apontando para `asimov-email.b-cdn.net`.
 
+O build audita os kits e o "Copiar HTML": se alguma imagem apontar para fora de `img.asimov.academy` ou para um arquivo que não existe, ele para com erro.
+
 Cada sistema tem uma pasta com versão, por exemplo `email/aura/v1/`, definida em `SISTEMAS` no `scripts/email_kit.py`. Uma versão publicada nunca muda, para os emails já enviados continuarem iguais. Para trocar uma imagem: suba a versão do sistema (`v1` → `v2`), rode os builds e envie.
 
 ```bash

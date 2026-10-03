@@ -18,6 +18,7 @@ então rodar o build sem mudanças não suja o git.
 """
 import json
 import re
+import sys
 import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -101,6 +102,32 @@ def absolutize(html, pasta):
     html = re.sub(r"url\((['\"]?)img/([^'\")]+)\1\)", lambda m: f"url({m.group(1)}{base}{m.group(2)}{m.group(1)})", html)
     return html.replace("Antes do disparo, troque img/... por URLs absolutas hospedadas.",
                         f"Imagens hospedadas em {base}")
+
+
+_REFS = re.compile(r"""\s(?:src|background)=["']([^"']+)["']|url\(\s*["']?([^"')]+?)["']?\s*\)""")
+
+
+def audit(html, pasta, onde):
+    """Toda imagem de um email que sai daqui (kit ou "Copiar HTML") precisa apontar para a CDN,
+    na pasta com versão do sistema, e existir em emails/<pasta>/img/ (é isso que o upload sobe).
+    Devolve a lista de problemas; vazia quando está tudo certo."""
+    base = assets_base(pasta)
+    img = ROOT / "emails" / pasta / "img"
+    problemas = []
+    for m in _REFS.finditer(html):
+        ref = (m.group(1) or m.group(2)).strip()
+        if ref.startswith("{{"):
+            continue
+        if not ref.startswith(base):
+            problemas.append(f"{onde}: imagem fora da CDN: {ref}")
+        elif not (img / ref[len(base):]).is_file():
+            problemas.append(f"{onde}: imagem sem arquivo em emails/{pasta}/img/: {ref}")
+    return problemas
+
+
+def fail_on(problemas):
+    if problemas:
+        sys.exit("Imagens de email fora da CDN (ver AGENTS.md):\n  " + "\n  ".join(problemas))
 
 
 def _images(html):
@@ -247,7 +274,9 @@ def kit_files(kit):
     for e in kit.exemplos:
         html[f"exemplos/{e}"] = (src / e).read_text(encoding="utf-8")
     images = sorted(set().union(*(_images(h) for h in html.values())))
-    files = {f"{root}/{p}": absolutize(h, kit.pasta).encode("utf-8") for p, h in html.items()}
+    html = {p: absolutize(h, kit.pasta) for p, h in html.items()}
+    fail_on([problema for p, h in html.items() for problema in audit(h, kit.pasta, f"kit {kit.slug}/{p}")])
+    files = {f"{root}/{p}": h.encode("utf-8") for p, h in html.items()}
     for img in images:
         files[f"{root}/{img}"] = (src / img).read_bytes()
     files[f"{root}/LEIA-ME.md"] = _readme(kit).encode("utf-8")

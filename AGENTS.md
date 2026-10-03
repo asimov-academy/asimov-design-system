@@ -13,7 +13,10 @@ Site estático, sem build e sem dependências: abre via `file://` e é publicado
 
 ## Regras gerais
 
-- Tudo com caminho relativo e local: fontes, ícones, imagens e scripts. Nada de CDN.
+- **No site** (design system web, hub, páginas dos sistemas): tudo com caminho relativo e local, ou seja,
+  fontes, ícones, imagens e scripts. Nada de CDN.
+- **Nos emails que saem daqui** (kits e "Copiar HTML"): o contrário. Toda imagem fica no bunny.net,
+  em `https://img.asimov.academy/email/...`. Ver "Imagens de email: sempre na CDN" abaixo.
 - Textos em português do Brasil. Copy demonstrativa em lorem ipsum.
 - Os HTML de email são **gerados**. Edite o script, nunca o HTML em `emails/design-system*/`.
 - Depois de mudar qualquer gerador, rode todos e confira que os emails que você não quis mudar
@@ -22,6 +25,30 @@ Site estático, sem build e sem dependências: abre via `file://` e é publicado
 ```bash
 python3 scripts/build-email-ds.py && python3 scripts/build-email-ds-cadence.py && python3 scripts/build-email-ds-trilhas.py && python3 scripts/build-email-ds-black.py && python3 scripts/build-email-export.py
 ```
+
+## Imagens de email: sempre na CDN
+
+Regra obrigatória: **nenhuma imagem de email pode sair deste repositório apontando para fora de
+`https://img.asimov.academy/email/<slug>/<versão>/`.** Nem para o site na Vercel, nem para outro host,
+nem como caminho relativo. Emails ficam anos na caixa de entrada; a imagem precisa estar num endereço
+que não muda.
+
+Sempre que criar, trocar ou remover uma imagem de email, ou um componente que use imagem:
+
+1. Coloque o arquivo em `emails/design-system-<nome>/img/` (PNG ou JPG) e referencie como `img/<arquivo>`
+   no gerador. Nunca escreva uma URL de imagem à mão no gerador.
+2. Se a imagem **já existia** e mudou, suba a versão do sistema em `SISTEMAS` (`scripts/email_kit.py`),
+   de `v1` para `v2`. Uma versão publicada nunca muda; o upload recusa sobrescrever.
+3. Rode todos os builds (comando acima). O `build-email-export.py` e cada `write_kit()` **auditam** os
+   kits e o HTML do "Copiar HTML": se qualquer imagem apontar para fora da CDN ou para um arquivo que não
+   existe em `img/`, o build para com erro e lista o que está errado. Não contorne essa trava; corrija a causa.
+4. Suba as imagens: `python3 scripts/upload-email-assets.py --enviar` (lê o `.env`; ver README).
+   Quem tem a senha da Storage Zone é a pessoa, não o agente: se você não tiver o `.env`, peça para ela rodar.
+5. Confira na CDN: `python3 scripts/upload-email-assets.py --verificar` precisa terminar com
+   "N de N imagens corretas". Só abra ou mescle o PR depois disso.
+
+O que o `--verificar` não cobre: o envio real. Antes do primeiro disparo de um email novo, mande um teste
+para Gmail, Outlook e celular e confira se as imagens aparecem.
 
 ## Como os design systems de email são montados
 
@@ -106,7 +133,9 @@ O contrato que todo gerador cumpre:
     - Rode todos os geradores e o `build-email-export.py`; os outros sistemas não podem mudar.
     - Abra o `index.html` do sistema e os emails nos dois temas, no desktop e em 390px.
     - Abra `<variante>/catalogo.html` de dentro do zip.
-    - Suba as imagens com `python3 scripts/upload-email-assets.py --enviar` e confira com `--verificar`.
+    - A auditoria do build precisa passar (nenhuma imagem fora da CDN).
+    - Suba as imagens com `python3 scripts/upload-email-assets.py --enviar` e confira com `--verificar`
+      (ver "Imagens de email: sempre na CDN").
     - No hub, teste "Baixar kit" e "Copiar HTML".
     - Antes de usar de verdade, envie um teste para Gmail, Outlook e celular.
 

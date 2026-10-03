@@ -22,7 +22,7 @@ import zipfile
 from pathlib import Path
 
 from email_copies import COPIES
-from email_kit import KITS, assets_base, write_zip
+from email_kit import KITS, absolutize, assets_base, audit, fail_on, write_zip
 
 ROOT = Path(__file__).resolve().parent.parent
 EMAILS = ROOT / "emails"
@@ -85,6 +85,11 @@ def ds_templates():
 
 def main():
     templates = list(ds_templates())
+    # A mesma troca que o "Copiar HTML" faz no hub (emails/export.js): nada pode sair fora da CDN.
+    fail_on([problema for t in templates
+             for problema in audit(absolutize((EMAILS / t["caminho"]).read_text(encoding="utf-8"), t["caminho"].split("/")[0]),
+                                   t["caminho"].split("/")[0], t["caminho"])])
+    print(f"Auditoria: as imagens dos {len(templates)} templates e dos kits apontam só para a CDN.")
     data = json.dumps(templates, ensure_ascii=False, indent=2)
     (EMAILS / "templates.json").write_text(data + "\n", encoding="utf-8")
     (EMAILS / "templates.js").write_text(
