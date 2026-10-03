@@ -1,0 +1,6 @@
+# Segredos locais (senha da Storage Zone do bunny.net etc.). Nunca versione.
+.env
+.env.*
+!.env.example
+
+__pycache__/

@@ -10,11 +10,13 @@ Assim emails já enviados continuam mostrando as mesmas imagens.
     python3 scripts/upload-email-assets.py --enviar     sobe o que falta
     python3 scripts/upload-email-assets.py --verificar  confere na CDN cada imagem, byte a byte
 
-Para --enviar, defina no seu terminal (os dados ficam em Storage → asimov-email → FTP & API Access):
+Para --enviar, copie .env.example para .env na raiz do repositório e preencha com os dados
+de Storage → asimov-email → Access. O .env fica fora do git (.gitignore). Variáveis já
+definidas no terminal têm prioridade sobre o .env.
 
-    export BUNNY_STORAGE_ZONE=asimov-email
-    export BUNNY_STORAGE_HOST=br.storage.bunnycdn.com    # o "Hostname" da zona
-    export BUNNY_STORAGE_KEY=...                         # a "Password" da zona. Nunca versione.
+    BUNNY_STORAGE_ZONE=asimov-email
+    BUNNY_STORAGE_HOST=br.storage.bunnycdn.com    # o "Hostname" da zona
+    BUNNY_STORAGE_KEY=...                         # a "Password" (não a read-only)
 """
 import argparse
 import hashlib
@@ -57,10 +59,24 @@ def cdn_url(remote):
     return f"{ASSETS_URL}/{remote}"
 
 
+def load_env():
+    """Lê o .env da raiz (KEY=valor por linha) sem sobrescrever o que já está no ambiente."""
+    env = ROOT / ".env"
+    if not env.exists():
+        return
+    for line in env.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip("'\""))
+
+
 def storage():
+    load_env()
     zone, host, key = (os.environ.get(k) for k in ("BUNNY_STORAGE_ZONE", "BUNNY_STORAGE_HOST", "BUNNY_STORAGE_KEY"))
     if not (zone and host and key):
-        sys.exit("Defina BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOST e BUNNY_STORAGE_KEY (ver o topo deste script).")
+        sys.exit("Preencha BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOST e BUNNY_STORAGE_KEY no .env (copie o .env.example).")
     base = host if host.startswith("http") else f"https://{host}"
     return f"{base.rstrip('/')}/{zone}/{PREFIX}", {"AccessKey": key}
 
@@ -85,7 +101,7 @@ def main():
         run()
     except urllib.error.HTTPError as e:
         if e.code == 401:
-            sys.exit("O bunny.net recusou a senha (HTTP 401). Confira BUNNY_STORAGE_KEY e BUNNY_STORAGE_ZONE.")
+            sys.exit("O bunny.net recusou a senha (HTTP 401). Confira BUNNY_STORAGE_KEY (a Password, não a read-only) e BUNNY_STORAGE_ZONE.")
         sys.exit(f"O bunny.net respondeu HTTP {e.code} em {e.url}")
     except urllib.error.URLError as e:
         sys.exit(f"Não consegui acessar o bunny.net: {e.reason}")

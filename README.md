@@ -93,11 +93,11 @@ Cada sistema tem uma pasta com versão, por exemplo `email/aura/v1/`, definida e
 
 ```bash
 python3 scripts/upload-email-assets.py              # mostra o que falta subir
-python3 scripts/upload-email-assets.py --enviar     # sobe; precisa de BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOST e BUNNY_STORAGE_KEY
+python3 scripts/upload-email-assets.py --enviar     # sobe; lê os dados do bunny.net no .env
 python3 scripts/upload-email-assets.py --verificar  # confere cada imagem na CDN
 ```
 
-A senha da Storage Zone (`BUNNY_STORAGE_KEY`) fica só no terminal de quem envia; nunca entra no repositório.
+Para enviar, copie `.env.example` para `.env` e preencha com os dados de bunny.net → Storage → asimov-email → Access (a senha é a **Password**, não a read-only). O `.env` está no `.gitignore` e nunca entra no repositório.
 
 O processo completo para criar um design system de email novo está em `AGENTS.md`.
 
