@@ -23,7 +23,7 @@ Saída em emails/design-system-black/:
     em-XXX-<tema>.html                  emails conversacionais (copies reais, sem título)
     img/
 
-E o kit para download em emails/kits/asimov-email-black.zip (ver email_kit.py).
+kit() descreve as peças do sistema para os arquivos de download (ver build-email-export.py).
 
     python3 scripts/build-email-ds-black.py
 """
@@ -32,7 +32,7 @@ import unicodedata
 from pathlib import Path
 
 from email_copies import COPIES, render_blocks
-from email_kit import Componente, Kit, Variante, write_kit
+from email_kit import Componente, Kit, Variante
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system-black"
 
@@ -349,43 +349,18 @@ def botao(t, label, tom="chamativo", href="{{link_cta}}"):
 
 
 def button_variants(t, label="Quero me cadastrar na Black"):
-    """As opções de botão da Black, para escolher. Cada uma: (nome, quando usar, html)."""
-    dark = t["SCHEME"] == "dark"
-    orange_text = t["ACCENT_TEXT"]
-    arrow_orange = "img/seta-laranja.png" if dark else "img/seta-laranja-escuro.png"
-    spectrum_border = (
-        f'<table role="presentation" style="border-collapse:separate;"><tr>'
-        f'<td bgcolor="{BF["ORANGE"]}" style="background:{BF["ORANGE"]}; background-image:{SPECTRUM}; border-radius:999px; padding:2px;">'
-        + _btn(t, label, bg=t["SURFACE"], fg=t["TEXT"], arrow=arrow_orange, pad="13px 20px 13px 26px")
-        + '</td></tr></table>')
-    items = [
-        ("A · Degradê", "Pílula em degradê vertical, caixa alta. A mais próxima das peças da campanha: guarde para emails de venda direta.",
-         button(t, label, "#", align="left")),
-        ("B · Sólido", "Laranja chapado, cantos de 12px, texto normal. Mais sóbrio, bom para emails conversacionais.",
-         _btn(t, label, bg=BF["ORANGE"], fg="#ffffff", arrow="img/seta-branca.png", radius=12)),
-        ("C · Contorno", "Só a borda laranja. Para uma segunda ação, ou quando o email já tem muita cor.",
-         _btn(t, label, bg=t["PAGE"], fg=orange_text, arrow=arrow_orange, border=f"1.5px solid {BF['ORANGE']}", pad="14px 21px 14px 27px")),
-        ("D · Neutro · padrão discreto", "Branco quente no escuro, preto no claro; o laranja fica só na seta. Para emails de relacionamento, em que o botão é um convite.",
+    """Os botões da Black. Cada um: (nome, quando usar, html). Os dois padrões vêm primeiro."""
+    arrow_orange = "img/seta-laranja.png" if t["SCHEME"] == "dark" else "img/seta-laranja-escuro.png"
+    return [
+        ("Neutro · padrão discreto", "Branco quente no escuro, preto no claro; o laranja fica só na seta. Para emails de relacionamento, em que o botão é um convite.",
          botao_discreto(t, label, "#")),
-        ("E · Brasa", "Fundo laranja bem escuro e texto pêssego (no claro, pêssego claro e texto terracota). Discreto e quente.",
-         _btn(t, label, bg=t["PILL_BG"], fg="#ffae6b" if dark else "#9a3412",
-              arrow="img/seta-pessego.png" if dark else "img/seta-laranja-escuro.png", border=f"1px solid {t['CTA_LINE']}")),
-        ("F · Borda espectro", "Contorno com o degradê teal, vermelho, teal da faixa. Onde não há degradê, a borda fica laranja.",
-         spectrum_border),
-        ("G · Seta em círculo · padrão chamativo", "Laranja sólido com a seta num círculo branco, sem caixa alta. Para emails cuja ação é o objetivo: cadastro, compra.",
+        ("Seta em círculo · padrão chamativo", "Laranja sólido com a seta num círculo branco, sem caixa alta. Para emails cuja ação é o objetivo: cadastro, compra.",
          botao_chamativo(t, label, "#")),
-        ("H · Compacto", "Pílula menor, 13px. Para ações secundárias no meio do texto.",
-         _btn(t, "Ver a programação", bg=BF["ORANGE"], fg="#ffffff", arrow="img/seta-branca.png", pad="10px 16px 10px 20px", size=13)),
-        ("I · Link", "Texto laranja sublinhado com seta. Para quando o botão seria demais.",
-         f'<a href="#" style="text-decoration:none;"><table role="presentation" style="border-collapse:separate;"><tr>'
-         f'<td style="font-family:{TITLE_FONT}; font-size:16px; line-height:22px; font-weight:600; color:{orange_text}; border-bottom:1.5px solid {BF["ORANGE"]}; padding-bottom:2px;">{label}</td>'
-         f'<td width="8" style="font-size:0;">&nbsp;</td><td valign="middle"><img src="{arrow_orange}" width="18" height="18" alt="" style="width:18px; height:18px;"></td>'
-         f'</tr></table></a>'),
-        ("J · Largura total", "Degradê ocupando a coluna inteira. Para o fim de emails curtos e para o mobile.",
+        ("Contorno", "Só a borda laranja. Para uma segunda ação, ou quando o email já tem muita cor.",
+         _btn(t, label, bg=t["PAGE"], fg=t["ACCENT_TEXT"], arrow=arrow_orange, border=f"1.5px solid {BF['ORANGE']}", pad="14px 21px 14px 27px")),
+        ("Largura total", "Degradê ocupando a coluna inteira. Para o fim de emails curtos e para o mobile.",
          button(t, label, "#", full=True)),
     ]
-    padrao = [i for i in items if "padrão" in i[0]]
-    return padrao + [i for i in items if "padrão" not in i[0]]
 
 
 def spec_buttons(t):
@@ -587,13 +562,12 @@ def kit():
             ("assinatura", "Assinatura", "bloco", "Quem assina o email. O cargo é opcional.", sign("Lorem Ipsum", "Dolor sit amet da Asimov Academy")),
             ("ps", "PS", "bloco", "Pós-escrito no fim do texto.", ps(LOREM["curto"])),
         ]
-        # As outras variações de botão da página do design system, como alternativas aos dois padrões.
+        # Os outros dois botões da página do design system (os padrões já entraram acima).
         for nome, uso, html in button_variants(t, "Lorem ipsum dolor"):
             if "padrão" in nome:
                 continue
-            letra, rotulo = nome.split(" · ", 1)
-            ascii_ = unicodedata.normalize("NFKD", rotulo).encode("ascii", "ignore").decode().lower()
-            pecas.append((f"botao-{letra.lower()}-{re.sub(r'[^a-z]+', '-', ascii_).strip('-')}", f"Botão {nome}", "bloco", uso,
+            ascii_ = unicodedata.normalize("NFKD", nome).encode("ascii", "ignore").decode().lower()
+            pecas.append((f"botao-{re.sub(r'[^a-z]+', '-', ascii_).strip('-')}", f"Botão {nome.lower()}", "bloco", uso,
                           f'<div style="padding:10px 0 28px;">{html.replace(chr(34) + "#" + chr(34), chr(34) + "{{link_cta}}" + chr(34))}</div>'))
         variantes.append(Variante(
             id=theme, rotulo=f"Tema {theme}", tema=theme,
@@ -601,7 +575,7 @@ def kit():
             componentes=[Componente(s, n, tp, u, h) for s, n, tp, u, h in pecas],
             cores=dict({k: v for k, v in t.items() if isinstance(v, str) and v.startswith("#")}, **{k: v for k, v in BF.items()})))
     return Kit(
-        slug="black", nome="Black Friday", pasta="design-system-black",
+        slug="black", quando="Todas as fases da campanha de Black Friday.", nome="Black Friday", pasta="design-system-black",
         descricao="A estrutura do design system Asimov nas cores da Black Friday 2026: preto, laranja #ff6e14, luz teal e Rethink Sans. O visual não escreve \"Black Friday\"; quem fala da Black é o texto.",
         fontes=["Rethink Sans nos títulos e botões (Google Fonts)", "Inter no corpo (Google Fonts)", "Helvetica e Arial de reserva"],
         tipografia=[dict(nome=n, familia="Rethink Sans" if fam == "TITLE" else "Inter", tamanho=s, entrelinha=lh, peso=w, tracking=tr, mobile=m, uso=u)
@@ -814,7 +788,7 @@ SPEC = """<!DOCTYPE html>
 
     <section id="botoes">
       <div class="sec-head"><div><div class="k">Components</div><h2>Botões</h2></div>
-        <p>Dois padrões, escolhidos por email no campo “tom” da copy: G (chamativo) quando a ação é o objetivo, D (discreto) quando o botão é um convite. O mesmo email não mistura os dois. As outras opções ficam de referência. Todas têm cor sólida por baixo e VML para o Outlook.</p></div>
+        <p>Dois padrões, escolhidos por email no campo “tom” da copy: o chamativo quando a ação é o objetivo, o discreto quando o botão é um convite. O mesmo email não mistura os dois. O contorno serve para uma segunda ação; a largura total, para o fim de emails curtos. Todos têm cor sólida por baixo e VML para o Outlook.</p></div>
       %BOTOES%
     </section>
 
@@ -853,8 +827,15 @@ SPEC = """<!DOCTYPE html>
   </div>
   %FAIXA_END%
   <script>
+    /* A prévia tem a altura do email: mede no load, de novo quando as fontes chegam e sempre que o
+       email muda de tamanho. Sem isso, sobram alguns pixels e aparece uma barra de rolagem. */
     document.querySelectorAll("iframe").forEach(f => f.addEventListener("load", () => {
-      try { f.style.height = "0px"; f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
+      const medir = () => { try {
+        f.style.height = "0px";  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
+        f.style.height = f.contentDocument.documentElement.scrollHeight + (f.offsetHeight - f.clientHeight) + "px";  /* + a borda */
+      } catch (_) {} };
+      medir();
+      try { f.contentDocument.fonts.ready.then(medir); new ResizeObserver(medir).observe(f.contentDocument.body); } catch (_) {}
     }));
   </script>
 </body>
@@ -894,7 +875,6 @@ def main():
             print(name)
     (OUT / "index.html").write_text(specimen())
     print("index.html")
-    write_kit(kit())
 
 
 if __name__ == "__main__":

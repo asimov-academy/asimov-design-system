@@ -4,7 +4,7 @@
 Mesma família do design system de email principal (Inter, teal Asimov, fundo
 #050505), com outra leitura:
   - cabeçalho com a chuva de luz como imagem de fundo e uma ficha técnica embaixo
-  - trilho lateral numerado em mono que costura as seções do texto
+  - o texto em seções com título, sem numeração
   - janela de editor para a frase que merece destaque
   - CTA como tecla teal alinhada ao texto
 
@@ -12,7 +12,7 @@ Saída em emails/design-system-cadence/:
 
     index.html, email-escuro.html, email-claro.html, em-XXX-<tema>.html, img/
 
-E o kit para download em emails/kits/asimov-email-cadence.zip (ver email_kit.py).
+kit() descreve as peças do sistema para os arquivos de download (ver build-email-export.py).
 
     python3 scripts/build-email-ds-cadence.py
 """
@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 
 from email_copies import COPIES, render_blocks
-from email_kit import Componente, Kit, Variante, write_kit
+from email_kit import Componente, Kit, Variante
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system-cadence"
 
@@ -70,10 +70,10 @@ ON_ACCENT = "#04201d"
 # nome: (família, tamanho, entrelinha, peso, tracking, cor, mobile, uso)
 TYPE = {
     "Manchete": ("SANS", 56, 56, 500, -2.4, "TEXT", "40/42", "Só no cabeçalho, alinhada à esquerda."),
-    "Título de seção": ("SANS", 28, 34, 500, -0.8, "TEXT", "24/30", "Abre cada passo do trilho."),
+    "Título de seção": ("SANS", 28, 34, 500, -0.8, "TEXT", "24/30", "Abre cada seção do texto."),
     "Destaque": ("SANS", 20, 30, 400, -0.2, "TEXT", "18/28", "A frase dentro da janela."),
     "Corpo": ("SANS", 17, 29, 400, 0, "BODY", "16/27", "Todo o texto corrido."),
-    "Índice": ("MONO", 12, 16, 500, 0.5, "ACCENT_TEXT", "12/16", "Números do trilho e da ficha."),
+    "Índice": ("MONO", 12, 16, 500, 0.5, "ACCENT_TEXT", "12/16", "Marcadores em mono: PS e lista."),
     "Rótulo": ("MONO", 11, 16, 400, 1.2, "MUTED", "11/16", "Caixa alta. Ficha técnica, janela, rodapé."),
 }
 
@@ -132,8 +132,7 @@ def hero(t):
         </tr>
         <tr>
           <td class="px" style="padding:96px 40px 0;">
-            <div style="{ts("Índice", t)}">01 &mdash; 03</div>
-            <div class="h1" style="margin:14px 0 0; max-width:470px; {ts("Manchete", t)}">Lorem ipsum dolor sit amet.</div>
+            <div class="h1" style="margin:0; max-width:470px; {ts("Manchete", t)}">Lorem ipsum dolor sit amet.</div>
             <p class="lead" style="margin:20px 0 0; max-width:400px; font-family:{SANS}; font-size:17px; line-height:27px; color:{t["BODY"]};">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
           </td>
         </tr>
@@ -145,16 +144,11 @@ def hero(t):
 </table>'''
 
 
-def rail(num, inner, t, last=False):
-    """Um passo do trilho: índice em mono à esquerda, fio vertical, conteúdo à direita."""
+def secao(inner, t, last=False):
+    """Um trecho do texto: título e parágrafos, sem numeração. 48px até o próximo."""
     pad_bottom = "0" if last else "48px"
     return (f'<table role="presentation" width="100%"><tr>'
-            f'<td class="rail" width="52" valign="top" style="width:52px; padding-top:9px;">'
-            f'<table role="presentation" width="100%"><tr>'
-            f'<td style="{ts("Índice", t)}">{num}</td>'
-            f'<td width="14" valign="middle"><div style="height:1px; line-height:1px; font-size:0; background:{ACCENT};">&nbsp;</div></td>'
-            f'</tr></table></td>'
-            f'<td class="rail-body" valign="top" style="border-left:1px solid {t["LINE"]}; padding:0 0 {pad_bottom} 28px;">{inner}</td>'
+            f'<td class="secao" valign="top" style="padding:0 0 {pad_bottom};">{inner}</td>'
             f'</tr></table>')
 
 
@@ -252,9 +246,7 @@ SHELL = """<!DOCTYPE html>
       .h1 { font-size: 40px !important; line-height: 42px !important; letter-spacing: -1.6px !important; }
       .h2 { font-size: 24px !important; line-height: 30px !important; }
       .quote { font-size: 18px !important; line-height: 28px !important; }
-      .rail { width: 40px !important; }
-      .rail-body { padding-left: 18px !important; }
-      .rail-body p { font-size: 16px !important; line-height: 27px !important; }
+      .secao p { font-size: 16px !important; line-height: 27px !important; }
       .spec-cell { padding-left: 12px !important; padding-right: 8px !important; }
       .btn-t { white-space: normal !important; }
       .stack { display: block !important; width: 100% !important; text-align: left !important; box-sizing: border-box; }
@@ -285,13 +277,13 @@ def email(theme):
     t = THEMES[theme]
     rows = [
         row(hero(t), "0", cls=""),
-        row(rail("01", section_title("Lorem ipsum dolor sit amet, consectetur.", t)
+        row(secao(section_title("Lorem ipsum dolor sit amet, consectetur.", t)
                  + paragraphs([LOREM["longo"], LOREM["curto"]], t), t), "56px 40px 0"),
-        row(rail("02", section_title("Sed ut perspiciatis unde omnis.", t)
+        row(secao(section_title("Sed ut perspiciatis unde omnis.", t)
                  + paragraphs([LOREM["medio"]], t)
                  + f'<div style="height:28px;"></div>{window(t)}'
                  + paragraphs([LOREM["longo"]], t, "28px"), t), "0 40px"),
-        row(rail("03", paragraphs([LOREM["medio"]], t, "0") + signature(t), t, last=True), "0 40px"),
+        row(secao(paragraphs([LOREM["medio"]], t, "0") + signature(t), t, last=True), "0 40px"),
         row(f'<div style="margin-bottom:14px; {ts("Rótulo", t)}">Próximo passo</div>' + button(t), "56px 40px 0"),
         row(footer(t), "56px 40px 0"),
     ]
@@ -308,8 +300,8 @@ def blocos(t):
     p = lambda text: f'<p style="margin:0 0 18px; {ts("Corpo", t)}">{text}</p>'
     cta_ = lambda label: f'<div style="padding:10px 0 30px;">{button(t, label)}</div>'
     ul = lambda items: ('<table role="presentation" style="margin:0 0 22px;">' + "".join(
-        f'<tr><td width="28" valign="top" style="padding:0; {ts("Índice", t)} line-height:29px;">{n:02d}</td>'
-        f'<td style="padding:0 0 4px; {ts("Corpo", t)}">{i}</td></tr>' for n, i in enumerate(items, 1)) + "</table>")
+        f'<tr><td width="22" valign="top" style="padding:12px 0 0;"><div style="width:6px; height:6px; background:{ACCENT}; font-size:0; line-height:0;">&nbsp;</div></td>'
+        f'<td style="padding:0 0 6px; {ts("Corpo", t)}">{i}</td></tr>' for i in items) + "</table>")
     sign = lambda name, role: (f'<div style="margin-top:4px; font-family:{SANS}; font-size:16px; line-height:22px; font-weight:500; color:{t["TEXT"]};">{name}</div>'
                                + (f'<div style="margin-top:2px; {ts("Rótulo", t)}">{role}</div>' if role else ""))
     ps = lambda text: (f'<p style="margin:28px 0 0; padding-top:20px; border-top:1px solid {t["LINE"]}; {ts("Corpo", t)}">'
@@ -349,10 +341,10 @@ def kit():
         pecas = [
             ("capa", "Capa", "linha", "Topo dos emails conversacionais: a chuva de luz numa faixa de 600x150.", row(capa(t), "0", cls="")),
             ("hero", "Cabeçalho", "linha", "Topo dos emails com título: chuva de luz, manchete e ficha técnica.", row(hero(t), "0", cls="")),
-            ("passo", "Passo do trilho", "linha", "Um trecho numerado do texto: índice em mono, fio e título. Troque o número (01, 02...).",
-             row(rail("01", passo, t), "56px 40px 0")),
-            ("passo-final", "Último passo", "linha", "Fecha o trilho: vem logo depois de um passo, sem espaço acima.",
-             row(rail("03", paragraphs([LOREM["medio"]], t, "0") + signature(t), t, last=True), "0 40px")),
+            ("secao", "Seção", "linha", "Um trecho do texto com título. Seções seguidas ficam a 48px uma da outra.",
+             row(secao(passo, t), "56px 40px 0")),
+            ("fechamento", "Fechamento", "linha", "O último trecho, com a assinatura. Vem logo depois de uma seção, sem espaço acima.",
+             row(secao(paragraphs([LOREM["medio"]], t, "0") + signature(t), t, last=True), "0 40px")),
             ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "44px 40px 0", "px body")),
             ("proximo-passo", "Próximo passo", "linha", "Fechamento com a ação: rótulo em mono e a tecla teal.",
              row(f'<div style="margin-bottom:14px; {ts("Rótulo", t)}">Próximo passo</div>' + button(t), "56px 40px 0")),
@@ -361,7 +353,7 @@ def kit():
             ("botao", "Botão", "bloco", "A ação do email: a tecla teal, alinhada ao texto.", cta_("Lorem ipsum dolor")),
             ("janela", "Janela de editor", "bloco", "A frase que merece destaque, como um arquivo aberto.",
              f'<div style="padding:10px 0 28px;">{window(t)}</div>'),
-            ("lista", "Lista numerada", "bloco", "Itens curtos e paralelos, numerados em mono.", ul(["Lorem ipsum dolor sit amet", "Consectetur adipiscing elit", "Sed do eiusmod tempor"])),
+            ("lista", "Lista", "bloco", "Itens curtos e paralelos.", ul(["Lorem ipsum dolor sit amet", "Consectetur adipiscing elit", "Sed do eiusmod tempor"])),
             ("assinatura", "Assinatura", "bloco", "Quem assina o email. O cargo é opcional.", sign("Lorem Ipsum", "Dolor sit amet da Asimov Academy")),
             ("ps", "PS", "bloco", "Pós-escrito no fim do texto.", ps(LOREM["curto"])),
         ]
@@ -371,15 +363,15 @@ def kit():
             componentes=[Componente(s, n, tp, u, h) for s, n, tp, u, h in pecas],
             cores=dict({k: v for k, v in t.items() if isinstance(v, str) and v.startswith("#")}, ACCENT=ACCENT, ON_ACCENT=ON_ACCENT)))
     return Kit(
-        slug="cadence", nome="Cadence", pasta="design-system-cadence",
-        descricao="A chuva de luz do Cadence Rain com cara de workspace: trilho numerado em mono, janela de editor e CTA como tecla teal.",
+        slug="cadence", quando="Conteúdo técnico, tutoriais e séries.", nome="Cadence", pasta="design-system-cadence",
+        descricao="A chuva de luz do Cadence Rain com cara de workspace: seções com título, janela de editor e CTA como tecla teal.",
         fontes=["Inter (Google Fonts), com Helvetica e Arial de reserva", "JetBrains Mono nos rótulos, com Menlo e Consolas de reserva"],
         tipografia=[dict(nome=n, familia="mono" if fam == "MONO" else "sans", tamanho=s, entrelinha=lh, peso=w, tracking=tr, mobile=m, uso=u)
                     for n, (fam, s, lh, w, tr, _, m, u) in TYPE.items()],
         variantes=variantes,
         exemplos=sorted(p.name for p in OUT.glob("*.html") if p.name != "index.html"),
         montagem=[("Conversacional", ["capa", "corpo", "rodape"]),
-                  ("Com título", ["hero", "passo", "passo", "passo-final", "proximo-passo", "rodape"])],
+                  ("Com título", ["hero", "secao", "secao", "fechamento", "proximo-passo", "rodape"])],
     )
 
 
@@ -404,7 +396,7 @@ def both(fn, cls=""):
 def spec_type(t):
     out = ""
     for name, (fam, size, lh, weight, track, key, mob, use) in TYPE.items():
-        sample = {"Índice": "01 &mdash; 03", "Rótulo": "Lorem ipsum"}.get(name, "Lorem ipsum dolor sit amet")
+        sample = {"Índice": "PS &rsaquo;", "Rótulo": "Lorem ipsum"}.get(name, "Lorem ipsum dolor sit amet")
         out += (f'<div class="type-row" style="border-color:{t["LINE"]};">'
                 f'<div style="{ts("Rótulo", t)} text-transform:none;"><b style="color:{t["TEXT"]}; font-weight:500;">{name}</b><br>'
                 f'{"Inter" if fam == "SANS" else "JetBrains Mono"} {size}/{lh}<br>mobile {mob}</div>'
@@ -414,7 +406,7 @@ def spec_type(t):
 
 def spec_colors(t):
     keys = [("PAGE", "Página"), ("SURFACE", "Superfície"), ("SURFACE2", "Barra da janela"), ("TEXT", "Texto"),
-            ("BODY", "Corpo"), ("MUTED", "Rótulo"), ("LINE", "Fio do trilho"), ("ACCENT_TEXT", "Índice")]
+            ("BODY", "Corpo"), ("MUTED", "Rótulo"), ("LINE", "Linhas"), ("ACCENT_TEXT", "Destaque")]
     out = '<div class="swatches">'
     for k, label in keys:
         out += (f'<div><div class="chip" style="background:{t[k]}; border-color:{t["SURFACE_LINE"]};"></div>'
@@ -424,9 +416,9 @@ def spec_colors(t):
 
 
 def spec_paragraphs(t):
-    return rail("A", f'<div style="{ts("Rótulo", t)}">Curto</div>' + paragraphs([LOREM["curto"]], t, "8px"), t) + \
-        rail("B", f'<div style="{ts("Rótulo", t)}">Médio</div>' + paragraphs([LOREM["medio"]], t, "8px"), t) + \
-        rail("C", f'<div style="{ts("Rótulo", t)}">Longo + longo</div>' + paragraphs([LOREM["longo"], LOREM["longo"]], t, "8px"), t, last=True)
+    return secao(f'<div style="{ts("Rótulo", t)}">Curto</div>' + paragraphs([LOREM["curto"]], t, "8px"), t) + \
+        secao(f'<div style="{ts("Rótulo", t)}">Médio</div>' + paragraphs([LOREM["medio"]], t, "8px"), t) + \
+        secao(f'<div style="{ts("Rótulo", t)}">Longo + longo</div>' + paragraphs([LOREM["longo"], LOREM["longo"]], t, "8px"), t, last=True)
 
 
 SPEC = """<!DOCTYPE html>
@@ -493,8 +485,8 @@ SPEC = """<!DOCTYPE html>
   <div class="masthead"><div class="in">
     <div class="bar"><img src="img/logo-branco.png" alt="Asimov"><a class="mono" href="../../design-system.html">Asimov Design System &rarr;</a></div>
     <div class="mono" style="margin-top:120px; color:#2dd4bf; font-size:12px;">EMAIL / CADENCE</div>
-    <h1 style="margin-top:16px;">Chuva de luz, trilho e linha de comando.</h1>
-    <p>Uma leitura do Cadence Rain para email. O texto anda por um trilho numerado, a frase importante ganha uma janela e o CTA é uma tecla teal.</p>
+    <h1 style="margin-top:16px;">Chuva de luz, janela e linha de comando.</h1>
+    <p>Uma leitura do Cadence Rain para email. O texto corre em seções com título, a frase importante ganha uma janela e o CTA é uma tecla teal.</p>
     <div class="spec">
       <div><span class="mono">Fundo</span>Cadence Rain</div>
       <div><span class="mono">Tipos</span>Inter + JetBrains Mono</div>
@@ -509,7 +501,7 @@ SPEC = """<!DOCTYPE html>
       <a href="#cores"><b>02</b>Cores</a>
       <a href="#paragrafos"><b>03</b>Parágrafos</a>
       <a href="#cabecalho"><b>04</b>Cabeçalho</a>
-      <a href="#trilho"><b>05</b>Trilho</a>
+      <a href="#secoes"><b>05</b>Seções</a>
       <a href="#janela"><b>06</b>Janela</a>
       <a href="#comando"><b>07</b>Botão</a>
       <a href="#rodape"><b>08</b>Rodapé</a>
@@ -522,20 +514,20 @@ SPEC = """<!DOCTYPE html>
         %TYPE%
       </section>
       <section id="cores">
-        <div class="sec-head"><div class="n mono">02</div><h2>Cores</h2><p>A mesma base do design system principal. O teal aparece em pequenas doses: índices, o traço de cada passo, o primeiro ponto da janela e a tecla do CTA.</p></div>
+        <div class="sec-head"><div class="n mono">02</div><h2>Cores</h2><p>A mesma base do design system principal. O teal aparece em pequenas doses: os marcadores da lista, o primeiro ponto da janela e a tecla do CTA.</p></div>
         %COLORS%
       </section>
       <section id="paragrafos">
-        <div class="sec-head"><div class="n mono">03</div><h2>Parágrafos</h2><p>Corpo 17/29 com 20px entre parágrafos. O trilho estreita a coluna para cerca de 60 caracteres por linha. No mobile, 16/27.</p></div>
+        <div class="sec-head"><div class="n mono">03</div><h2>Parágrafos</h2><p>Corpo 17/29 com 20px entre parágrafos. No mobile, 16/27.</p></div>
         %PARAGRAPHS%
       </section>
       <section id="cabecalho">
         <div class="sec-head"><div class="n mono">04</div><h2>Cabeçalho</h2><p>A chuva de luz como imagem de fundo, mais escura do lado do texto. Embaixo, uma ficha técnica em três células. No claro, a chuva fica teal sobre cinza-claro.</p></div>
         %HERO%
       </section>
-      <section id="trilho">
-        <div class="sec-head"><div class="n mono">05</div><h2>Trilho</h2><p>Cada bloco do texto é um passo numerado. O fio vertical é a borda da célula e o traço teal liga o número ao fio. Tudo é tabela, então funciona até no Outlook.</p></div>
-        %RAIL%
+      <section id="secoes">
+        <div class="sec-head"><div class="n mono">05</div><h2>Seções</h2><p>O texto anda em seções: título e parágrafos, 48px entre uma e outra, sem numeração. Tudo é tabela, então funciona até no Outlook.</p></div>
+        %SECOES%
       </section>
       <section id="janela">
         <div class="sec-head"><div class="n mono">06</div><h2>Janela</h2><p>Para a frase que precisa de pausa. A barra tem três pontos, o primeiro em teal, e um nome de arquivo. Use uma por email, no máximo.</p></div>
@@ -550,7 +542,7 @@ SPEC = """<!DOCTYPE html>
         %FOOTER%
       </section>
       <section id="conversas">
-        <div class="sec-head"><div class="n mono">09</div><h2>Emails conversacionais</h2><p>Copies reais, sem título: capa estreita da chuva, a conversa, o botão no meio do texto e a assinatura. Listas viram índice numerado.</p></div>
+        <div class="sec-head"><div class="n mono">09</div><h2>Emails conversacionais</h2><p>Copies reais, sem título: capa estreita da chuva, a conversa, o botão no meio do texto e a assinatura. Listas usam um quadradinho teal.</p></div>
         %CONVERSAS%
         <div class="frames" style="margin-top:16px;">
           <figure><figcaption>EM-022 · escuro <a href="em-022-escuro.html" target="_blank">Abrir &rarr;</a></figcaption><iframe src="em-022-escuro.html" title="EM-022, escuro"></iframe></figure>
@@ -567,8 +559,15 @@ SPEC = """<!DOCTYPE html>
     </main>
   </div>
   <script>
+    /* A prévia tem a altura do email: mede no load, de novo quando as fontes chegam e sempre que o
+       email muda de tamanho. Sem isso, sobram alguns pixels e aparece uma barra de rolagem. */
     document.querySelectorAll("iframe").forEach(f => f.addEventListener("load", () => {
-      try { f.style.height = "0px"; f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
+      const medir = () => { try {
+        f.style.height = "0px";  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
+        f.style.height = f.contentDocument.documentElement.scrollHeight + (f.offsetHeight - f.clientHeight) + "px";  /* + a borda */
+      } catch (_) {} };
+      medir();
+      try { f.contentDocument.fonts.ready.then(medir); new ResizeObserver(medir).observe(f.contentDocument.body); } catch (_) {}
     }));
   </script>
 </body>
@@ -583,8 +582,8 @@ def specimen():
         "COLORS": both(spec_colors),
         "PARAGRAPHS": both(spec_paragraphs),
         "HERO": both(hero),
-        "RAIL": both(lambda t: rail("01", section_title("Lorem ipsum dolor sit.", t) + paragraphs([LOREM["medio"]], t), t)
-                     + rail("02", section_title("Sed ut perspiciatis.", t) + paragraphs([LOREM["curto"]], t), t, last=True)),
+        "SECOES": both(lambda t: secao(section_title("Lorem ipsum dolor sit.", t) + paragraphs([LOREM["medio"]], t), t)
+                       + secao(section_title("Sed ut perspiciatis.", t) + paragraphs([LOREM["curto"]], t), t, last=True)),
         "WINDOW": both(window),
         "COMMAND": both(lambda t: button(t, href="#") + '<div style="height:20px;"></div>' + button(t, "Quero receber o guia com 50 Skills do Claude", "#")),
         "FOOTER": both(footer),
@@ -603,7 +602,6 @@ def main():
             print(f'{copy["id"]}-{theme}.html')
     (OUT / "index.html").write_text(specimen())
     print("index.html")
-    write_kit(kit())
 
 
 if __name__ == "__main__":

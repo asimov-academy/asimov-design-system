@@ -12,7 +12,7 @@ Saída em emails/design-system/:
     em-XXX-<tema>.html  emails conversacionais (copies reais, sem título)
     img/                imagens de fundo e ícones (PNG/JPG; email não aceita SVG)
 
-E o kit para download em emails/kits/asimov-email-aura.zip (ver email_kit.py).
+kit() descreve as peças do sistema para os arquivos de download (ver build-email-export.py).
 
     python3 scripts/build-email-ds.py
 """
@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 
 from email_copies import COPIES, render_blocks
-from email_kit import Componente, Kit, Variante, write_kit
+from email_kit import Componente, Kit, Variante
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system"
 
@@ -456,7 +456,7 @@ def kit():
             componentes=[Componente(s, n, tp, u, h) for s, n, tp, u, h in pecas],
             cores=dict({k: v for k, v in t.items() if isinstance(v, str) and v.startswith("#")}, **BRAND)))
     return Kit(
-        slug="aura", nome="Aura", pasta="design-system",
+        slug="aura", quando="Padrão para newsletters, avisos e emails escritos.", nome="Aura", pasta="design-system",
         descricao="O design system de email principal da Asimov, na linguagem do Overview: a paisagem Aura, superfícies com brilho e o teal da marca.",
         fontes=["Inter (Google Fonts), com Helvetica e Arial de reserva"],
         tipografia=[dict(nome=n, tamanho=s, entrelinha=lh, peso=w, tracking=tr, mobile=m, uso=u)
@@ -687,8 +687,15 @@ SPEC = """<!DOCTYPE html>
     </section>
   </div>
   <script>
+    /* A prévia tem a altura do email: mede no load, de novo quando as fontes chegam e sempre que o
+       email muda de tamanho. Sem isso, sobram alguns pixels e aparece uma barra de rolagem. */
     document.querySelectorAll("iframe").forEach(f => f.addEventListener("load", () => {
-      try { f.style.height = "0px"; f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
+      const medir = () => { try {
+        f.style.height = "0px";  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
+        f.style.height = f.contentDocument.documentElement.scrollHeight + (f.offsetHeight - f.clientHeight) + "px";  /* + a borda */
+      } catch (_) {} };
+      medir();
+      try { f.contentDocument.fonts.ready.then(medir); new ResizeObserver(medir).observe(f.contentDocument.body); } catch (_) {}
     }));
   </script>
 </body>
@@ -746,7 +753,6 @@ def main():
             print(f'{copy["id"]}-{theme}.html')
     (OUT / "index.html").write_text(specimen())
     print("index.html")
-    write_kit(kit())
 
 
 if __name__ == "__main__":

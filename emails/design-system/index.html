@@ -215,8 +215,15 @@
     </section>
   </div>
   <script>
+    /* A prévia tem a altura do email: mede no load, de novo quando as fontes chegam e sempre que o
+       email muda de tamanho. Sem isso, sobram alguns pixels e aparece uma barra de rolagem. */
     document.querySelectorAll("iframe").forEach(f => f.addEventListener("load", () => {
-      try { f.style.height = "0px"; f.style.height = f.contentDocument.documentElement.scrollHeight + "px"; } catch (_) {}  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
+      const medir = () => { try {
+        f.style.height = "0px";  /* zera antes de medir: scrollHeight nunca é menor que a altura atual */
+        f.style.height = f.contentDocument.documentElement.scrollHeight + (f.offsetHeight - f.clientHeight) + "px";  /* + a borda */
+      } catch (_) {} };
+      medir();
+      try { f.contentDocument.fonts.ready.then(medir); new ResizeObserver(medir).observe(f.contentDocument.body); } catch (_) {}
     }));
   </script>
 </body>

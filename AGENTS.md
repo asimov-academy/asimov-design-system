@@ -8,14 +8,14 @@ Site estático, sem build e sem dependências: abre via `file://` e é publicado
 - `design-system.html`: entrada. Navbar com Overview, Components, Emails, seletor Escuro/Claro e cores.
 - `assets/overview/` e `assets/components/`: o design system web. O modo claro é uma camada
   (`assets/modo.js` + `assets/modo-claro.css`) presa a `html[data-modo="claro"]`; não duplique páginas.
-- `emails/`: o hub e os quatro design systems de email (Aura, Cadence, Trilhas, Black Friday).
+- `emails/`: o hub e os três design systems de email (Aura, Cadence, Black Friday).
 - `scripts/`: os geradores dos emails. Ficam fora do deploy (`.vercelignore`).
 
 ## Regras gerais
 
 - **No site** (design system web, hub, páginas dos sistemas): tudo com caminho relativo e local, ou seja,
   fontes, ícones, imagens e scripts. Nada de CDN.
-- **Nos emails que saem daqui** (kits e "Copiar HTML"): o contrário. Toda imagem fica no bunny.net,
+- **Nos emails que saem daqui** (os arquivos de download `emails/asimov-email-<tema>.html`): o contrário. Toda imagem fica no bunny.net,
   em `https://img.asimov.academy/email/...`. Ver "Imagens de email: sempre na CDN" abaixo.
 - Textos em português do Brasil. Copy demonstrativa em lorem ipsum.
 - Os HTML de email são **gerados**. Edite o script, nunca o HTML em `emails/design-system*/`.
@@ -23,7 +23,7 @@ Site estático, sem build e sem dependências: abre via `file://` e é publicado
   continuam iguais (`git status` sem diferença neles).
 
 ```bash
-python3 scripts/build-email-ds.py && python3 scripts/build-email-ds-cadence.py && python3 scripts/build-email-ds-trilhas.py && python3 scripts/build-email-ds-black.py && python3 scripts/build-email-export.py
+python3 scripts/build-email-ds.py && python3 scripts/build-email-ds-cadence.py && python3 scripts/build-email-ds-black.py && python3 scripts/build-email-export.py
 ```
 
 ## Imagens de email: sempre na CDN
@@ -39,8 +39,8 @@ Sempre que criar, trocar ou remover uma imagem de email, ou um componente que us
    no gerador. Nunca escreva uma URL de imagem à mão no gerador.
 2. Se a imagem **já existia** e mudou, suba a versão do sistema em `SISTEMAS` (`scripts/email_kit.py`),
    de `v1` para `v2`. Uma versão publicada nunca muda; o upload recusa sobrescrever.
-3. Rode todos os builds (comando acima). O `build-email-export.py` e cada `write_kit()` **auditam** os
-   kits e o HTML do "Copiar HTML": se qualquer imagem apontar para fora da CDN ou para um arquivo que não
+3. Rode todos os builds (comando acima). O `build-email-export.py` **audita** cada peça e exemplo dos
+   arquivos de download: se qualquer imagem apontar para fora da CDN ou para um arquivo que não
    existe em `img/`, o build para com erro e lista o que está errado. Não contorne essa trava; corrija a causa.
 4. Suba as imagens: `python3 scripts/upload-email-assets.py --enviar` (lê o `.env`; ver README).
    Quem tem a senha da Storage Zone é a pessoa, não o agente: se você não tiver o `.env`, peça para ela rodar.
@@ -60,13 +60,14 @@ componentes e a montagem dos emails moram nele. Ele grava em `emails/design-syst
 - `em-XXX-<tema>.html`: os emails conversacionais, com as copies reais de `scripts/email_copies.py`.
 - `img/`: imagens (só PNG e JPG; email não aceita SVG), no dobro do tamanho de exibição.
 
-E grava o kit para download em `emails/kits/asimov-email-<slug>.zip` via `scripts/email_kit.py`.
-Nos kits e no "Copiar HTML" do hub, `img/...` vira `https://img.asimov.academy/email/<slug>/<versão>/...`
-(bunny.net). A versão de cada sistema fica em `SISTEMAS`, no `email_kit.py`, e uma versão publicada nunca
-muda: mudou uma imagem, suba a versão e rode `scripts/upload-email-assets.py --enviar` (ver README).
-Por último, `scripts/build-email-export.py` gera `emails/templates.json`/`.js` (lista de templates
-do hub) e junta os kits em `emails/kits/asimov-email-design-systems.zip`. Os zips são
-determinísticos: sem mudança de conteúdo, o arquivo não muda.
+E descreve as peças do sistema em `kit()`. Por último, `scripts/build-email-export.py` junta o `kit()`
+dos três geradores nos arquivos de download: `emails/asimov-email-<tema>.html`, com todos os sistemas, e
+`emails/asimov-email-<sistema>-<tema>.html`, um por sistema
+(montados por `reference_html()`, em `scripts/email_kit.py`): como usar, e para cada sistema fundações,
+casca, elementos e exemplos. Nesses arquivos, `img/...` vira
+`https://img.asimov.academy/email/<slug>/<versão>/...` (bunny.net). A versão de cada sistema fica em
+`SISTEMAS`, no `email_kit.py`, e uma versão publicada nunca muda: mudou uma imagem, suba a versão e rode
+`scripts/upload-email-assets.py --enviar` (ver README).
 
 O contrato que todo gerador cumpre:
 
@@ -79,16 +80,16 @@ O contrato que todo gerador cumpre:
 | componentes | Uma função por peça: hero, capa, título, cartões, CTA, rodapé... |
 | `blocos(t)` | Devolve `p, cta, ul, sign, ps`, os blocos do email conversacional, na ordem de `email_copies.render_blocks`. |
 | `fill(t, rows, assunto, preheader)` | Preenche a `SHELL`. |
-| `email(theme)` / `conversa(theme, copy)` | A aplicação e os conversacionais. No Trilhas, recebem também a cor (`slug`). |
+| `email(theme)` / `conversa(theme, copy)` | A aplicação e os conversacionais. |
 | `specimen()` | A página `index.html` do sistema. |
 | `kit()` | Devolve um `email_kit.Kit`: casca, peças por variante, tipografia e receitas de montagem. |
-| `main()` | Grava tudo e chama `write_kit(kit())`. |
+| `main()` | Grava o `index.html`, a aplicação e os conversacionais. |
 
 ## Criar um design system de email novo
 
 1. **Combine o conceito antes de codar.** Qual o papel do sistema (campanha, formação, tipo de email),
-   o que ele faz diferente dos quatro que existem e quais peças próprias ele terá. Se for só outra cor,
-   provavelmente é uma variante do Trilhas, não um sistema novo.
+   o que ele faz diferente dos três que existem e quais peças próprias ele terá. Se for só outra cor,
+   provavelmente não é um sistema novo.
 
 2. **Copie o gerador mais próximo** para `scripts/build-email-ds-<nome>.py` e ajuste o docstring e
    `OUT = .../emails/design-system-<nome>`. Mantenha o contrato da tabela acima.
@@ -117,31 +118,32 @@ O contrato que todo gerador cumpre:
 
 8. **Kit.** Escreva `kit()` listando cada peça como `linha` (vai na casca) ou `bloco` (vai dentro da
    linha `corpo`, que precisa existir e conter `{{blocos}}`), com nome e quando usar. Inclua as receitas
-   de montagem (`montagem`) e notas próprias. Chame `write_kit(kit())` no `main()`.
+   de montagem (`montagem`), o texto de `quando` usar e notas próprias. Os arquivos de download usam a
+   variante de cada tema.
 
 9. **Registre o sistema** no restante do repositório:
-   - `scripts/build-email-export.py`: adicione a pasta e o nome em `SISTEMAS`.
+   - `scripts/build-email-export.py`: adicione o gerador em `GERADORES`.
    - `emails/index.html`:
-     - um cartão em `#design-systems`, copiando um `<article class="ds">` existente, com o link "Baixar kit (.zip)";
+     - um cartão em `#design-systems`, copiando um `<article class="ds">` existente, com os links
+       "Baixar escuro" e "Baixar claro" para `asimov-email-<slug>-<tema>.html`;
      - as miniaturas `emails/_hub/<nome>-escuro.jpg` e `-claro.jpg` (captura do email em 600px de largura, JPG);
      - a linha na tabela de `#conversacionais`;
-     - o cartão do kit em `#exportar`, com o número de peças igual ao que o `kit()` gera;
      - os números do topo (design systems e emails prontos).
    - O comando de build deste arquivo e do `README.md`.
 
 10. **Gere e confira.**
     - Rode todos os geradores e o `build-email-export.py`; os outros sistemas não podem mudar.
     - Abra o `index.html` do sistema e os emails nos dois temas, no desktop e em 390px.
-    - Abra `<variante>/catalogo.html` de dentro do zip.
+    - Abra `emails/asimov-email-escuro.html`, `-claro.html` e os do sistema novo, e confira as prévias.
     - A auditoria do build precisa passar (nenhuma imagem fora da CDN).
     - Suba as imagens com `python3 scripts/upload-email-assets.py --enviar` e confira com `--verificar`
       (ver "Imagens de email: sempre na CDN").
-    - No hub, teste "Baixar kit" e "Copiar HTML".
+    - No hub, teste os botões de **Baixar** e os do cartão do sistema.
     - Antes de usar de verdade, envie um teste para Gmail, Outlook e celular.
 
 ## Remover um design system de email
 
-Apague o gerador, a pasta em `emails/`, as miniaturas em `emails/_hub/`, o zip em `emails/kits/` e as
-referências no hub, nos dois `SISTEMAS` (`build-email-export.py` e `email_kit.py`) e nos comandos de build.
+Apague o gerador, a pasta em `emails/`, as miniaturas em `emails/_hub/` e as referências no hub, em
+`GERADORES` (`build-email-export.py`), em `SISTEMAS` (`email_kit.py`) e nos comandos de build.
 Não apague as imagens no bunny.net: emails já enviados ainda as usam. Depois rode o
-`build-email-export.py` para refazer a lista e o pacote completo.
+`build-email-export.py` para refazer os arquivos de download.
