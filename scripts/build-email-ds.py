@@ -9,7 +9,10 @@ Saída em emails/design-system/:
     index.html          página do design system (fundações, componentes, aplicação)
     email-escuro.html   aplicação: email escrito com CTA no final, tema escuro
     email-claro.html    a mesma aplicação, tema claro
+    em-XXX-<tema>.html  emails conversacionais (copies reais, sem título)
     img/                imagens de fundo e ícones (PNG/JPG; email não aceita SVG)
+
+E o kit para download em emails/kits/asimov-email-aura.zip (ver email_kit.py).
 
     python3 scripts/build-email-ds.py
 """
@@ -17,6 +20,7 @@ import re
 from pathlib import Path
 
 from email_copies import COPIES, render_blocks
+from email_kit import Componente, Kit, Variante, write_kit
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system"
 
@@ -382,10 +386,8 @@ def email(theme):
     return html
 
 
-def conversa(theme, copy):
-    """Email conversacional (sem título): capa estreita da Aura, a conversa, botões no texto, assinatura."""
-    t = THEMES[theme]
-    capa = t["HERO_IMG"].replace("aura-hero", "capa")
+def blocos(t):
+    """Os blocos de texto do email conversacional, na ordem de email_copies.render_blocks."""
     p = lambda text: f'<p style="margin:0 0 18px; {ts("Corpo", t)}">{text}</p>'
     cta_ = lambda label: f'<div style="padding:10px 0 28px;">{button(label, "{{link_cta}}", "primario", t)}</div>'
     ul = lambda items: ('<table role="presentation" style="margin:0 0 22px;">' + "".join(
@@ -395,14 +397,75 @@ def conversa(theme, copy):
                                + (f'<div style="{ts("Legenda", t)}">{role}</div>' if role else ""))
     ps = lambda text: (f'<p style="margin:28px 0 0; padding-top:20px; border-top:1px solid {t["LINE"]}; {ts("Corpo", t)}">'
                        f'<strong style="font-weight:600; color:{t["TEXT"]};">PS:</strong> {text}</p>')
+    return p, cta_, ul, sign, ps
+
+
+def capa(t):
+    src = t["HERO_IMG"].replace("aura-hero", "capa")
+    return f'<img src="{src}" width="600" height="150" alt="Asimov Academy" style="display:block; width:100%; max-width:600px; height:auto; border-radius:20px;">'
+
+
+def fill(t, rows, title, preheader):
+    tokens = dict(t, MOBILE=MOBILE, ROWS=rows, TITLE=title, PREHEADER=preheader)
+    return re.sub(r"%([A-Z_]+)%", lambda m: tokens.get(m.group(1), m.group(0)), SHELL)
+
+
+def conversa(theme, copy):
+    """Email conversacional (sem título): capa estreita da Aura, a conversa, botões no texto, assinatura."""
+    t = THEMES[theme]
     rows = [
-        row(f'<img src="{capa}" width="600" height="150" alt="Asimov Academy" style="display:block; width:100%; max-width:600px; height:auto; border-radius:20px;">', "0", cls=""),
-        row(render_blocks(copy["blocks"], p, cta_, ul, sign, ps), "40px 40px 0", "px body"),
+        row(capa(t), "0", cls=""),
+        row(render_blocks(copy["blocks"], *blocos(t)), "40px 40px 0", "px body"),
         row(divider(t), "40px 40px 0"),
         row(footer(t), "28px 40px 0"),
     ]
-    tokens = dict(t, MOBILE=MOBILE, ROWS="\n\n".join(rows), TITLE=copy["assunto"], PREHEADER=copy["preheader"])
-    return re.sub(r"%([A-Z_]+)%", lambda m: tokens.get(m.group(1), m.group(0)), SHELL)
+    return fill(t, "\n\n".join(rows), copy["assunto"], copy["preheader"])
+
+
+# ------------------------------------------------------------------ kit para download
+
+def kit():
+    """O sistema inteiro para aplicações: casca, todas as peças e tokens (ver email_kit.py)."""
+    variantes = []
+    for theme, t in THEMES.items():
+        p, cta_, ul, sign, ps = blocos(t)
+        pecas = [
+            ("capa", "Capa", "linha", "Topo dos emails conversacionais: a paisagem Aura numa faixa de 600x150.", row(capa(t), "0", cls="")),
+            ("hero", "Hero", "linha", "Topo dos emails com título: paisagem, pílula, título e subtítulo.", row(hero(t), "0", cls="")),
+            ("titulo", "Título de seção", "linha", "Sobretítulo e título que abrem um trecho do email.",
+             row(meta("Lorem ipsum", t) + heading("Lorem ipsum dolor sit amet, consectetur adipiscing.", t), "56px 40px 0")),
+            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "40px 40px 0", "px body")),
+            ("destaque", "Cartão de destaque", "linha", "Uma ideia em evidência no meio do texto: ícone, sobretítulo, título e texto.", row(feature_card(t), "40px 40px 0")),
+            ("faixa", "Faixa de paisagem", "linha", "Respiro visual entre trechos longos.", row(faixa(t, "20px"), "40px 40px 0")),
+            ("cta", "Cartão de CTA", "linha", "Fechamento com a ação principal: faixa, título, botão e nota.", row(cta_card(t), "56px 40px 0")),
+            ("divisor", "Divisor", "linha", "Separa o conteúdo do rodapé.", row(divider(t), "48px 40px 0")),
+            ("rodape", "Rodapé", "linha", "Logo, redes, endereço e descadastro. Obrigatório.", row(footer(t), "28px 40px 0")),
+            ("paragrafo", "Parágrafo", "bloco", "Todo o texto corrido. Frases curtas, um parágrafo por ideia.", p(LOREM["medio"])),
+            ("botao", "Botão principal", "bloco", "A ação do email, no meio ou no fim do texto.", cta_("Lorem ipsum dolor")),
+            ("botao-secundario", "Botão secundário", "bloco", "Uma segunda ação, menos importante que a principal.",
+             f'<div style="padding:10px 0 28px;">{button("Lorem ipsum dolor", "{{link_cta}}", "secundario", t)}</div>'),
+            ("link", "Link com seta", "bloco", "Ação discreta, quando um botão seria demais.",
+             f'<div style="padding:0 0 22px;">{button("Lorem ipsum dolor", "{{link_cta}}", "link", t)}</div>'),
+            ("lista", "Lista", "bloco", "Itens curtos e paralelos.", ul(["Lorem ipsum dolor sit amet", "Consectetur adipiscing elit", "Sed do eiusmod tempor"])),
+            ("assinatura", "Assinatura", "bloco", "Quem assina o email. O cargo é opcional.", sign("Lorem Ipsum", "Dolor sit amet da Asimov Academy")),
+            ("ps", "PS", "bloco", "Pós-escrito no fim do texto.", ps(LOREM["curto"])),
+        ]
+        variantes.append(Variante(
+            id=theme, rotulo=f"Tema {theme}", tema=theme,
+            casca=fill(t, "{{linhas}}", "{{assunto}}", "{{preheader}}"),
+            componentes=[Componente(s, n, tp, u, h) for s, n, tp, u, h in pecas],
+            cores=dict({k: v for k, v in t.items() if isinstance(v, str) and v.startswith("#")}, **BRAND)))
+    return Kit(
+        slug="aura", nome="Aura", pasta="design-system",
+        descricao="O design system de email principal da Asimov, na linguagem do Overview: a paisagem Aura, superfícies com brilho e o teal da marca.",
+        fontes=["Inter (Google Fonts), com Helvetica e Arial de reserva"],
+        tipografia=[dict(nome=n, tamanho=s, entrelinha=lh, peso=w, tracking=tr, mobile=m, uso=u)
+                    for n, (s, lh, w, tr, _, m, u) in TYPE.items()],
+        variantes=variantes,
+        exemplos=sorted(p.name for p in OUT.glob("*.html") if p.name != "index.html"),
+        montagem=[("Conversacional", ["capa", "corpo", "divisor", "rodape"]),
+                  ("Com título", ["hero", "titulo", "corpo", "destaque", "corpo", "cta", "divisor", "rodape"])],
+    )
 
 
 def spec_conversas():
@@ -683,6 +746,7 @@ def main():
             print(f'{copy["id"]}-{theme}.html')
     (OUT / "index.html").write_text(specimen())
     print("index.html")
+    write_kit(kit())
 
 
 if __name__ == "__main__":

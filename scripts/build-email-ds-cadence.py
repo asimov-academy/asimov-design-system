@@ -10,7 +10,9 @@ Mesma família do design system de email principal (Inter, teal Asimov, fundo
 
 Saída em emails/design-system-cadence/:
 
-    index.html, email-escuro.html, email-claro.html, img/
+    index.html, email-escuro.html, email-claro.html, em-XXX-<tema>.html, img/
+
+E o kit para download em emails/kits/asimov-email-cadence.zip (ver email_kit.py).
 
     python3 scripts/build-email-ds-cadence.py
 """
@@ -18,6 +20,7 @@ import re
 from pathlib import Path
 
 from email_copies import COPIES, render_blocks
+from email_kit import Componente, Kit, Variante, write_kit
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system-cadence"
 
@@ -300,10 +303,8 @@ def email(theme):
     return html
 
 
-def conversa(theme, copy):
-    """Email conversacional (sem título): capa estreita da chuva, a conversa, botões no texto, assinatura."""
-    t = THEMES[theme]
-    capa = t["HERO"].replace("chuva", "capa")
+def blocos(t):
+    """Os blocos de texto do email conversacional, na ordem de email_copies.render_blocks."""
     p = lambda text: f'<p style="margin:0 0 18px; {ts("Corpo", t)}">{text}</p>'
     cta_ = lambda label: f'<div style="padding:10px 0 30px;">{button(t, label)}</div>'
     ul = lambda items: ('<table role="presentation" style="margin:0 0 22px;">' + "".join(
@@ -313,13 +314,73 @@ def conversa(theme, copy):
                                + (f'<div style="margin-top:2px; {ts("Rótulo", t)}">{role}</div>' if role else ""))
     ps = lambda text: (f'<p style="margin:28px 0 0; padding-top:20px; border-top:1px solid {t["LINE"]}; {ts("Corpo", t)}">'
                        f'<span style="{ts("Índice", t)}">PS &rsaquo;</span>&nbsp; {text}</p>')
+    return p, cta_, ul, sign, ps
+
+
+def capa(t):
+    src = t["HERO"].replace("chuva", "capa")
+    return f'<img src="{src}" width="600" height="150" alt="Asimov Academy" style="display:block; width:100%; max-width:600px; height:auto;">'
+
+
+def fill(t, rows, title, preheader):
+    tokens = dict(t, ROWS=rows, TITLE=title, PREHEADER=preheader)
+    return re.sub(r"%([A-Z_0-9]+)%", lambda m: tokens.get(m.group(1), m.group(0)), SHELL)
+
+
+def conversa(theme, copy):
+    """Email conversacional (sem título): capa estreita da chuva, a conversa, botões no texto, assinatura."""
+    t = THEMES[theme]
     rows = [
-        row(f'<img src="{capa}" width="600" height="150" alt="Asimov Academy" style="display:block; width:100%; max-width:600px; height:auto;">', "0", cls=""),
-        row(render_blocks(copy["blocks"], p, cta_, ul, sign, ps), "44px 40px 0", "px body"),
+        row(capa(t), "0", cls=""),
+        row(render_blocks(copy["blocks"], *blocos(t)), "44px 40px 0", "px body"),
         row(footer(t), "48px 40px 0"),
     ]
-    tokens = dict(t, ROWS="\n\n".join(rows), TITLE=copy["assunto"], PREHEADER=copy["preheader"])
-    return re.sub(r"%([A-Z_0-9]+)%", lambda m: tokens.get(m.group(1), m.group(0)), SHELL)
+    return fill(t, "\n\n".join(rows), copy["assunto"], copy["preheader"])
+
+
+# ------------------------------------------------------------------ kit para download
+
+def kit():
+    """O sistema inteiro para aplicações: casca, todas as peças e tokens (ver email_kit.py)."""
+    variantes = []
+    for theme, t in THEMES.items():
+        p, cta_, ul, sign, ps = blocos(t)
+        passo = section_title("Lorem ipsum dolor sit amet, consectetur.", t) + paragraphs([LOREM["medio"]], t)
+        pecas = [
+            ("capa", "Capa", "linha", "Topo dos emails conversacionais: a chuva de luz numa faixa de 600x150.", row(capa(t), "0", cls="")),
+            ("hero", "Cabeçalho", "linha", "Topo dos emails com título: chuva de luz, manchete e ficha técnica.", row(hero(t), "0", cls="")),
+            ("passo", "Passo do trilho", "linha", "Um trecho numerado do texto: índice em mono, fio e título. Troque o número (01, 02...).",
+             row(rail("01", passo, t), "56px 40px 0")),
+            ("passo-final", "Último passo", "linha", "Fecha o trilho: vem logo depois de um passo, sem espaço acima.",
+             row(rail("03", paragraphs([LOREM["medio"]], t, "0") + signature(t), t, last=True), "0 40px")),
+            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "44px 40px 0", "px body")),
+            ("proximo-passo", "Próximo passo", "linha", "Fechamento com a ação: rótulo em mono e a tecla teal.",
+             row(f'<div style="margin-bottom:14px; {ts("Rótulo", t)}">Próximo passo</div>' + button(t), "56px 40px 0")),
+            ("rodape", "Rodapé", "linha", "Endereço, redes e descadastro. Obrigatório.", row(footer(t), "48px 40px 0")),
+            ("paragrafo", "Parágrafo", "bloco", "Todo o texto corrido. Frases curtas, um parágrafo por ideia.", p(LOREM["medio"])),
+            ("botao", "Botão", "bloco", "A ação do email: a tecla teal, alinhada ao texto.", cta_("Lorem ipsum dolor")),
+            ("janela", "Janela de editor", "bloco", "A frase que merece destaque, como um arquivo aberto.",
+             f'<div style="padding:10px 0 28px;">{window(t)}</div>'),
+            ("lista", "Lista numerada", "bloco", "Itens curtos e paralelos, numerados em mono.", ul(["Lorem ipsum dolor sit amet", "Consectetur adipiscing elit", "Sed do eiusmod tempor"])),
+            ("assinatura", "Assinatura", "bloco", "Quem assina o email. O cargo é opcional.", sign("Lorem Ipsum", "Dolor sit amet da Asimov Academy")),
+            ("ps", "PS", "bloco", "Pós-escrito no fim do texto.", ps(LOREM["curto"])),
+        ]
+        variantes.append(Variante(
+            id=theme, rotulo=f"Tema {theme}", tema=theme,
+            casca=fill(t, "{{linhas}}", "{{assunto}}", "{{preheader}}"),
+            componentes=[Componente(s, n, tp, u, h) for s, n, tp, u, h in pecas],
+            cores=dict({k: v for k, v in t.items() if isinstance(v, str) and v.startswith("#")}, ACCENT=ACCENT, ON_ACCENT=ON_ACCENT)))
+    return Kit(
+        slug="cadence", nome="Cadence", pasta="design-system-cadence",
+        descricao="A chuva de luz do Cadence Rain com cara de workspace: trilho numerado em mono, janela de editor e CTA como tecla teal.",
+        fontes=["Inter (Google Fonts), com Helvetica e Arial de reserva", "JetBrains Mono nos rótulos, com Menlo e Consolas de reserva"],
+        tipografia=[dict(nome=n, familia="mono" if fam == "MONO" else "sans", tamanho=s, entrelinha=lh, peso=w, tracking=tr, mobile=m, uso=u)
+                    for n, (fam, s, lh, w, tr, _, m, u) in TYPE.items()],
+        variantes=variantes,
+        exemplos=sorted(p.name for p in OUT.glob("*.html") if p.name != "index.html"),
+        montagem=[("Conversacional", ["capa", "corpo", "rodape"]),
+                  ("Com título", ["hero", "passo", "passo", "passo-final", "proximo-passo", "rodape"])],
+    )
 
 
 def spec_conversas():
@@ -542,6 +603,7 @@ def main():
             print(f'{copy["id"]}-{theme}.html')
     (OUT / "index.html").write_text(specimen())
     print("index.html")
+    write_kit(kit())
 
 
 if __name__ == "__main__":
