@@ -3,6 +3,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system--em-001-claro",
     "caminho": "design-system/em-001-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/aura/v1/",
     "sistema": "Aura",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -14,6 +15,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system--em-001-escuro",
     "caminho": "design-system/em-001-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/aura/v1/",
     "sistema": "Aura",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -25,6 +27,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system--em-005-claro",
     "caminho": "design-system/em-005-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/aura/v1/",
     "sistema": "Aura",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -36,6 +39,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system--em-005-escuro",
     "caminho": "design-system/em-005-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/aura/v1/",
     "sistema": "Aura",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -47,6 +51,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system--em-022-claro",
     "caminho": "design-system/em-022-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/aura/v1/",
     "sistema": "Aura",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -58,6 +63,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system--em-022-escuro",
     "caminho": "design-system/em-022-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/aura/v1/",
     "sistema": "Aura",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -69,6 +75,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system--email-claro",
     "caminho": "design-system/email-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/aura/v1/",
     "sistema": "Aura",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -80,6 +87,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system--email-escuro",
     "caminho": "design-system/email-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/aura/v1/",
     "sistema": "Aura",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -91,6 +99,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-cadence--em-001-claro",
     "caminho": "design-system-cadence/em-001-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/cadence/v1/",
     "sistema": "Cadence",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -102,6 +111,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-cadence--em-001-escuro",
     "caminho": "design-system-cadence/em-001-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/cadence/v1/",
     "sistema": "Cadence",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -113,6 +123,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-cadence--em-005-claro",
     "caminho": "design-system-cadence/em-005-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/cadence/v1/",
     "sistema": "Cadence",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -124,6 +135,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-cadence--em-005-escuro",
     "caminho": "design-system-cadence/em-005-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/cadence/v1/",
     "sistema": "Cadence",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -135,6 +147,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-cadence--em-022-claro",
     "caminho": "design-system-cadence/em-022-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/cadence/v1/",
     "sistema": "Cadence",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -146,6 +159,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-cadence--em-022-escuro",
     "caminho": "design-system-cadence/em-022-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/cadence/v1/",
     "sistema": "Cadence",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -157,6 +171,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-cadence--email-claro",
     "caminho": "design-system-cadence/email-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/cadence/v1/",
     "sistema": "Cadence",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -168,6 +183,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-cadence--email-escuro",
     "caminho": "design-system-cadence/email-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/cadence/v1/",
     "sistema": "Cadence",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -179,6 +195,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-001-ai-designer-claro",
     "caminho": "design-system-trilhas/em-001-ai-designer-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -190,6 +207,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-001-ai-designer-escuro",
     "caminho": "design-system-trilhas/em-001-ai-designer-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -201,6 +219,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-001-analista-dados-claro",
     "caminho": "design-system-trilhas/em-001-analista-dados-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -212,6 +231,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-001-analista-dados-escuro",
     "caminho": "design-system-trilhas/em-001-analista-dados-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -223,6 +243,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-001-engenheiro-ia-claro",
     "caminho": "design-system-trilhas/em-001-engenheiro-ia-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -234,6 +255,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-001-engenheiro-ia-escuro",
     "caminho": "design-system-trilhas/em-001-engenheiro-ia-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -245,6 +267,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-001-n8n-claro",
     "caminho": "design-system-trilhas/em-001-n8n-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -256,6 +279,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-001-n8n-escuro",
     "caminho": "design-system-trilhas/em-001-n8n-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -267,6 +291,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-001-teal-claro",
     "caminho": "design-system-trilhas/em-001-teal-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -278,6 +303,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-001-teal-escuro",
     "caminho": "design-system-trilhas/em-001-teal-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -289,6 +315,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-005-ai-designer-claro",
     "caminho": "design-system-trilhas/em-005-ai-designer-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -300,6 +327,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-005-ai-designer-escuro",
     "caminho": "design-system-trilhas/em-005-ai-designer-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -311,6 +339,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-005-analista-dados-claro",
     "caminho": "design-system-trilhas/em-005-analista-dados-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -322,6 +351,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-005-analista-dados-escuro",
     "caminho": "design-system-trilhas/em-005-analista-dados-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -333,6 +363,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-005-engenheiro-ia-claro",
     "caminho": "design-system-trilhas/em-005-engenheiro-ia-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -344,6 +375,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-005-engenheiro-ia-escuro",
     "caminho": "design-system-trilhas/em-005-engenheiro-ia-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -355,6 +387,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-005-n8n-claro",
     "caminho": "design-system-trilhas/em-005-n8n-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -366,6 +399,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-005-n8n-escuro",
     "caminho": "design-system-trilhas/em-005-n8n-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -377,6 +411,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-005-teal-claro",
     "caminho": "design-system-trilhas/em-005-teal-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -388,6 +423,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-005-teal-escuro",
     "caminho": "design-system-trilhas/em-005-teal-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -399,6 +435,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-022-ai-designer-claro",
     "caminho": "design-system-trilhas/em-022-ai-designer-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -410,6 +447,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-022-ai-designer-escuro",
     "caminho": "design-system-trilhas/em-022-ai-designer-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -421,6 +459,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-022-analista-dados-claro",
     "caminho": "design-system-trilhas/em-022-analista-dados-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -432,6 +471,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-022-analista-dados-escuro",
     "caminho": "design-system-trilhas/em-022-analista-dados-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -443,6 +483,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-022-engenheiro-ia-claro",
     "caminho": "design-system-trilhas/em-022-engenheiro-ia-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -454,6 +495,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-022-engenheiro-ia-escuro",
     "caminho": "design-system-trilhas/em-022-engenheiro-ia-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -465,6 +507,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-022-n8n-claro",
     "caminho": "design-system-trilhas/em-022-n8n-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -476,6 +519,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-022-n8n-escuro",
     "caminho": "design-system-trilhas/em-022-n8n-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -487,6 +531,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-022-teal-claro",
     "caminho": "design-system-trilhas/em-022-teal-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -498,6 +543,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--em-022-teal-escuro",
     "caminho": "design-system-trilhas/em-022-teal-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -509,6 +555,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--email-ai-designer-claro",
     "caminho": "design-system-trilhas/email-ai-designer-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -520,6 +567,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--email-ai-designer-escuro",
     "caminho": "design-system-trilhas/email-ai-designer-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -531,6 +579,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--email-analista-dados-claro",
     "caminho": "design-system-trilhas/email-analista-dados-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -542,6 +591,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--email-analista-dados-escuro",
     "caminho": "design-system-trilhas/email-analista-dados-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -553,6 +603,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--email-engenheiro-ia-claro",
     "caminho": "design-system-trilhas/email-engenheiro-ia-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -564,6 +615,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--email-engenheiro-ia-escuro",
     "caminho": "design-system-trilhas/email-engenheiro-ia-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -575,6 +627,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--email-n8n-claro",
     "caminho": "design-system-trilhas/email-n8n-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -586,6 +639,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--email-n8n-escuro",
     "caminho": "design-system-trilhas/email-n8n-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -597,6 +651,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--email-teal-claro",
     "caminho": "design-system-trilhas/email-teal-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -608,6 +663,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-trilhas--email-teal-escuro",
     "caminho": "design-system-trilhas/email-teal-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/trilhas/v1/",
     "sistema": "Trilhas",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -619,6 +675,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-black--em-001-claro",
     "caminho": "design-system-black/em-001-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/black/v1/",
     "sistema": "Black Friday",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -630,6 +687,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-black--em-001-escuro",
     "caminho": "design-system-black/em-001-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/black/v1/",
     "sistema": "Black Friday",
     "peca": "EM-001",
     "nome": "Você sumiu…",
@@ -641,6 +699,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-black--em-005-claro",
     "caminho": "design-system-black/em-005-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/black/v1/",
     "sistema": "Black Friday",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -652,6 +711,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-black--em-005-escuro",
     "caminho": "design-system-black/em-005-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/black/v1/",
     "sistema": "Black Friday",
     "peca": "EM-005",
     "nome": "Convite Exclusivo para você!",
@@ -663,6 +723,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-black--em-022-claro",
     "caminho": "design-system-black/em-022-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/black/v1/",
     "sistema": "Black Friday",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -674,6 +735,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-black--em-022-escuro",
     "caminho": "design-system-black/em-022-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/black/v1/",
     "sistema": "Black Friday",
     "peca": "EM-022",
     "nome": "Essa Black vai ser ao vivo",
@@ -685,6 +747,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-black--email-claro",
     "caminho": "design-system-black/email-claro.html",
+    "imagens_base": "https://img.asimov.academy/email/black/v1/",
     "sistema": "Black Friday",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",
@@ -696,6 +759,7 @@ window.AsimovEmailTemplates = [
   {
     "id": "design-system-black--email-escuro",
     "caminho": "design-system-black/email-escuro.html",
+    "imagens_base": "https://img.asimov.academy/email/black/v1/",
     "sistema": "Black Friday",
     "peca": "Aplicação",
     "nome": "Vitrine de componentes",

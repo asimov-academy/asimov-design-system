@@ -12,8 +12,9 @@ write_kit(). O kit sai em emails/kits/asimov-email-<slug>.zip com:
     exemplos/                os emails prontos do sistema
     img/                     as imagens usadas, para hospedar em outro lugar se precisar
 
-As imagens nos HTML já apontam para o site publicado (BASE_URL). O zip é determinístico:
-o mesmo conteúdo gera o mesmo arquivo, então rodar o build sem mudanças não suja o git.
+As imagens nos HTML apontam para a hospedagem de imagens de email (ASSETS_URL), não para
+o site do design system. O zip é determinístico: o mesmo conteúdo gera o mesmo arquivo,
+então rodar o build sem mudanças não suja o git.
 """
 import json
 import re
@@ -23,7 +24,25 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 KITS = ROOT / "emails" / "kits"
-BASE_URL = "https://asimov-design-system.vercel.app"
+SITE_URL = "https://asimov-design-system.vercel.app"
+
+# Onde as imagens dos emails ficam para disparo: bunny.net, Storage Zone "asimov-email" com a
+# Pull Zone em img.asimov.academy. Cada sistema tem uma versão, e uma versão publicada nunca
+# muda: emails já enviados continuam mostrando as mesmas imagens. Mudou alguma imagem de um
+# sistema? Suba a versão dele aqui, rode os builds e scripts/upload-email-assets.py.
+ASSETS_URL = "https://img.asimov.academy/email"
+SISTEMAS = {  # pasta em emails/ -> (slug, versão das imagens)
+    "design-system": ("aura", "v1"),
+    "design-system-cadence": ("cadence", "v1"),
+    "design-system-trilhas": ("trilhas", "v1"),
+    "design-system-black": ("black", "v1"),
+}
+
+
+def assets_base(pasta):
+    """URL da pasta de imagens de um sistema, com a versão. img/x.png vira <base>x.png."""
+    slug, versao = SISTEMAS[pasta]
+    return f"{ASSETS_URL}/{slug}/{versao}/"
 
 VARIAVEIS = {
     "{{assunto}}": "Assunto do email (vai no <title>).",
@@ -75,12 +94,13 @@ class Kit:
     notas: list = field(default_factory=list)
 
 
-def _absolute(html, pasta):
-    base = f"{BASE_URL}/emails/{pasta}/"
-    html = re.sub(r'(\s(?:src|background)=")(img/[^"]+)"', lambda m: f'{m.group(1)}{base}{m.group(2)}"', html)
-    html = re.sub(r"url\((['\"]?)(img/[^'\")]+)\1\)", lambda m: f"url({m.group(1)}{base}{m.group(2)}{m.group(1)})", html)
+def absolutize(html, pasta):
+    """Troca img/... pela URL hospedada. Texto puro, para alcançar também o VML do Outlook."""
+    base = assets_base(pasta)
+    html = re.sub(r'(\s(?:src|background)=")img/([^"]+)"', lambda m: f'{m.group(1)}{base}{m.group(2)}"', html)
+    html = re.sub(r"url\((['\"]?)img/([^'\")]+)\1\)", lambda m: f"url({m.group(1)}{base}{m.group(2)}{m.group(1)})", html)
     return html.replace("Antes do disparo, troque img/... por URLs absolutas hospedadas.",
-                        f"Imagens em URL absoluta ({BASE_URL}).")
+                        f"Imagens hospedadas em {base}")
 
 
 def _images(html):
@@ -119,7 +139,7 @@ def _readme(kit):
 
 {kit.descricao}
 
-Guia visual: {BASE_URL}/emails/{kit.pasta}/index.html
+Guia visual: {SITE_URL}/emails/{kit.pasta}/index.html
 
 ## O que tem aqui
 
@@ -170,7 +190,7 @@ Receitas comuns:
 
 - Troque só textos e links. Tabelas, estilos inline, larguras e os blocos `<!--[if mso]>` (Outlook) precisam ficar como estão.
 - Um botão por ideia. Rótulos curtos, com verbo.
-- Imagens: já apontam para `{BASE_URL}/emails/{kit.pasta}/img/`. Para hospedar em outro lugar, suba a pasta `img/` e troque esse prefixo.
+- Imagens: já apontam para `{assets_base(kit.pasta)}`, uma pasta que nunca muda. Para hospedar em outro lugar, suba a pasta `img/` e troque esse prefixo.
 - Teste no Gmail, no Outlook e no celular antes de disparar.
 {notas}
 
@@ -192,8 +212,8 @@ def _manifest(kit):
         "nome": kit.nome,
         "slug": kit.slug,
         "descricao": kit.descricao,
-        "guia": f"{BASE_URL}/emails/{kit.pasta}/index.html",
-        "imagens_base": f"{BASE_URL}/emails/{kit.pasta}/img/",
+        "guia": f"{SITE_URL}/emails/{kit.pasta}/index.html",
+        "imagens_base": assets_base(kit.pasta),
         "fontes": kit.fontes,
         "tipografia": kit.tipografia,
         "variaveis": VARIAVEIS,
@@ -227,7 +247,7 @@ def kit_files(kit):
     for e in kit.exemplos:
         html[f"exemplos/{e}"] = (src / e).read_text(encoding="utf-8")
     images = sorted(set().union(*(_images(h) for h in html.values())))
-    files = {f"{root}/{p}": _absolute(h, kit.pasta).encode("utf-8") for p, h in html.items()}
+    files = {f"{root}/{p}": absolutize(h, kit.pasta).encode("utf-8") for p, h in html.items()}
     for img in images:
         files[f"{root}/{img}"] = (src / img).read_bytes()
     files[f"{root}/LEIA-ME.md"] = _readme(kit).encode("utf-8")

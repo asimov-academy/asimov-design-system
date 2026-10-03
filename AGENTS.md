@@ -34,6 +34,9 @@ componentes e a montagem dos emails moram nele. Ele grava em `emails/design-syst
 - `img/`: imagens (só PNG e JPG; email não aceita SVG), no dobro do tamanho de exibição.
 
 E grava o kit para download em `emails/kits/asimov-email-<slug>.zip` via `scripts/email_kit.py`.
+Nos kits e no "Copiar HTML" do hub, `img/...` vira `https://img.asimov.academy/email/<slug>/<versão>/...`
+(bunny.net). A versão de cada sistema fica em `SISTEMAS`, no `email_kit.py`, e uma versão publicada nunca
+muda: mudou uma imagem, suba a versão e rode `scripts/upload-email-assets.py --enviar` (ver README).
 Por último, `scripts/build-email-export.py` gera `emails/templates.json`/`.js` (lista de templates
 do hub) e junta os kits em `emails/kits/asimov-email-design-systems.zip`. Os zips são
 determinísticos: sem mudança de conteúdo, o arquivo não muda.
@@ -76,7 +79,8 @@ O contrato que todo gerador cumpre:
    - Media query só para o mobile (`.px`, `.h1`, `.h2`, `.body`...); o email precisa funcionar sem ela.
 
 5. **Imagens** em `emails/design-system-<nome>/img/`, PNG ou JPG, no dobro do tamanho de exibição
-   (a capa é 1200x300 para 600x150). Precisam existir nos dois temas.
+   (a capa é 1200x300 para 600x150). Precisam existir nos dois temas. Registre o sistema em `SISTEMAS`
+   no `scripts/email_kit.py` (`"design-system-<nome>": ("<slug>", "v1")`): é o que define a pasta no bunny.net.
 
 6. **Emails.** `email(theme)` com a aplicação em lorem ipsum e `conversa(theme, copy)` para cada copy
    de `COPIES`. A conversa usa `render_blocks(copy["blocks"], *blocos(t))`.
@@ -102,11 +106,13 @@ O contrato que todo gerador cumpre:
     - Rode todos os geradores e o `build-email-export.py`; os outros sistemas não podem mudar.
     - Abra o `index.html` do sistema e os emails nos dois temas, no desktop e em 390px.
     - Abra `<variante>/catalogo.html` de dentro do zip.
+    - Suba as imagens com `python3 scripts/upload-email-assets.py --enviar` e confira com `--verificar`.
     - No hub, teste "Baixar kit" e "Copiar HTML".
     - Antes de usar de verdade, envie um teste para Gmail, Outlook e celular.
 
 ## Remover um design system de email
 
 Apague o gerador, a pasta em `emails/`, as miniaturas em `emails/_hub/`, o zip em `emails/kits/` e as
-referências no hub, no `SISTEMAS` do `build-email-export.py` e nos comandos de build. Depois rode o
+referências no hub, nos dois `SISTEMAS` (`build-email-export.py` e `email_kit.py`) e nos comandos de build.
+Não apague as imagens no bunny.net: emails já enviados ainda as usam. Depois rode o
 `build-email-export.py` para refazer a lista e o pacote completo.

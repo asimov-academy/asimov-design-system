@@ -2,8 +2,9 @@
  *
  * Lista os templates de window.AsimovEmailTemplates (gerado por
  * scripts/build-email-export.py) e, para cada um, copia ou baixa o HTML completo
- * com as imagens em URL absoluta. Assim o arquivo funciona fora deste site: numa
- * ferramenta de email ou entregue a uma LLM junto com a copy.
+ * com as imagens apontando para a hospedagem de imagens de email (img.asimov.academy,
+ * pasta com versão, em template.imagens_base). Assim o arquivo funciona fora deste
+ * site: numa ferramenta de email ou entregue a uma LLM junto com a copy.
  *
  * Buscar o HTML exige http(s): via file:// o navegador bloqueia o fetch, e a
  * seção avisa isso em vez de falhar calada.
@@ -21,7 +22,6 @@
     cor: root.querySelector('[data-filter="cor"]'),
   };
   const isFile = location.protocol === "file:";
-  const isLocal = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname) || location.hostname.endsWith(".localhost");
 
   const escape = (text) => String(text).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   const unique = (key) => [...new Set(templates.map((t) => t[key]).filter(Boolean))];
@@ -29,13 +29,18 @@
   fill(filters.sistema, unique("sistema"));
   fill(filters.cor, unique("cor"));
 
-  // Caminhos relativos (src, background, url()) viram absolutos em relação ao próprio
-  // template. É texto puro de propósito: o código do Outlook mora dentro de comentários
+  // Caminhos relativos (src, background, url()) viram absolutos: img/... vai para a
+  // hospedagem de imagens de email; qualquer outro, para o endereço do próprio template.
+  // É texto puro de propósito: o código do Outlook mora dentro de comentários
   // (<!--[if mso]>) e um parser de HTML não reescreveria o que está ali.
   const keep = /^(?:[a-z][a-z0-9+.-]*:|\/\/|#|\{\{)/i;
-  const absolutize = (html, base) => html
-    .replace(/(\s(?:src|background)=)(["'])([^"']+)\2/gi, (all, attr, quote, value) => keep.test(value) ? all : `${attr}${quote}${new URL(value, base).href}${quote}`)
-    .replace(/url\((["']?)([^"')]+)\1\)/gi, (all, quote, value) => keep.test(value.trim()) ? all : `url(${quote}${new URL(value.trim(), base).href}${quote})`);
+  const absolutize = (html, template, page) => {
+    const resolve = (value) => value.startsWith("img/") ? template.imagens_base + value.slice(4) : new URL(value, page).href;
+    return html
+      .replace(/(\s(?:src|background)=)(["'])([^"']+)\2/gi, (all, attr, quote, value) => keep.test(value) ? all : `${attr}${quote}${resolve(value)}${quote}`)
+      .replace(/url\((["']?)([^"')]+)\1\)/gi, (all, quote, value) => keep.test(value.trim()) ? all : `url(${quote}${resolve(value.trim())}${quote})`)
+      .replace("Antes do disparo, troque img/... por URLs absolutas hospedadas.", `Imagens hospedadas em ${template.imagens_base}`);
+  };
 
   const say = (message, tone = "") => {
     status.textContent = message;
@@ -46,7 +51,7 @@
     const url = new URL(template.caminho, location.href);
     const response = await fetch(url, { cache: "no-cache" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return absolutize(await response.text(), url);
+    return absolutize(await response.text(), template, url);
   };
 
   const copy = async (text) => {
@@ -127,6 +132,5 @@
 
   Object.values(filters).forEach((select) => select.addEventListener("change", render));
   if (isFile) say("Aberto via file://: a exportação só funciona pelo site publicado ou por um servidor local.", "warn");
-  else if (isLocal) say(`As imagens vão apontar para ${location.origin}. Para usar em emails reais, exporte pelo site publicado.`, "warn");
   render();
 })();

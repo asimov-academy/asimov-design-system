@@ -22,7 +22,7 @@ import zipfile
 from pathlib import Path
 
 from email_copies import COPIES
-from email_kit import KITS, write_zip
+from email_kit import KITS, assets_base, write_zip
 
 ROOT = Path(__file__).resolve().parent.parent
 EMAILS = ROOT / "emails"
@@ -72,6 +72,7 @@ def ds_templates():
             yield {
                 "id": path.relative_to(EMAILS).with_suffix("").as_posix().replace("/", "--"),
                 "caminho": path.relative_to(EMAILS).as_posix(),
+                "imagens_base": assets_base(folder),
                 "sistema": sistema,
                 "peca": peca,
                 "nome": nome,

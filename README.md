@@ -77,13 +77,27 @@ No hub de emails (`/emails/`), a seção **Exportar** tem dois caminhos.
 
 **Um email por vez.** Em cada template, **Copiar HTML** e **Baixar .html**. A lista para código fica em `emails/templates.json`.
 
-Nos dois casos as imagens já apontam para o site publicado (`https://asimov-design-system.vercel.app`), e os links ficam como variáveis para a aplicação trocar no envio: `{{link_cta}}`, `{{link_descadastro}}`, `{{link_youtube}}`, `{{link_instagram}}`, `{{link_linkedin}}` e `{{endereco}}`. Com uma LLM, peça para trocar só os textos: tabelas, estilos inline, os blocos `<!--[if mso]>` do Outlook e as variáveis precisam ficar como estão.
+Nos dois casos as imagens já apontam para `https://img.asimov.academy/email/<sistema>/<versão>/` (bunny.net; ver abaixo), e os links ficam como variáveis para a aplicação trocar no envio: `{{link_cta}}`, `{{link_descadastro}}`, `{{link_youtube}}`, `{{link_instagram}}`, `{{link_linkedin}}` e `{{endereco}}`. Com uma LLM, peça para trocar só os textos: tabelas, estilos inline, os blocos `<!--[if mso]>` do Outlook e as variáveis precisam ficar como estão.
 
 Os kits e a lista são gerados pelos scripts. Depois de mudar um design system de email, rode:
 
 ```bash
 python3 scripts/build-email-ds.py && python3 scripts/build-email-ds-cadence.py && python3 scripts/build-email-ds-trilhas.py && python3 scripts/build-email-ds-black.py && python3 scripts/build-email-export.py
 ```
+
+### Imagens dos emails (bunny.net)
+
+As imagens dos emails não saem deste site: ficam no bunny.net (Storage Zone `asimov-email`, região São Paulo), servidas em `https://img.asimov.academy` pela Pull Zone `asimov-email`, com SSL e cache de 1 ano. O DNS é um CNAME `img` na Hostinger apontando para `asimov-email.b-cdn.net`.
+
+Cada sistema tem uma pasta com versão, por exemplo `email/aura/v1/`, definida em `SISTEMAS` no `scripts/email_kit.py`. Uma versão publicada nunca muda, para os emails já enviados continuarem iguais. Para trocar uma imagem: suba a versão do sistema (`v1` → `v2`), rode os builds e envie.
+
+```bash
+python3 scripts/upload-email-assets.py              # mostra o que falta subir
+python3 scripts/upload-email-assets.py --enviar     # sobe; precisa de BUNNY_STORAGE_ZONE, BUNNY_STORAGE_HOST e BUNNY_STORAGE_KEY
+python3 scripts/upload-email-assets.py --verificar  # confere cada imagem na CDN
+```
+
+A senha da Storage Zone (`BUNNY_STORAGE_KEY`) fica só no terminal de quem envia; nunca entra no repositório.
 
 O processo completo para criar um design system de email novo está em `AGENTS.md`.
 
