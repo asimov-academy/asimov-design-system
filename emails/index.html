@@ -75,6 +75,7 @@
     .btn svg { width: 18px; height: 18px; }
     .link { font-size: 14px; color: #d4d4d8; text-decoration: none; border-bottom: 1px solid var(--line-2); padding-bottom: 2px; }
     .link:hover { color: #fff; border-color: var(--accent); }
+    .link.dl::before { content: "↓ "; }
 
     /* tabelas */
     .compare { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 21px; }
@@ -109,49 +110,28 @@
     .note b { display: block; font-weight: 500; font-size: 16px; margin-bottom: 8px; }
     .note p { margin: 0; color: #a1a1aa; font-size: 14px; line-height: 22px; }
     .note code { display: block; margin-top: 6px; font-family: var(--mono); font-size: 12px; color: var(--accent-glow); overflow-wrap: anywhere; }
-    /* exportar HTML */
-    .xp-bar { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin-bottom: 14px; }
-    .xp-bar label { display: grid; gap: 6px; color: var(--muted); font-size: 12px; }
-    .xp-bar label[hidden] { display: none; }
-    .xp-bar select { min-width: 180px; padding: 10px 12px; border: 1px solid var(--line-2); border-radius: 12px; color: var(--text); background: var(--surface); font: inherit; font-size: 14px; }
-    .xp-bar select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-    .xp-count { margin-left: auto; padding-bottom: 11px; color: var(--muted); font-size: 13px; }
-    .xp-status { min-height: 21px; margin: 0 0 14px; color: var(--body); font-size: 14px; line-height: 21px; }
-    .xp-status[data-tone="ok"] { color: var(--accent-glow); }
-    .xp-status[data-tone="warn"] { color: #fbbf24; }
-    .xp-status[data-tone="error"] { color: #fb7185; }
-    .xp-list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); max-height: 560px; overflow: auto; }
-    .xp-list li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--line); }
-    .xp-list li:last-child { border-bottom: 0; }
-    .xp-name b { display: block; font-weight: 500; font-size: 15px; }
-    .xp-name b span { color: var(--body); font-weight: 400; }
-    .xp-name small { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; }
-    .xp-actions { display: flex; align-items: center; gap: 8px; flex: none; }
-    .xp-actions a { margin-right: 6px; color: #d4d4d8; font-size: 13px; text-decoration: none; border-bottom: 1px solid var(--line-2); }
-    .xp-actions a:hover { color: #fff; border-color: var(--accent); }
-    .xp-actions button { padding: 8px 14px; border: 1px solid var(--line-2); border-radius: 999px; color: var(--text); background: transparent; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: border-color .2s, background .2s; }
-    .xp-actions button:hover { border-color: var(--accent); background: rgba(20,184,166,.08); }
-    .xp-actions button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-    .xp-actions button:disabled { opacity: .5; cursor: progress; }
-    .xp-notes { margin-top: 14px; }
-    .xp-h { margin: 0; font-weight: 500; font-size: 22px; letter-spacing: -.4px; }
-    .xp-h + .xp-sub { margin: 6px 0 18px; max-width: 720px; color: #a1a1aa; font-size: 14px; line-height: 22px; }
-    .kits + .xp-h { margin-top: 48px; }
-    .kits { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-    .kit { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 18px; border: 1px solid var(--line-2); border-radius: 18px; background: var(--surface); color: var(--text); text-decoration: none; transition: border-color .2s, transform .2s; }
-    .kit:hover { border-color: var(--c); transform: translateY(-1px); }
-    .kit:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-    .kit i { width: 10px; height: 10px; margin-bottom: 10px; border-radius: 99px; background: var(--c); box-shadow: 0 0 10px var(--c); }
-    .kit b { font-weight: 500; font-size: 17px; }
-    .kit span { color: var(--muted); font-size: 12px; line-height: 17px; }
-    .kit svg { position: absolute; top: 16px; right: 16px; width: 18px; height: 18px; color: #a1a1aa; }
-    .kit:hover svg { color: var(--c); }
-    .kit-all { background: linear-gradient(135deg, #0a0a0a, #151518); }
-    .link.dl::before { content: "↓ "; }
+    /* baixar */
+    .downloads { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .download { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 28px 28px 26px; border-radius: 22px; text-decoration: none; transition: transform .2s, box-shadow .2s, border-color .2s; }
+    .download:hover { transform: translateY(-2px); }
+    .download:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .download small { font-size: 12px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; }
+    .download b { font-weight: 500; font-size: 28px; letter-spacing: -.8px; }
+    .download span { font-size: 14px; line-height: 22px; }
+    .download em { margin-top: 14px; font-style: normal; font-size: 13px; }
+    .download svg { position: absolute; top: 26px; right: 26px; width: 22px; height: 22px; }
+    .download.escuro { border: 1px solid var(--line-2); background: radial-gradient(ellipse 80% 90% at 100% 0%, rgba(20,184,166,.16), transparent 60%), #0b0c0e; color: var(--text); }
+    .download.escuro small, .download.escuro svg { color: var(--accent-light); }
+    .download.escuro span, .download.escuro em { color: #a1a1aa; }
+    .download.escuro:hover { border-color: rgba(45,212,191,.5); }
+    .download.claro { border: 1px solid #e4e4e7; background: radial-gradient(ellipse 80% 90% at 100% 0%, rgba(20,184,166,.14), transparent 60%), #fafafa; color: #09090b; }
+    .download.claro small, .download.claro svg { color: #0f766e; }
+    .download.claro span, .download.claro em { color: #52525b; }
+    .download.claro:hover { box-shadow: 0 16px 40px -18px rgba(255,255,255,.35); }
     footer { margin-top: 120px; padding: 32px 0 48px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; color: var(--muted); font-size: 13px; flex-wrap: wrap; }
     footer a { color: #a1a1aa; text-decoration: none; }
 
-    @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, 1fr); } .kits { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 900px) {
       .ds { grid-template-columns: 1fr; }
       .ds-visual { min-height: 380px; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -161,11 +141,10 @@
       .stats div:nth-child(3) { border-left: 0; }
       .stats div:nth-child(n+3) { border-top: 1px solid var(--line); }
       .top nav { display: none; }
-      .xp-list li { flex-direction: column; align-items: flex-start; }
-      .xp-count { margin-left: 0; width: 100%; }
+      .downloads { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
-      .grid, .kits { grid-template-columns: repeat(2, 1fr); }
+      .grid { grid-template-columns: repeat(2, 1fr); }
       .ds-visual { min-height: 300px; }
       .ds-info h3 { font-size: 30px; line-height: 34px; }
       .traits li { grid-template-columns: 1fr; gap: 2px; }
@@ -182,19 +161,19 @@
           <a href="#design-systems">Design systems</a>
           <a href="design-system-black/index.html">Black Friday DS</a>
           <a href="#conversacionais">Conversacionais</a>
-          <a href="#exportar">Exportar</a>
+          <a href="#baixar">Baixar</a>
           <a href="../design-system.html">Asimov Design System &rarr;</a>
         </nav>
       </div>
       <div class="hero-in">
         <span class="pill"><i></i>EMAIL · ASIMOV ACADEMY <span>V1.0</span></span>
         <h1>Design systems de email</h1>
-        <p>Tudo o que existe de email na linguagem da Asimov, num lugar só: quatro sistemas, cada um com tema claro e escuro, e os templates já feitos com eles.</p>
+        <p>Tudo o que existe de email na linguagem da Asimov, num lugar só: três sistemas, cada um com tema claro e escuro, e os templates já feitos com eles.</p>
         <div class="stats">
-          <div><b>4</b><span>design systems</span></div>
+          <div><b>3</b><span>design systems</span></div>
           <div><b>2</b><span>temas em cada</span></div>
-          <div><b>5</b><span>cores de trilha</span></div>
-          <div><b>64</b><span>emails prontos</span></div>
+          <div><b>3</b><span>copies reais</span></div>
+          <div><b>24</b><span>emails prontos</span></div>
         </div>
       </div>
     </div>
@@ -224,9 +203,8 @@
           </ul>
           <div class="actions">
             <a class="btn" href="design-system/index.html">Abrir design system <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
-            <a class="link dl" href="kits/asimov-email-aura.zip" download>Baixar kit (.zip)</a>
-            <a class="link" href="design-system/email-escuro.html">Email escuro</a>
-            <a class="link" href="design-system/email-claro.html">Email claro</a>
+            <a class="link dl" href="asimov-email-aura-escuro.html" download>Baixar escuro</a>
+            <a class="link dl" href="asimov-email-aura-claro.html" download>Baixar claro</a>
           </div>
         </div>
       </article>
@@ -239,52 +217,21 @@
         <div class="ds-info">
           <div class="ds-num">02</div>
           <h3>Cadence</h3>
-          <p>A chuva de luz do Cadence Rain com cara de workspace. O texto anda por um trilho numerado, a frase importante ganha uma janela de editor e o CTA é uma tecla teal.</p>
+          <p>A chuva de luz do Cadence Rain com cara de workspace. O texto corre em seções com título, a frase importante ganha uma janela de editor e o CTA é uma tecla teal.</p>
           <ul class="traits">
             <li><span>Topo</span>Chuva de luz teal e uma ficha técnica em três células</li>
             <li><span>Destaque</span>Janela com três pontos e nome de arquivo</li>
             <li><span>CTA</span>Tecla teal alinhada ao texto</li>
-            <li><span>Quando usar</span>Conteúdo técnico, passo a passo, séries numeradas</li>
+            <li><span>Quando usar</span>Conteúdo técnico, tutoriais e séries</li>
           </ul>
           <div class="actions">
             <a class="btn" href="design-system-cadence/index.html">Abrir design system <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
-            <a class="link dl" href="kits/asimov-email-cadence.zip" download>Baixar kit (.zip)</a>
-            <a class="link" href="design-system-cadence/email-escuro.html">Email escuro</a>
-            <a class="link" href="design-system-cadence/email-claro.html">Email claro</a>
+            <a class="link dl" href="asimov-email-cadence-escuro.html" download>Baixar escuro</a>
+            <a class="link dl" href="asimov-email-cadence-claro.html" download>Baixar claro</a>
           </div>
         </div>
       </article>
 
-      <article class="ds" style="--c:#fb923c;">
-        <div class="ds-visual">
-          <img class="b" src="_hub/trilhas-claro.jpg" alt="Email Trilhas AI Designer, tema claro" loading="lazy">
-          <img class="f" src="_hub/trilhas-escuro.jpg" alt="Email Trilhas Analista de Dados, tema escuro" loading="lazy">
-        </div>
-        <div class="ds-info">
-          <div class="ds-num">03</div>
-          <h3>Trilhas</h3>
-          <p>Uma cor para cada formação, com as paletas do themes.js. Um halo de luz abre o email com o título dentro do anel. Números, faixa de espectro e botão assumem a cor da trilha.</p>
-          <ul class="traits">
-            <li><span>Topo</span>Halo na cor da trilha, gerado por cor e tema</li>
-            <li><span>Destaque</span>Marcos numerados e citação com barra de espectro</li>
-            <li><span>CTA</span>Botão dentro de um halo menor, texto com contraste calculado</li>
-            <li><span>Quando usar</span>Comunicação de uma formação ou trilha específica</li>
-          </ul>
-          <div class="dots">
-            <a href="design-system-trilhas/index.html#teal" style="--d:#14b8a6;"><i></i>Teal Asimov</a>
-            <a href="design-system-trilhas/index.html#engenheiro-ia" style="--d:#06b6d4;"><i></i>Engenheiro de IA</a>
-            <a href="design-system-trilhas/index.html#analista-dados" style="--d:#f97316;"><i></i>Analista de Dados</a>
-            <a href="design-system-trilhas/index.html#ai-designer" style="--d:#2563eb;"><i></i>AI Designer</a>
-            <a href="design-system-trilhas/index.html#n8n" style="--d:#f43f5e;"><i></i>Automações n8n</a>
-          </div>
-          <div class="actions">
-            <a class="btn" href="design-system-trilhas/index.html">Abrir design system <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
-            <a class="link dl" href="kits/asimov-email-trilhas.zip" download>Baixar kit (.zip)</a>
-            <a class="link" href="design-system-trilhas/email-analista-dados-escuro.html">Email escuro</a>
-            <a class="link" href="design-system-trilhas/email-ai-designer-claro.html">Email claro</a>
-          </div>
-        </div>
-      </article>
 
       <article class="ds" style="--c:#ff6e14;">
         <div class="ds-visual">
@@ -292,20 +239,19 @@
           <img class="f" src="_hub/black-escuro.jpg" alt="Email Black Friday, tema escuro" loading="lazy">
         </div>
         <div class="ds-info">
-          <div class="ds-num">04</div>
+          <div class="ds-num">03</div>
           <h3>Black Friday <span class="badge">Campanha 2026</span></h3>
           <p>A estrutura do design system Asimov nas cores da campanha, tiradas do Figma da Black: preto, laranja #ff6e14, luz teal e Rethink Sans. O visual não escreve “Black Friday”; quem fala da Black é o texto.</p>
           <ul class="traits">
             <li><span>Topo</span>Capa estreita com a luz da campanha e só o ASIMOV</li>
             <li><span>Destaque</span>Fio de cor no topo e faixa em degradê com ASIMOV no fim</li>
-            <li><span>CTA</span>Pílula laranja em degradê, em caixa alta; peças de campanha são opcionais</li>
+            <li><span>CTA</span>Laranja com seta em círculo (chamativo) ou neutro (discreto); contorno para uma segunda ação</li>
             <li><span>Quando usar</span>Todas as fases da campanha de Black Friday</li>
           </ul>
           <div class="actions">
             <a class="btn" href="design-system-black/index.html" style="background:linear-gradient(180deg,#d48859,#ff6e14); color:#fff; box-shadow:0 10px 32px rgba(255,110,20,.32);">Abrir design system <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></a>
-            <a class="link dl" href="kits/asimov-email-black.zip" download>Baixar kit (.zip)</a>
-            <a class="link" href="design-system-black/em-022-escuro.html">EM-022 escuro</a>
-            <a class="link" href="design-system-black/em-022-claro.html">EM-022 claro</a>
+            <a class="link dl" href="asimov-email-black-escuro.html" download>Baixar escuro</a>
+            <a class="link dl" href="asimov-email-black-claro.html" download>Baixar claro</a>
           </div>
         </div>
       </article>
@@ -315,45 +261,25 @@
     <section id="conversacionais">
       <div class="sec-head">
         <div><div class="kicker">Aplicação</div><h2>Emails conversacionais</h2></div>
-        <p>A maior parte dos emails da Asimov não tem título: abre direto na conversa. Três copies reais (EM-001, EM-005, EM-022) aplicadas em cada design system, nos dois temas. No Trilhas, existem nas cinco cores; aqui aparece a teal.</p>
+        <p>A maior parte dos emails da Asimov não tem título: abre direto na conversa. Três copies reais (EM-001, EM-005, EM-022) aplicadas em cada design system, nos dois temas.</p>
       </div>
       <div class="scroll-x">
         <table class="compare conv-table">
-          <thead><tr><th>Copy</th><th style="--c:#2dd4bf;"><i></i>Aura</th><th style="--c:#5eead4;"><i></i>Cadence</th><th style="--c:#fb923c;"><i></i>Trilhas · teal</th><th style="--c:#ff6e14;"><i></i>Black Friday</th></tr></thead>
-          <tbody><tr><td><span style="font-family:var(--mono); color:var(--accent-light);">EM-001</span><br><b style="font-weight:500; color:#fff;">Você sumiu…</b><br><span style="color:var(--muted); font-size:12px;">Engajamento · Não aluno não engajado</span></td><td><a href="design-system/em-001-escuro.html">Escuro</a> &middot; <a href="design-system/em-001-claro.html">Claro</a></td><td><a href="design-system-cadence/em-001-escuro.html">Escuro</a> &middot; <a href="design-system-cadence/em-001-claro.html">Claro</a></td><td><a href="design-system-trilhas/em-001-teal-escuro.html">Escuro</a> &middot; <a href="design-system-trilhas/em-001-teal-claro.html">Claro</a></td><td><a href="design-system-black/em-001-escuro.html">Escuro</a> &middot; <a href="design-system-black/em-001-claro.html">Claro</a></td></tr><tr><td><span style="font-family:var(--mono); color:var(--accent-light);">EM-005</span><br><b style="font-weight:500; color:#fff;">Convite Exclusivo para você!</b><br><span style="color:var(--muted); font-size:12px;">Pré-captura · Aluno Trilha</span></td><td><a href="design-system/em-005-escuro.html">Escuro</a> &middot; <a href="design-system/em-005-claro.html">Claro</a></td><td><a href="design-system-cadence/em-005-escuro.html">Escuro</a> &middot; <a href="design-system-cadence/em-005-claro.html">Claro</a></td><td><a href="design-system-trilhas/em-005-teal-escuro.html">Escuro</a> &middot; <a href="design-system-trilhas/em-005-teal-claro.html">Claro</a></td><td><a href="design-system-black/em-005-escuro.html">Escuro</a> &middot; <a href="design-system-black/em-005-claro.html">Claro</a></td></tr><tr><td><span style="font-family:var(--mono); color:var(--accent-light);">EM-022</span><br><b style="font-weight:500; color:#fff;">Essa Black vai ser ao vivo</b><br><span style="color:var(--muted); font-size:12px;">Captação · Não aluno não engajado</span></td><td><a href="design-system/em-022-escuro.html">Escuro</a> &middot; <a href="design-system/em-022-claro.html">Claro</a></td><td><a href="design-system-cadence/em-022-escuro.html">Escuro</a> &middot; <a href="design-system-cadence/em-022-claro.html">Claro</a></td><td><a href="design-system-trilhas/em-022-teal-escuro.html">Escuro</a> &middot; <a href="design-system-trilhas/em-022-teal-claro.html">Claro</a></td><td><a href="design-system-black/em-022-escuro.html">Escuro</a> &middot; <a href="design-system-black/em-022-claro.html">Claro</a></td></tr></tbody>
+          <thead><tr><th>Copy</th><th style="--c:#2dd4bf;"><i></i>Aura</th><th style="--c:#5eead4;"><i></i>Cadence</th><th style="--c:#ff6e14;"><i></i>Black Friday</th></tr></thead>
+          <tbody><tr><td><span style="font-family:var(--mono); color:var(--accent-light);">EM-001</span><br><b style="font-weight:500; color:#fff;">Você sumiu…</b><br><span style="color:var(--muted); font-size:12px;">Engajamento · Não aluno não engajado</span></td><td><a href="design-system/em-001-escuro.html">Escuro</a> &middot; <a href="design-system/em-001-claro.html">Claro</a></td><td><a href="design-system-cadence/em-001-escuro.html">Escuro</a> &middot; <a href="design-system-cadence/em-001-claro.html">Claro</a></td><td><a href="design-system-black/em-001-escuro.html">Escuro</a> &middot; <a href="design-system-black/em-001-claro.html">Claro</a></td></tr><tr><td><span style="font-family:var(--mono); color:var(--accent-light);">EM-005</span><br><b style="font-weight:500; color:#fff;">Convite Exclusivo para você!</b><br><span style="color:var(--muted); font-size:12px;">Pré-captura · Aluno Trilha</span></td><td><a href="design-system/em-005-escuro.html">Escuro</a> &middot; <a href="design-system/em-005-claro.html">Claro</a></td><td><a href="design-system-cadence/em-005-escuro.html">Escuro</a> &middot; <a href="design-system-cadence/em-005-claro.html">Claro</a></td><td><a href="design-system-black/em-005-escuro.html">Escuro</a> &middot; <a href="design-system-black/em-005-claro.html">Claro</a></td></tr><tr><td><span style="font-family:var(--mono); color:var(--accent-light);">EM-022</span><br><b style="font-weight:500; color:#fff;">Essa Black vai ser ao vivo</b><br><span style="color:var(--muted); font-size:12px;">Captação · Não aluno não engajado</span></td><td><a href="design-system/em-022-escuro.html">Escuro</a> &middot; <a href="design-system/em-022-claro.html">Claro</a></td><td><a href="design-system-cadence/em-022-escuro.html">Escuro</a> &middot; <a href="design-system-cadence/em-022-claro.html">Claro</a></td><td><a href="design-system-black/em-022-escuro.html">Escuro</a> &middot; <a href="design-system-black/em-022-claro.html">Claro</a></td></tr></tbody>
         </table>
       </div>
     </section>
 
 
-    <section id="exportar" data-export>
+    <section id="baixar">
       <div class="sec-head">
-        <div><div class="kicker">Para aplicações</div><h2>Exportar</h2></div>
-        <p>O design system inteiro num .zip, para montar emails novos numa aplicação, ou o HTML de um email pronto. As imagens já vêm hospedadas em img.asimov.academy, então tudo funciona fora daqui.</p>
+        <div><div class="kicker">Para aplicações</div><h2>Baixar</h2></div>
+        <p>Um arquivo por tema, com os três design systems: como usar no topo, depois as fundações, todos os elementos e os exemplos de aplicação de cada sistema. É um HTML só, que abre no navegador e serve de referência para uma aplicação ou uma LLM. Para um sistema só, use o botão no cartão dele, acima.</p>
       </div>
-      <h3 class="xp-h">Design system completo</h3>
-      <p class="xp-sub">Casca do email, todos os componentes em cada tema (e cor, no Trilhas), catálogo visual, tokens em JSON, emails de exemplo, imagens e um LEIA-ME com as regras e um prompt para LLM.</p>
-      <div class="kits">
-        <a class="kit" href="kits/asimov-email-aura.zip" download style="--c:#2dd4bf;"><i></i><b>Aura</b><span>2 temas · 16 peças</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
-        <a class="kit" href="kits/asimov-email-cadence.zip" download style="--c:#5eead4;"><i></i><b>Cadence</b><span>2 temas · 13 peças</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
-        <a class="kit" href="kits/asimov-email-trilhas.zip" download style="--c:#fb923c;"><i></i><b>Trilhas</b><span>5 cores × 2 temas · 14 peças</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
-        <a class="kit" href="kits/asimov-email-black.zip" download style="--c:#ff6e14;"><i></i><b>Black Friday</b><span>2 temas · 26 peças</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
-        <a class="kit kit-all" href="kits/asimov-email-design-systems.zip" download style="--c:#a1a1aa;"><i></i><b>Os quatro</b><span>Todos os kits num .zip só</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
-      </div>
-      <h3 class="xp-h">Um email por vez</h3>
-      <p class="xp-sub">O HTML completo de um email pronto, para colar numa ferramenta de email ou entregar a uma LLM junto com a copy.</p>
-      <div class="xp-bar">
-        <label>Design system<select data-filter="sistema"><option value="">Todos</option></select></label>
-        <label>Tema<select data-filter="tema"><option value="">Todos</option><option value="escuro">Escuro</option><option value="claro">Claro</option></select></label>
-        <label>Cor da trilha<select data-filter="cor"><option value="">Todas</option></select></label>
-        <span class="xp-count" data-export-count></span>
-      </div>
-      <p class="xp-status" data-export-status role="status" aria-live="polite"></p>
-      <ul class="xp-list" data-export-list></ul>
-      <div class="notes xp-notes">
-        <div class="note"><b>Variáveis</b><p>Os links ficam como variáveis para a aplicação trocar no envio.</p><code>{{link_cta}} {{link_descadastro}} {{link_youtube}} {{link_instagram}} {{link_linkedin}} {{endereco}}</code></div>
-        <div class="note"><b>Com uma LLM</b><p>Peça para trocar só os textos. Tabelas, estilos inline, os blocos <code style="display:inline; margin:0;">&lt;!--[if mso]&gt;</code> do Outlook e as variáveis precisam ficar como estão.</p></div>
-        <div class="note"><b>Lista para código</b><p>Todos os templates, com sistema, peça, tema, cor e caminho, num JSON público.</p><code><a href="templates.json" style="color:inherit;">emails/templates.json</a></code></div>
+      <div class="downloads">
+        <a class="download escuro" href="asimov-email-escuro.html" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><small>Tema escuro</small><b>Design systems de email</b><span>Aura, Cadence e Black Friday, com elementos e exemplos.</span><em>asimov-email-escuro.html</em></a>
+        <a class="download claro" href="asimov-email-claro.html" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><small>Tema claro</small><b>Design systems de email</b><span>Aura, Cadence e Black Friday, com elementos e exemplos.</span><em>asimov-email-claro.html</em></a>
       </div>
     </section>
 
@@ -365,7 +291,7 @@
       </div>
       <div class="notes">
         <div class="note"><b>Edite o gerador, não o HTML</b><p>Cada design system tem um script que gera a página e os emails a partir dos mesmos tokens.</p><code>python3 scripts/build-email-ds.py</code></div>
-        <div class="note"><b>Imagens hospedadas</b><p>O <a href="#exportar" style="color:inherit;">Exportar</a> já entrega as imagens no bunny.net, numa pasta com versão que nunca muda. Fundos e ícones são JPG e PNG, porque email não aceita SVG.</p><code>img/aura-hero-escuro.jpg → https://img.asimov.academy/email/aura/v1/aura-hero-escuro.jpg</code></div>
+        <div class="note"><b>Imagens hospedadas</b><p>Os <a href="#baixar" style="color:inherit;">arquivos de download</a> já trazem as imagens no bunny.net, numa pasta com versão que nunca muda. Fundos e ícones são JPG e PNG, porque email não aceita SVG.</p><code>img/aura-hero-escuro.jpg → https://img.asimov.academy/email/aura/v1/aura-hero-escuro.jpg</code></div>
         <div class="note"><b>Teste nos clientes</b><p>Gmail e Outlook não carregam Inter nem degradês. Tudo tem cor sólida e fonte substituta, mas vale um teste real antes do envio.</p><code>Gmail · Outlook · Apple Mail · iOS</code></div>
       </div>
     </section>
@@ -375,7 +301,5 @@
       <a href="../design-system.html">Voltar ao Asimov Design System &rarr;</a>
     </footer>
   </main>
-  <script src="templates.js"></script>
-  <script src="export.js"></script>
 </body>
 </html>

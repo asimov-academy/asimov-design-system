@@ -65,31 +65,24 @@ Os textos e dados exibidos são demonstrativos e devem ser substituídos pelo co
 
 ## Usar os emails em outras aplicações
 
-No hub de emails (`/emails/`), a seção **Exportar** tem dois caminhos.
+No hub de emails (`/emails/`), a seção **Baixar** tem dois arquivos, `emails/asimov-email-escuro.html` e `emails/asimov-email-claro.html`, com os três design systems naquele tema (Aura, Cadence e Black Friday). O cartão de cada sistema baixa só ele, no mesmo formato: `emails/asimov-email-<sistema>-<tema>.html`. Cada arquivo é um HTML só, com:
 
-**Design system completo (.zip).** Um kit por sistema (Aura, Cadence, Trilhas, Black Friday) ou os quatro juntos, em `emails/kits/`. Serve para uma aplicação montar emails novos:
+- **Como usar**, no topo: qual sistema escolher, como montar um email com casca, linhas e blocos, variáveis, regras e um prompt para LLM.
+- Para cada sistema: **fundações** (cores e tipografia), **casca**, **elementos** (linhas e blocos) e **exemplos de aplicação**, cada um com prévia e código.
 
-- `<variante>/casca.html`: o documento do email, com `{{linhas}}` no lugar do conteúdo.
-- `<variante>/componentes/`: uma peça por arquivo. **Linhas** (capa, hero, corpo, cartões, CTA, rodapé) vão na casca; **blocos** (parágrafo, botões, lista, assinatura, PS) vão dentro da linha `corpo`, em `{{blocos}}`.
-- `<variante>/catalogo.html`: todas as peças empilhadas, para ver de uma vez.
-- `design-system.json`: variantes, componentes, cores, tipografia, variáveis e receitas de montagem.
-- `exemplos/`, `img/` e um `LEIA-ME.md` com as regras e um prompt para LLM.
+O código de cada peça fica no próprio arquivo, intacto, dentro de `<script type="text/x-email">`, para uma aplicação ou uma LLM ler. As imagens já apontam para `https://img.asimov.academy/email/<sistema>/<versão>/` (bunny.net; ver abaixo), e os links ficam como variáveis para a aplicação trocar no envio: `{{link_cta}}`, `{{link_descadastro}}`, `{{link_youtube}}`, `{{link_instagram}}`, `{{link_linkedin}}` e `{{endereco}}`.
 
-**Um email por vez.** Em cada template, **Copiar HTML** e **Baixar .html**. A lista para código fica em `emails/templates.json`.
-
-Nos dois casos as imagens já apontam para `https://img.asimov.academy/email/<sistema>/<versão>/` (bunny.net; ver abaixo), e os links ficam como variáveis para a aplicação trocar no envio: `{{link_cta}}`, `{{link_descadastro}}`, `{{link_youtube}}`, `{{link_instagram}}`, `{{link_linkedin}}` e `{{endereco}}`. Com uma LLM, peça para trocar só os textos: tabelas, estilos inline, os blocos `<!--[if mso]>` do Outlook e as variáveis precisam ficar como estão.
-
-Os kits e a lista são gerados pelos scripts. Depois de mudar um design system de email, rode:
+Os arquivos são gerados pelos scripts. Depois de mudar um design system de email, rode:
 
 ```bash
-python3 scripts/build-email-ds.py && python3 scripts/build-email-ds-cadence.py && python3 scripts/build-email-ds-trilhas.py && python3 scripts/build-email-ds-black.py && python3 scripts/build-email-export.py
+python3 scripts/build-email-ds.py && python3 scripts/build-email-ds-cadence.py && python3 scripts/build-email-ds-black.py && python3 scripts/build-email-export.py
 ```
 
 ### Imagens dos emails (bunny.net)
 
 As imagens dos emails não saem deste site: ficam no bunny.net (Storage Zone `asimov-email`, região São Paulo), servidas em `https://img.asimov.academy` pela Pull Zone `asimov-email`, com SSL e cache de 1 ano. O DNS é um CNAME `img` na Hostinger apontando para `asimov-email.b-cdn.net`.
 
-O build audita os kits e o "Copiar HTML": se alguma imagem apontar para fora de `img.asimov.academy` ou para um arquivo que não existe, ele para com erro.
+O build audita os arquivos de download: se alguma imagem apontar para fora de `img.asimov.academy` ou para um arquivo que não existe, ele para com erro.
 
 Cada sistema tem uma pasta com versão, por exemplo `email/aura/v1/`, definida em `SISTEMAS` no `scripts/email_kit.py`. Uma versão publicada nunca muda, para os emails já enviados continuarem iguais. Para trocar uma imagem: suba a versão do sistema (`v1` → `v2`), rode os builds e envie.
 
