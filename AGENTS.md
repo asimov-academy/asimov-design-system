@@ -103,7 +103,8 @@ O contrato que todo gerador cumpre:
    - Botões e imagens de fundo com a versão VML do Outlook (`<!--[if mso]>`), como nos geradores atuais.
    - Toda cor com fallback sólido (`bgcolor` + `background`) antes de degradês.
    - Links como variáveis: `{{link_cta}}`, `{{link_descadastro}}`, `{{link_youtube}}`,
-     `{{link_instagram}}`, `{{link_linkedin}}`, `{{endereco}}`. Rodapé com descadastro e endereço é obrigatório.
+     `{{link_instagram}}`, `{{link_linkedin}}`. Rodapé com descadastro e endereço é obrigatório; o endereço
+     vem de `endereco(cor)` (`scripts/email_kit.py`), já como link na cor do rodapé, para o Gmail não pintá-lo de azul.
    - Media query só para o mobile (`.px`, `.h1`, `.h2`, `.body`...); o email precisa funcionar sem ela.
 
 5. **Imagens** em `emails/design-system-<nome>/img/`, PNG ou JPG, no dobro do tamanho de exibição
