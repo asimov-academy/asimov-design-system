@@ -50,7 +50,10 @@ VARIAVEIS = {
     "{{link_cta}}": "Destino dos botões.",
     "{{link_descadastro}}": "Link de cancelar inscrição. Obrigatório.",
     "{{link_youtube}}, {{link_instagram}}, {{link_linkedin}}": "Redes no rodapé.",
-    "{{endereco}}": "Endereço da empresa no rodapé. Obrigatório.",
+    "{{endereco}}": ("Endereço da empresa no rodapé. Obrigatório. Preencha já como link na cor do rodapé, "
+                     "senão o Gmail e o Apple Mail o transformam em link azul sublinhado: "
+                     '<a href="https://www.google.com/maps/search/?api=1&query=<endereço codificado>" '
+                     'style="color:<cor do rodapé>; text-decoration:none;">endereço</a>'),
 }
 
 

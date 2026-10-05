@@ -78,7 +78,6 @@ THEMES = {
         "CAPA": "img/capa-escuro.jpg",
         "LUZ": "img/luz-escuro.jpg",
         "LOGO_BF": "img/logo-bf-escuro-t.png",
-        "LOGO": "img/logo-branco.png",
         "GLOW": "img/glow-escuro.jpg",
         "CTA_IMG": "img/cta-escuro.jpg",
     },
@@ -89,7 +88,7 @@ THEMES = {
         "SURFACE_LINE": "#ece7e2",
         "TITLE": "#0a0a0a",
         "TEXT": "#0a0a0a",
-        "BODY": "#52525b",
+        "BODY": "#27272a",
         "MUTED": "#8a8a8a",
         "LINE": "#e7e1db",
         "HL": "#e2560a",
@@ -109,7 +108,6 @@ THEMES = {
         "CAPA": "img/capa-claro.jpg",
         "LUZ": "img/luz-claro.jpg",
         "LOGO_BF": "img/logo-bf-claro-t.png",
-        "LOGO": "img/logo-preto.png",
         "GLOW": "img/glow-claro.jpg",
         "CTA_IMG": "img/cta-claro.jpg",
     },
@@ -203,7 +201,7 @@ def topo(t):
             f'<img src="{t["CAPA"]}" width="598" height="150" alt="Asimov Academy" '
             f'style="display:block; width:100%; max-width:598px; height:auto; border-radius:23px 23px 0 0;"></td></tr>'
             f'<tr><td class="px" align="center" bgcolor="{t["SURFACE"]}" style="background:{t["SURFACE"]}; border:1px solid {t["SURFACE_LINE"]}; border-top:0; '
-            f'border-radius:0 0 24px 24px; padding:32px 40px 40px;">'
+            f'border-radius:0 0 24px 24px; padding:32px 24px 40px;">'
             f'<div class="h1" style="margin:0 auto; max-width:470px; text-align:center; {ts("Título", t)}">{hl("Lorem ipsum: o [[dolor sit amet]] consectetur, adipiscing elit", t)}</div>'
             f'<p style="margin:14px auto 0; max-width:440px; text-align:center; font-family:{BODY_FONT}; font-size:16px; line-height:25px; color:{t["BODY"]};">'
             f'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>'
@@ -296,7 +294,7 @@ def button(t, label="Lorem ipsum dolor", href="{{link_cta}}", full=False, align=
             f'arcsize="50%" stroke="f" fillcolor="{BF["ORANGE"]}"><w:anchorlock/><center style="color:#ffffff;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;">{label.upper()}</center></v:roundrect><![endif]-->'
             f'<!--[if !mso]><!--><a class="btn-a" href="{href}" style="display:{"block" if full else "inline-block"}; padding:15px 24px 15px 32px; text-decoration:none; border-radius:999px;">'
             f'<table role="presentation" align="center" style="border-collapse:separate; margin:0 auto;"><tr>'
-            f'<td class="btn-t" style="font-family:{TITLE_FONT}; font-size:15px; line-height:20px; font-weight:600; letter-spacing:-0.2px; color:#ffffff; white-space:nowrap;">{label.upper()}</td>'
+            f'<td class="btn-t" valign="middle" style="vertical-align:middle; font-family:{TITLE_FONT}; font-size:15px; line-height:20px; font-weight:600; letter-spacing:-0.2px; color:#ffffff; white-space:nowrap;">{label.upper()}</td>'
             f'<td width="12" style="font-size:0;">&nbsp;</td>'
             f'<td><img src="img/seta-branca.png" width="20" height="20" alt="" style="width:20px; height:20px;"></td>'
             f'</tr></table></a><!--<![endif]--></td></tr></table>')
@@ -323,7 +321,7 @@ def _btn(t, label, href="#", *, bg, fg, arrow, border=None, grad=None, radius=99
             f'arcsize="{arc}" {stroke} fillcolor="{bg}"><w:anchorlock/><center style="color:{fg};font-family:Arial,sans-serif;font-size:{size}px;font-weight:bold;">{text}</center></v:roundrect><![endif]-->'
             f'<!--[if !mso]><!--><a href="{href}" style="display:{"block" if full else "inline-block"}; padding:{pad}; text-decoration:none; border-radius:{radius}px;">'
             f'<table role="presentation" align="center" style="border-collapse:separate; margin:0 auto;"><tr>'
-            f'<td class="btn-t" style="font-family:{TITLE_FONT}; font-size:{size}px; line-height:20px; font-weight:600; letter-spacing:-0.2px; color:{fg};">{text}</td>'
+            f'<td class="btn-t" valign="middle" style="vertical-align:middle; font-family:{TITLE_FONT}; font-size:{size}px; line-height:20px; font-weight:600; letter-spacing:-0.2px; color:{fg};">{text}</td>'
             f'{tail}</tr></table></a><!--<![endif]--></td></tr></table>')
 
 
@@ -391,14 +389,15 @@ def signature(t):
 
 
 def footer(t):
+    """Redes centralizadas; embaixo, à esquerda, a empresa, o endereço e o descadastro. O logo fica só na
+    faixa ASIMOV logo acima. {{endereco}} já vem como link na cor do rodapé (ver VARIAVEIS em email_kit.py)."""
     links = "&nbsp;&nbsp;&middot;&nbsp;&nbsp;".join(
         f'<a href="{{{{link_{k.lower()}}}}}" style="color:{t["MUTED"]}; text-decoration:none;">{k}</a>'
         for k in ("YouTube", "Instagram", "LinkedIn"))
     return (f'<table role="presentation" width="100%"><tr>'
-            f'<td valign="middle"><img src="{t["LOGO"]}" width="60" height="18" alt="Asimov Academy" style="width:60px; height:18px; opacity:.7;"></td>'
-            f'<td align="right" valign="middle" style="font-family:{BODY_FONT}; font-size:12px; line-height:18px;">{links}</td></tr></table>'
+            f'<td align="center" valign="middle" style="text-align:center; font-family:{BODY_FONT}; font-size:12px; line-height:18px;">{links}</td></tr></table>'
             f'<div style="margin-top:16px; font-family:{BODY_FONT}; font-size:12px; line-height:19px; color:{t["MUTED"]};">'
-            f'Asimov Academy &middot; {{{{endereco}}}}<br><a href="{{{{link_descadastro}}}}" style="color:{t["MUTED"]};">Cancelar inscrição</a></div>')
+            f'Asimov Academy<br>{{{{endereco}}}}<div style="margin-top:10px;"><a href="{{{{link_descadastro}}}}" style="color:{t["MUTED"]};">Cancelar inscrição</a></div></div>')
 
 
 # ------------------------------------------------------------------ email
@@ -428,7 +427,7 @@ SHELL = """<!DOCTYPE html>
     p { margin: 0; }
     @media (max-width: 620px) {
       .container { width: 100% !important; }
-      .px { padding-left: 24px !important; padding-right: 24px !important; }
+      .px { padding-left: 20px !important; padding-right: 20px !important; }
       .faixa { font-size: 12px !important; }
       .hide-m { display: none !important; }
       .cta-in { padding-left: 16px !important; padding-right: 16px !important; }
@@ -460,7 +459,7 @@ SHELL = """<!DOCTYPE html>
     <tr>
       <td align="center" style="padding:28px 12px 48px;">
         <table role="presentation" class="container" width="600" style="width:600px; max-width:600px;">
-          <tr><td class="px" style="padding:0 40px;">%FOOTER%</td></tr>
+          <tr><td class="px" style="padding:0 24px;">%FOOTER%</td></tr>
         </table>
       </td>
     </tr>
@@ -478,13 +477,13 @@ def email(theme):
     t = THEMES[theme]
     rows = [
         row(topo(t), "0", cls=""),
-        row(meta("Lorem ipsum", t) + section_title("Lorem ipsum dolor sit amet, [[consectetur]] adipiscing.", t), "48px 40px 0"),
-        row(paragraphs([f'<strong style="font-weight:500; color:{t["TEXT"]};">Lorem ipsum,</strong> {LOREM["longo"]}', LOREM["curto"]], t, "18px"), "0 40px", "px body"),
-        row(paragraphs([LOREM["medio"], LOREM["longo"]], t), "36px 40px 0", "px body"),
-        row(destaque(t), "36px 40px 0"),
-        row(paragraphs([LOREM["medio"]], t), "36px 40px 0", "px body"),
-        row(signature(t), "24px 40px 0"),
-        row(cta(t), "48px 40px 0"),
+        row(meta("Lorem ipsum", t) + section_title("Lorem ipsum dolor sit amet, [[consectetur]] adipiscing.", t), "48px 24px 0"),
+        row(paragraphs([f'<strong style="font-weight:500; color:{t["TEXT"]};">Lorem ipsum,</strong> {LOREM["longo"]}', LOREM["curto"]], t, "18px"), "0 24px", "px body"),
+        row(paragraphs([LOREM["medio"], LOREM["longo"]], t), "36px 24px 0", "px body"),
+        row(destaque(t), "36px 24px 0"),
+        row(paragraphs([LOREM["medio"]], t), "36px 24px 0", "px body"),
+        row(signature(t), "24px 24px 0"),
+        row(cta(t), "48px 24px 0"),
     ]
     tokens = dict(t, ROWS="\n\n".join(rows), FAIXA=fio(t), FAIXA2=faixa_asimov(t), FOOTER=footer(t), TITLE="Lorem ipsum", PREHEADER=PREHEADER_LOREM)
     html = re.sub(r"%([A-Z_0-9]+)%", lambda m: tokens.get(m.group(1), m.group(0)), SHELL)
@@ -495,6 +494,20 @@ def email(theme):
 
 
 PREHEADER_LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+
+
+def negrito(text, t):
+    """Destaque no texto corrido: negrito na cor do título. Nunca laranja (foi testado e reprovado)."""
+    return f'<strong style="color:{t["TEXT"]}; font-weight:600;">{text}</strong>'
+
+
+def sublinhado(text, t):
+    """O outro destaque, para alternar com o negrito: sublinhado na cor do título."""
+    return f'<u style="color:{t["TEXT"]}; text-decoration:underline; text-decoration-color:{t["TEXT"]};">{text}</u>'
+
+
+DESTAQUES_USO = ("Trechos curtos em destaque, mais ou menos um a cada um ou dois parágrafos, alternando "
+                 "negrito e sublinhado, na cor do título. Nunca em laranja.")
 
 
 def blocos(t, tom="chamativo"):
@@ -528,7 +541,7 @@ def conversa(theme, copy):
     body = render_blocks(copy["blocks"], *blocos(t, copy.get("tom", "chamativo")))
     rows = [
         row(capa(t), "0", cls=""),
-        row(body, "40px 40px 0", "px body"),
+        row(body, "40px 24px 0", "px body"),
     ]
     return fill(t, "\n\n".join(rows), copy["assunto"], copy["preheader"])
 
@@ -545,17 +558,20 @@ def kit():
             ("capa", "Capa", "linha", "Topo dos emails conversacionais: a luz da campanha e só o ASIMOV, em 600x150.", row(capa(t), "0", cls="")),
             ("topo", "Cartão de topo", "linha", "Topo dos emails com título: capa e título com uma expressão em laranja.", row(topo(t), "0", cls="")),
             ("titulo", "Título de seção", "linha", "Sobretítulo e título que abrem um trecho do email. [[...]] no título vira laranja.",
-             row(meta("Lorem ipsum", t) + section_title("Lorem ipsum dolor sit amet, [[consectetur]] adipiscing.", t), "48px 40px 0")),
-            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "40px 40px 0", "px body")),
-            ("destaque", "Superfície com luz", "linha", "Uma ideia em evidência no meio do texto.", row(destaque(t), "36px 40px 0")),
-            ("destaque-selos", "Superfície com selos", "linha", "A superfície com selos de público (aluno Formação, Trilha, Anual).", row(destaque(t, True), "36px 40px 0")),
-            ("cta", "Cartão de CTA", "linha", "Fechamento com a ação principal, com a luz da Black por baixo.", row(cta(t), "48px 40px 0")),
-            ("ingresso", "Ingresso da live", "linha", "Opcional de campanha: data e horário da live como ingresso.", row(ticket(t), "36px 40px 0")),
-            ("contagem", "Contagem regressiva", "linha", "Opcional de campanha: estática; para andar, troque por um GIF de contador.", row(countdown(t), "36px 40px 0")),
-            ("pilula", "Pílula ao vivo", "linha", "Opcional de campanha: data e hora da live em destaque.", row(pill(t), "36px 40px 0")),
+             row(meta("Lorem ipsum", t) + section_title("Lorem ipsum dolor sit amet, [[consectetur]] adipiscing.", t), "48px 24px 0")),
+            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "40px 24px 0", "px body")),
+            ("destaque", "Superfície com luz", "linha", "Uma ideia em evidência no meio do texto.", row(destaque(t), "36px 24px 0")),
+            ("destaque-selos", "Superfície com selos", "linha", "A superfície com selos de público (aluno Formação, Trilha, Anual).", row(destaque(t, True), "36px 24px 0")),
+            ("cta", "Cartão de CTA", "linha", "Fechamento com a ação principal, com a luz da Black por baixo.", row(cta(t), "48px 24px 0")),
+            ("ingresso", "Ingresso da live", "linha", "Opcional de campanha: data e horário da live como ingresso.", row(ticket(t), "36px 24px 0")),
+            ("contagem", "Contagem regressiva", "linha", "Opcional de campanha: estática; para andar, troque por um GIF de contador.", row(countdown(t), "36px 24px 0")),
+            ("pilula", "Pílula ao vivo", "linha", "Opcional de campanha: data e hora da live em destaque.", row(pill(t), "36px 24px 0")),
             ("faixa", "Faixa da campanha", "linha", "Opcional de campanha: a faixa laranja com texto, de ponta a ponta.", row(faixa(t), "36px 0 0", cls="")),
             ("faixa-espectro", "Faixa espectro", "linha", "Opcional de campanha: a faixa com o degradê teal, vermelho, teal.", row(faixa(t, "espectro"), "36px 0 0", cls="")),
             ("paragrafo", "Parágrafo", "bloco", "Todo o texto corrido. Frases curtas, um parágrafo por ideia.", p(LOREM["medio"])),
+            ("paragrafo-destaques", "Parágrafo com destaques", "bloco", DESTAQUES_USO,
+             p(f'Lorem ipsum dolor sit amet, {negrito("consectetur adipiscing elit", t)}. Integer posuere erat a ante, '
+               f'sed do eiusmod tempor {sublinhado("incididunt ut labore", t)} et dolore magna aliqua.')),
             ("botao", "Botão chamativo", "bloco", "Padrão quando a ação é o objetivo do email (cadastro, compra).", cta_("Lorem ipsum dolor")),
             ("botao-discreto", "Botão discreto", "bloco", "Padrão quando o botão é um convite (relacionamento, conteúdo). Não misture com o chamativo.", cta_discreto("Lorem ipsum dolor")),
             ("lista", "Lista", "bloco", "Itens curtos e paralelos.", ul(["Lorem ipsum dolor sit amet", "Consectetur adipiscing elit", "Sed do eiusmod tempor"])),
@@ -585,6 +601,10 @@ def kit():
         montagem=[("Conversacional", ["capa", "corpo"]),
                   ("Com título", ["topo", "titulo", "corpo", "destaque", "corpo", "cta"])],
         notas=["A casca deste sistema já traz o fio de cor do topo, a faixa ASIMOV e o rodapé. Não há linha de rodapé.",
+               "Destaques no texto: " + DESTAQUES_USO + " Negrito: <strong style=\"color:<cor do título>; font-weight:600;\">. "
+               "Sublinhado: <u style=\"color:<cor do título>; text-decoration:underline; text-decoration-color:<cor do título>;\">. "
+               "Cor do título: #0a0a0a no claro, #ffffff no escuro.",
+               "{{endereco}} entra já como link, na cor do rodapé: #8a8a8a no claro, #777777 no escuro.",
                "Peças de campanha (ingresso, contagem, pílula, faixas) são opcionais. Use com parcimônia."],
     )
 
@@ -802,7 +822,7 @@ SPEC = """<!DOCTYPE html>
 
     <section>
       <div class="sec-head"><div><div class="k">Foundations</div><h2>Parágrafos</h2></div>
-        <p>Inter 17/29, cinza #b3b3b3 no escuro, igual ao corpo das LPs da Black. 20px entre parágrafos.</p></div>
+        <p>Inter 17/29: #b3b3b3 no escuro, igual ao corpo das LPs da Black, e #27272a no claro. 20px entre parágrafos. Destaques em trechos curtos, mais ou menos um a cada um ou dois parágrafos, alternando negrito e sublinhado na cor do título. Nunca em laranja.</p></div>
       %PARAGRAPHS%
     </section>
 
@@ -859,7 +879,11 @@ def specimen():
         "TICKET": both(lambda t: countdown(t) + '<div style="height:28px;"></div>' + ticket(t)),
         "DESTAQUE": both(destaque),
         "CTA": both(lambda t: cta(t, "#")),
-        "PARAGRAPHS": both(lambda t: paragraphs([LOREM["curto"], LOREM["medio"], LOREM["longo"]], t)),
+        "PARAGRAPHS": both(lambda t: paragraphs([
+            LOREM["curto"],
+            f'Lorem ipsum dolor sit amet, {negrito("consectetur adipiscing elit", t)}. Integer posuere erat a ante, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            f'Curabitur pretium tincidunt lacus, nulla gravida orci a odio. {sublinhado("Nullam varius, turpis et commodo pharetra", t)}, est eros bibendum elit, nec luctus magna felis sollicitudin mauris.',
+        ], t)),
     }
     return re.sub(r"%([A-Z_]+)%", lambda m: parts.get(m.group(1), m.group(0)), SPEC)
 
