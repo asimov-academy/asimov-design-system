@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 
 from email_copies import COPIES, render_blocks
-from email_kit import Componente, Kit, Variante
+from email_kit import Componente, Kit, Variante, endereco
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system"
 
@@ -302,7 +302,7 @@ def footer(t):
             f'<td align="right" valign="top" style="font-family:{FONT}; font-size:12px; line-height:18px;">{links}</td>'
             f'</tr></table>'
             f'<div style="margin-top:18px; font-family:{FONT}; font-size:12px; line-height:19px; color:{t["MUTED"]};">'
-            f'Asimov Academy &middot; {{{{endereco}}}}<br>'
+            f'Asimov Academy &middot; {endereco(t["MUTED"])}<br>'
             f'<a href="{{{{link_descadastro}}}}" style="color:{t["MUTED"]};">Cancelar inscrição</a></div>')
 
 

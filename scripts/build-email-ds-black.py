@@ -32,7 +32,7 @@ import unicodedata
 from pathlib import Path
 
 from email_copies import COPIES, render_blocks
-from email_kit import Componente, Kit, Variante
+from email_kit import Componente, Kit, Variante, endereco
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system-black"
 
@@ -390,14 +390,14 @@ def signature(t):
 
 def footer(t):
     """Redes centralizadas; embaixo, à esquerda, a empresa, o endereço e o descadastro. O logo fica só na
-    faixa ASIMOV logo acima. {{endereco}} já vem como link na cor do rodapé (ver VARIAVEIS em email_kit.py)."""
+    faixa ASIMOV logo acima. O endereço já vem como link na cor do rodapé (email_kit.endereco)."""
     links = "&nbsp;&nbsp;&middot;&nbsp;&nbsp;".join(
         f'<a href="{{{{link_{k.lower()}}}}}" style="color:{t["MUTED"]}; text-decoration:none;">{k}</a>'
         for k in ("YouTube", "Instagram", "LinkedIn"))
     return (f'<table role="presentation" width="100%"><tr>'
             f'<td align="center" valign="middle" style="text-align:center; font-family:{BODY_FONT}; font-size:12px; line-height:18px;">{links}</td></tr></table>'
             f'<div style="margin-top:16px; font-family:{BODY_FONT}; font-size:12px; line-height:19px; color:{t["MUTED"]};">'
-            f'Asimov Academy<br>{{{{endereco}}}}<div style="margin-top:10px;"><a href="{{{{link_descadastro}}}}" style="color:{t["MUTED"]};">Cancelar inscrição</a></div></div>')
+            f'Asimov Academy<br>{endereco(t["MUTED"])}<div style="margin-top:10px;"><a href="{{{{link_descadastro}}}}" style="color:{t["MUTED"]};">Cancelar inscrição</a></div></div>')
 
 
 # ------------------------------------------------------------------ email
@@ -604,7 +604,7 @@ def kit():
                "Destaques no texto: " + DESTAQUES_USO + " Negrito: <strong style=\"color:<cor do título>; font-weight:600;\">. "
                "Sublinhado: <u style=\"color:<cor do título>; text-decoration:underline; text-decoration-color:<cor do título>;\">. "
                "Cor do título: #0a0a0a no claro, #ffffff no escuro.",
-               "{{endereco}} entra já como link, na cor do rodapé: #8a8a8a no claro, #777777 no escuro.",
+               "O endereço da empresa já vem no rodapé, como link na cor do rodapé, para o Gmail não pintá-lo de azul.",
                "Peças de campanha (ingresso, contagem, pílula, faixas) são opcionais. Use com parcimônia."],
     )
 

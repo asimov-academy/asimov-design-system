@@ -70,7 +70,7 @@ No hub de emails (`/emails/`), a seção **Baixar** tem dois arquivos, `emails/a
 - **Como usar**, no topo: qual sistema escolher, como montar um email com casca, linhas e blocos, variáveis, regras e um prompt para LLM.
 - Para cada sistema: **fundações** (cores e tipografia), **casca**, **elementos** (linhas e blocos) e **exemplos de aplicação**, cada um com prévia e código.
 
-O código de cada peça fica no próprio arquivo, intacto, dentro de `<script type="text/x-email">`, para uma aplicação ou uma LLM ler. As imagens já apontam para `https://img.asimov.academy/email/<sistema>/<versão>/` (bunny.net; ver abaixo), e os links ficam como variáveis para a aplicação trocar no envio: `{{link_cta}}`, `{{link_descadastro}}`, `{{link_youtube}}`, `{{link_instagram}}`, `{{link_linkedin}}` e `{{endereco}}`.
+O código de cada peça fica no próprio arquivo, intacto, dentro de `<script type="text/x-email">`, para uma aplicação ou uma LLM ler. As imagens já apontam para `https://img.asimov.academy/email/<sistema>/<versão>/` (bunny.net; ver abaixo), e os links ficam como variáveis para a aplicação trocar no envio: `{{link_cta}}`, `{{link_descadastro}}`, `{{link_youtube}}`, `{{link_instagram}}` e `{{link_linkedin}}`. O endereço da empresa já vem no rodapé, como link na cor do rodapé.
 
 Os arquivos são gerados pelos scripts. Depois de mudar um design system de email, rode:
 

@@ -20,7 +20,7 @@ import re
 from pathlib import Path
 
 from email_copies import COPIES, render_blocks
-from email_kit import Componente, Kit, Variante
+from email_kit import Componente, Kit, Variante, endereco
 
 OUT = Path(__file__).resolve().parent.parent / "emails" / "design-system-cadence"
 
@@ -209,7 +209,7 @@ def footer(t):
         f'<a href="{{{{link_{k.lower()}}}}}" style="color:{t["MUTED"]}; text-decoration:none;">{k}</a>'
         for k in ("YouTube", "Instagram", "LinkedIn"))
     return (f'<table role="presentation" width="100%" style="border-top:1px solid {t["LINE"]};"><tr>'
-            f'<td class="stack" valign="top" style="padding-top:22px; {ts("Rótulo", t)}">Asimov Academy<br><span style="text-transform:none; letter-spacing:0.2px;">{{{{endereco}}}}</span></td>'
+            f'<td class="stack" valign="top" style="padding-top:22px; {ts("Rótulo", t)}">Asimov Academy<br><span style="text-transform:none; letter-spacing:0.2px;">{endereco(t["MUTED"])}</span></td>'
             f'<td class="stack" align="right" valign="top" style="padding-top:22px; {ts("Rótulo", t)}">{links}<br>'
             f'<a href="{{{{link_descadastro}}}}" style="color:{t["MUTED"]};">Cancelar inscrição</a></td>'
             f'</tr></table>')

@@ -16,6 +16,7 @@ design system, e o build trava se alguma ficar fora dela (audit).
 import html as _html
 import re
 import sys
+import urllib.parse
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -42,6 +43,17 @@ def assets_base(pasta):
     return f"{ASSETS_URL}/{slug}/{versao}/"
 
 
+ENDERECO = "R. Padre Chagas, 79 - Moinhos de Vento, Porto Alegre - RS, 90570-080"
+
+
+def endereco(cor):
+    """O endereço da empresa no rodapé, já como link nosso na cor do rodapé. Endereço solto vira link
+    azul sublinhado no Gmail e no Apple Mail, que ignoram format-detection e caracteres invisíveis."""
+    # quote_plus com vírgula e hífen livres: a URL fica sem "%", que as cascas usam como marcador (%ROWS%).
+    mapa = "https://www.google.com/maps/search/?api=1&amp;query=" + urllib.parse.quote_plus(ENDERECO, safe=",-")
+    return f'<a href="{mapa}" style="color:{cor}; text-decoration:none;">{ENDERECO}</a>'
+
+
 VARIAVEIS = {
     "{{assunto}}": "Assunto do email (vai no <title>).",
     "{{preheader}}": "Texto de prévia que aparece ao lado do assunto na caixa de entrada.",
@@ -50,10 +62,6 @@ VARIAVEIS = {
     "{{link_cta}}": "Destino dos botões.",
     "{{link_descadastro}}": "Link de cancelar inscrição. Obrigatório.",
     "{{link_youtube}}, {{link_instagram}}, {{link_linkedin}}": "Redes no rodapé.",
-    "{{endereco}}": ("Endereço da empresa no rodapé. Obrigatório. Preencha já como link na cor do rodapé, "
-                     "senão o Gmail e o Apple Mail o transformam em link azul sublinhado: "
-                     '<a href="https://www.google.com/maps/search/?api=1&query=<endereço codificado>" '
-                     'style="color:<cor do rodapé>; text-decoration:none;">endereço</a>'),
 }
 
 
