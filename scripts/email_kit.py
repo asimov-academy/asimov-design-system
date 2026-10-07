@@ -32,7 +32,7 @@ SITE_URL = "https://asimov-design-system.vercel.app"
 ASSETS_URL = "https://img.asimov.academy/email"
 SISTEMAS = {  # pasta em emails/ -> (slug, versão das imagens)
     "design-system": ("aura", "v1"),
-    "design-system-cadence": ("cadence", "v1"),
+    "design-system-cadence": ("cadence", "v2"),
     "design-system-black": ("black", "v1"),
 }
 
