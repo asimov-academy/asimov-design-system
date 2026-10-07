@@ -47,7 +47,7 @@ THEMES = {
     },
     "claro": {
         "SCHEME": "light",
-        "PAGE": "#f6f6f7",
+        "PAGE": "#ffffff",
         "TEXT": "#09090b",
         "BODY": "#52525b",
         "MUTED": "#8a8a93",
@@ -324,8 +324,8 @@ def conversa(theme, copy):
     t = THEMES[theme]
     rows = [
         row(capa(t), "0", cls=""),
-        row(render_blocks(copy["blocks"], *blocos(t)), "44px 40px 0", "px body"),
-        row(footer(t), "48px 40px 0"),
+        row(render_blocks(copy["blocks"], *blocos(t)), "44px 0 0", "px body"),
+        row(footer(t), "48px 0 0"),
     ]
     return fill(t, "\n\n".join(rows), copy["assunto"], copy["preheader"])
 
@@ -345,10 +345,10 @@ def kit():
              row(secao(passo, t), "56px 40px 0")),
             ("fechamento", "Fechamento", "linha", "O último trecho, com a assinatura. Vem logo depois de uma seção, sem espaço acima.",
              row(secao(paragraphs([LOREM["medio"]], t, "0") + signature(t), t, last=True), "0 40px")),
-            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "44px 40px 0", "px body")),
+            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "44px 0 0", "px body")),
             ("proximo-passo", "Próximo passo", "linha", "Fechamento com a ação: rótulo em mono e a tecla teal.",
              row(f'<div style="margin-bottom:14px; {ts("Rótulo", t)}">Próximo passo</div>' + button(t), "56px 40px 0")),
-            ("rodape", "Rodapé", "linha", "Endereço, redes e descadastro. Obrigatório.", row(footer(t), "48px 40px 0")),
+            ("rodape", "Rodapé", "linha", "Endereço, redes e descadastro. Obrigatório.", row(footer(t), "48px 0 0")),
             ("paragrafo", "Parágrafo", "bloco", "Todo o texto corrido. Frases curtas, um parágrafo por ideia.", p(LOREM["medio"])),
             ("botao", "Botão", "bloco", "A ação do email: a tecla teal, alinhada ao texto.", cta_("Lorem ipsum dolor")),
             ("janela", "Janela de editor", "bloco", "A frase que merece destaque, como um arquivo aberto.",

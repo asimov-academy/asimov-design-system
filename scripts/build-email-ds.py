@@ -65,7 +65,7 @@ THEMES = {
     },
     "claro": {
         "SCHEME": "light",
-        "PAGE": "#f4f4f5",
+        "PAGE": "#ffffff",
         "TEXT": "#09090b",
         "BODY": "#52525b",
         "MUTED": "#8a8a93",
@@ -415,9 +415,9 @@ def conversa(theme, copy):
     t = THEMES[theme]
     rows = [
         row(capa(t), "0", cls=""),
-        row(render_blocks(copy["blocks"], *blocos(t)), "40px 40px 0", "px body"),
-        row(divider(t), "40px 40px 0"),
-        row(footer(t), "28px 40px 0"),
+        row(render_blocks(copy["blocks"], *blocos(t)), "40px 0 0", "body"),
+        row(divider(t), "40px 0 0", ""),
+        row(footer(t), "28px 0 0", ""),
     ]
     return fill(t, "\n\n".join(rows), copy["assunto"], copy["preheader"])
 
@@ -434,12 +434,12 @@ def kit():
             ("hero", "Hero", "linha", "Topo dos emails com título: paisagem, pílula, título e subtítulo.", row(hero(t), "0", cls="")),
             ("titulo", "Título de seção", "linha", "Sobretítulo e título que abrem um trecho do email.",
              row(meta("Lorem ipsum", t) + heading("Lorem ipsum dolor sit amet, consectetur adipiscing.", t), "56px 40px 0")),
-            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "40px 40px 0", "px body")),
+            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "40px 0 0", "body")),
             ("destaque", "Cartão de destaque", "linha", "Uma ideia em evidência no meio do texto: ícone, sobretítulo, título e texto.", row(feature_card(t), "40px 40px 0")),
             ("faixa", "Faixa de paisagem", "linha", "Respiro visual entre trechos longos.", row(faixa(t, "20px"), "40px 40px 0")),
             ("cta", "Cartão de CTA", "linha", "Fechamento com a ação principal: faixa, título, botão e nota.", row(cta_card(t), "56px 40px 0")),
-            ("divisor", "Divisor", "linha", "Separa o conteúdo do rodapé.", row(divider(t), "48px 40px 0")),
-            ("rodape", "Rodapé", "linha", "Logo, redes, endereço e descadastro. Obrigatório.", row(footer(t), "28px 40px 0")),
+            ("divisor", "Divisor", "linha", "Separa o conteúdo do rodapé.", row(divider(t), "48px 0 0", "")),
+            ("rodape", "Rodapé", "linha", "Logo, redes, endereço e descadastro. Obrigatório.", row(footer(t), "28px 0 0", "")),
             ("paragrafo", "Parágrafo", "bloco", "Todo o texto corrido. Frases curtas, um parágrafo por ideia.", p(LOREM["medio"])),
             ("botao", "Botão principal", "bloco", "A ação do email, no meio ou no fim do texto.", cta_("Lorem ipsum dolor")),
             ("botao-secundario", "Botão secundário", "bloco", "Uma segunda ação, menos importante que a principal.",

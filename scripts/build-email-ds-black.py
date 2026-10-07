@@ -83,7 +83,7 @@ THEMES = {
     },
     "claro": {
         "SCHEME": "light",
-        "PAGE": "#f7f5f3",
+        "PAGE": "#ffffff",
         "SURFACE": "#ffffff",
         "SURFACE_LINE": "#ece7e2",
         "TITLE": "#0a0a0a",
@@ -541,7 +541,7 @@ def conversa(theme, copy):
     body = render_blocks(copy["blocks"], *blocos(t, copy.get("tom", "chamativo")))
     rows = [
         row(capa(t), "0", cls=""),
-        row(body, "40px 24px 0", "px body"),
+        row(body, "40px 0 0", "body"),
     ]
     return fill(t, "\n\n".join(rows), copy["assunto"], copy["preheader"])
 
@@ -559,7 +559,7 @@ def kit():
             ("topo", "Cartão de topo", "linha", "Topo dos emails com título: capa e título com uma expressão em laranja.", row(topo(t), "0", cls="")),
             ("titulo", "Título de seção", "linha", "Sobretítulo e título que abrem um trecho do email. [[...]] no título vira laranja.",
              row(meta("Lorem ipsum", t) + section_title("Lorem ipsum dolor sit amet, [[consectetur]] adipiscing.", t), "48px 24px 0")),
-            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "40px 24px 0", "px body")),
+            ("corpo", "Corpo", "linha", "O texto do email. Recebe os blocos em {{blocos}}.", row("{{blocos}}", "40px 0 0", "body")),
             ("destaque", "Superfície com luz", "linha", "Uma ideia em evidência no meio do texto.", row(destaque(t), "36px 24px 0")),
             ("destaque-selos", "Superfície com selos", "linha", "A superfície com selos de público (aluno Formação, Trilha, Anual).", row(destaque(t, True), "36px 24px 0")),
             ("cta", "Cartão de CTA", "linha", "Fechamento com a ação principal, com a luz da Black por baixo.", row(cta(t), "48px 24px 0")),
